@@ -1,0 +1,286 @@
+{
+    "name": "Sim",
+    "maps": [
+        {
+            "name": "SimulatorController",
+            "id": "1cd081b4-fd11-4510-ac6e-7901102c903a",
+            "actions": [
+                {
+                    "name": "LeftStick - y",
+                    "type": "Value",
+                    "id": "dfaadbad-abd1-4ff0-92db-17f2c2d96be9",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LeftStick - x",
+                    "type": "Value",
+                    "id": "3bc51a05-5a78-4bba-9346-8e91f3dd6d34",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightStick - y",
+                    "type": "Value",
+                    "id": "4550b3d6-4918-4e57-aa64-1e3f33a54891",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightStick - x",
+                    "type": "Value",
+                    "id": "62d132de-4ad9-45d6-8eae-15d93753d065",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "touchpad - y",
+                    "type": "Value",
+                    "id": "a83a4283-7e3b-4a7f-81ca-b87dd3420546",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "touchpad - x",
+                    "type": "Value",
+                    "id": "6283dbc8-63cc-4e87-8416-337839f74173",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Button1",
+                    "type": "Button",
+                    "id": "aaae5e85-b827-4daf-b661-4081c3c12e22",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "Global(WS)",
+                    "id": "cb3dcc69-72bb-4517-81af-ba587213cc22",
+                    "path": "1DAxis(minValue=-0.5,maxValue=0.5)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftStick - y",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "36a45b47-63bc-47df-b6a6-10b0be4506f9",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftStick - y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "f69837e3-b64c-4065-b28f-44af7b2576ad",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftStick - y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Global(AD)",
+                    "id": "e2ca8eec-2697-4119-95c0-becb512d4fac",
+                    "path": "1DAxis(minValue=-0.5,maxValue=0.5)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftStick - x",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "8f4c404b-aaef-419f-bbf4-c42f4c0d9bdc",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftStick - x",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "02ae9d41-59e6-4d9a-9103-4c7272856f2d",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftStick - x",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Global(JL)",
+                    "id": "b3e3d77a-996a-400b-980e-61bb62643c02",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightStick - x",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "2f8aac82-950d-4f81-a308-df546bc33b8a",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightStick - x",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "3cb2c4dd-adce-4b0f-8182-527202f86f9d",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightStick - x",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Global(IK)",
+                    "id": "62be0e50-a73c-4212-8d2c-30a2eb786740",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightStick - y",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "f52d8aae-e1f5-430c-baac-1e51ef894a2c",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightStick - y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "b5883354-2a45-4c9c-bc8f-22bffb2b5a6f",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightStick - y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Global(FG)",
+                    "id": "68699987-6fa4-4564-89f5-cea6cc12a5d4",
+                    "path": "1DAxis(minValue=-0.5,maxValue=0.5)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "touchpad - x",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "c79e6dcc-aec2-4fbf-99ee-87265da9da57",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "touchpad - x",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "21945729-aa2c-4753-8698-3f62d47a07fd",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "touchpad - x",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Global(TB)",
+                    "id": "5af60f2f-5308-41fa-a806-dfe9edff8134",
+                    "path": "1DAxis(minValue=-0.5,maxValue=0.5)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "touchpad - y",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "78b70a51-c87e-44ff-ad48-f380feadc58b",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "touchpad - y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "6af04999-a302-4ed1-905d-5788a62bd298",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "touchpad - y",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "7279e914-e60e-42ab-95d0-53151cfa539f",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
