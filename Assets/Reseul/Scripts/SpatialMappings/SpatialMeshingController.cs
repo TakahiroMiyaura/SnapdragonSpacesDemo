@@ -45,14 +45,7 @@ namespace Reseul.Snapdragon.Spaces.SpatialMappings
 
         private void OnMeshesChanged(ARMeshesChangedEventArgs args)
         {
-            if (_meshManagerConfig != null)
-            {
-                List<Transform> transforms = _meshManager.meshes.ToList().ConvertAll(MeshFilter =>
-                {
-                    return MeshFilter.transform;
-                });
-                _meshManagerConfig.UpdateMeshTransforms(args);
-            }
+            _meshManagerConfig?.UpdateMeshTransforms(args);
         }
 
         public void EnabledARMesh()

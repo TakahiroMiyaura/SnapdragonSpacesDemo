@@ -17,6 +17,12 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
 
         }
 
+        public void DisableCameraFrameAccess()
+        {
+            CameraFrameAccessObject.enabled = false;
+            DisplayObject.SetActive(false);
+        }
+
         public void EnableCameraFrameAccess()
         {
             CameraFrameAccessObject.enabled = true;

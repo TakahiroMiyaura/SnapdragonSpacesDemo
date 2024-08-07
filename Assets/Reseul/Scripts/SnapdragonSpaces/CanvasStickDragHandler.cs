@@ -20,6 +20,9 @@ namespace Reseul.Snapdragon.Spaces.Controllers
     {
 
         [SerializeField]
+        private AnimationCurve _sensitivity;
+
+        [SerializeField]
         private StirckType type;
 
         [SerializeField]
@@ -57,7 +60,8 @@ namespace Reseul.Snapdragon.Spaces.Controllers
                     stickTransform.anchoredPosition =
                         new Vector2(normalized.x * halfWidth, normalized.y * halfHeight); 
 
-
+                normalized.x = _sensitivity.Evaluate(normalized.x);
+                normalized.y = _sensitivity.Evaluate(normalized.y);
                 return normalized;
             }
             return Vector2.zero;

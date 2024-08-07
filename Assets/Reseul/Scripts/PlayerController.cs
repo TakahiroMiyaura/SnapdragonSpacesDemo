@@ -1,3 +1,4 @@
+using Qualcomm.Snapdragon.Spaces;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,6 @@ namespace Reseul.Snapdragon.Spaces
         public GameObject Character;
 
         [SerializeField]
-        AnimationCurve StickSensitivity;
-
-        [SerializeField]
         float stopThreshold = 0.005f;
 
         public float MoveSpeed;
@@ -32,6 +30,7 @@ namespace Reseul.Snapdragon.Spaces
         // Start is called before the first frame update
         void Start()
         {
+            _initialPos = transform.position;
             _rigidBody = GetComponent<Rigidbody>();
         }
 
@@ -40,8 +39,16 @@ namespace Reseul.Snapdragon.Spaces
         {
             if (transform.position.y < -RespawnRange)
             {
-                transform.position = Camera.main.transform.position + new Vector3(Camera.main.transform.forward.x,2f, Camera.main.transform.forward.z);
-                _rigidBody.velocity = Vector3.zero;
+                if (SpacesGlassStatus.Instance.GlassConnectionState == SpacesGlassStatus.ConnectionState.Connected)
+                {
+                    transform.position = ARCamera.transform.position + new Vector3(ARCamera.transform.forward.x, 2f, ARCamera.transform.forward.z);
+                    _rigidBody.velocity = Vector3.zero;
+                }
+                else
+                {
+                    transform.position = _initialPos;
+                    _rigidBody.velocity = Vector3.zero;
+                }
             }
         }
 
@@ -51,6 +58,8 @@ namespace Reseul.Snapdragon.Spaces
         }
 
         private bool useARCamera;
+        private Vector3 _initialPos;
+
         public void SwitchMoveFromARCamera(bool value)
         {
             useARCamera = value;
@@ -69,12 +78,12 @@ namespace Reseul.Snapdragon.Spaces
             CharacterAnimator.SetBool("walk", true);
             if (LeftStick.action.IsPressed())
             {
-                var forward = new Vector3(StickSensitivity.Evaluate(leftStickValue.x), 0, StickSensitivity.Evaluate(leftStickValue.y));
+                var forward = new Vector3(leftStickValue.x, 0, leftStickValue.y);
                 if (useARCamera)
                     forward = ARCamera.transform.rotation * forward;
                 else
                     forward = PhoneCamera.transform.rotation * forward;
-                forward = new Vector3(forward.x, 0, forward.z);
+                forward = new Vector3(forward.x, 0, forward.z).normalized;
 
                 if (forward.sqrMagnitude < stopThreshold) return;
 
