@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &89678803727020882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 89678803727020881}
+  - component: {fileID: 89678803727020880}
+  - component: {fileID: 89678803727020883}
+  m_Layer: 0
+  m_Name: StickControllerSimulator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &89678803727020881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89678803727020882}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &89678803727020880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89678803727020882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c3af9af379edd43a519b64c2156d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftStick_y: {fileID: 801170882288705787, guid: c97cbec12ce4c354a9f72df1cba46306, type: 3}
+  LeftStick_x: {fileID: 6190816716248480179, guid: c97cbec12ce4c354a9f72df1cba46306, type: 3}
+  RightStick_y: {fileID: 7359216861216759442, guid: c97cbec12ce4c354a9f72df1cba46306, type: 3}
+  RightStick_x: {fileID: -4915714542778286834, guid: c97cbec12ce4c354a9f72df1cba46306, type: 3}
+  Touchpad_y: {fileID: 3260396280598276329, guid: c97cbec12ce4c354a9f72df1cba46306, type: 3}
+  Touchpad_x: {fileID: 4617254931392136804, guid: c97cbec12ce4c354a9f72df1cba46306, type: 3}
+  Button1: {fileID: 8930742717781626229, guid: c97cbec12ce4c354a9f72df1cba46306, type: 3}
+--- !u!114 &89678803727020883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89678803727020882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017c5e3933235514c9520e1dace2a4b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ActionAssets:
+  - {fileID: -944628639613478452, guid: c97cbec12ce4c354a9f72df1cba46306, type: 3}
