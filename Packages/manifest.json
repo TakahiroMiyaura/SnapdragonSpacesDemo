@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.microsoft.mrtk.graphicstools.unity": "file:MixedReality/com.microsoft.mrtk.graphicstools.unity-0.5.12.tgz",
-    "com.qualcomm.snapdragon.spaces": "file:SnapdragonSpaces/com.qualcomm.snapdragon.spaces-0.23.0.tgz",
+    "com.qualcomm.snapdragon.spaces": "file:SnapdragonSpaces/com.qualcomm.snapdragon.spaces-0.23.2.tgz",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.feature.development": "1.0.1",
