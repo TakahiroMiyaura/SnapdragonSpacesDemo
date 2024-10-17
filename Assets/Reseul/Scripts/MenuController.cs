@@ -2,7 +2,10 @@
 // Released under the MIT license
 // http://opensource.org/licenses/mit-license.php
 
+using System.Net.Mime;
 using MixedReality.Toolkit.UX;
+using Qualcomm.Snapdragon.Spaces;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,12 +13,16 @@ using UnityEngine.Events;
 public class MenuController : MonoBehaviour
 {
     public DialogPool DialogPool;
+    
+    [SerializeField]
+    private DynamicOpenXRLoader _loader;
 
-    public UnityEvent OnPositive;
+    public TextMeshProUGUI text;
 
     // Start is called before the first frame update
     private void Start()
     {
+        text.text = $"{Screen.currentResolution.width},{Screen.currentResolution.height}";
     }
 
     // Update is called once per frame
@@ -43,4 +50,15 @@ public class MenuController : MonoBehaviour
             Application.Quit();
 #endif
     }
+
+    public void SetAutoStartOnDisplayConnected(bool value)
+    {
+        _loader.AutoStartXROnDisplayConnected = value;
+    }
+
+    public void SetAutoManageXRCamera(bool value)
+    {
+        _loader.AutoManageXRCamera = value;
+    }
+
 }

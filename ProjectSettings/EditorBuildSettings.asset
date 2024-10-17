@@ -8,13 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Reseul/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/test.unity
-    guid: 9ec8a3db0bb6d2745a8ee6c1e5b5ac34
-  - enabled: 0
-    path: Assets/Samples/Snapdragon Spaces/0.23.0/Core Samples/Scenes/Camera Frame
-      Access Sample/Camera Frame Access Sample.unity
-    guid: 7baa3e9f6af898949bb40acf3ab781df
   m_configObjects:
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 6e3c02319fdf15040a8945f656e5b2ad, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: acc58bdbcd88ef24e88860d2b5e3c2ac, type: 2}
