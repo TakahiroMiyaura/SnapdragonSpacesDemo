@@ -9,6 +9,7 @@ using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -23,6 +24,7 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
 
         public bool RenderUsingYUVPlanes;
 
+        [SerializeField]
         private ARCameraManager _cameraManager;
         private Texture2D _cameraTexture;
         private bool _deviceSupported;
@@ -37,7 +39,10 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
 
         public void Awake()
         {
-            _cameraManager = FindObjectOfType<ARCameraManager>(true);
+            if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+            {
+                Permission.RequestUserPermission(Permission.Camera);
+            }
         }
 
         void OnEnable()
@@ -61,7 +66,10 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
                 return;
             }
 
-            _cameraManager.frameReceived += OnFrameReceived;
+            if (_cameraManager != null)
+            {
+                _cameraManager.frameReceived += OnFrameReceived;
+            }
 
             _maxTextureSize = CameraRawImage.rectTransform.sizeDelta;
             _defaultAspectRatio = _maxTextureSize.x / _maxTextureSize.y;
@@ -69,7 +77,10 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
 
         void OnDisable()
         {
-            _cameraManager.frameReceived -= OnFrameReceived;
+            if (_cameraManager != null)
+            {
+                _cameraManager.frameReceived -= OnFrameReceived;
+            }
             _lastCpuImage.Dispose();
             _cameraConfigs.Dispose();
         }
@@ -286,7 +297,7 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
         {
             // Currently not supporting Lenovo VRX
             var type = DeviceConfirmProvider.GetCurrentDeviceType();
-            return type == XRDeviceType.ThinkRealityA3;
+            return type == XRDeviceType.Handheld;
         }
 
         private void OnDeviceNotSupported()

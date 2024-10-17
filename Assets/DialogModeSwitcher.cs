@@ -34,7 +34,7 @@ public class DialogModeSwitcher : MonoBehaviour
                 }
                 solverHandler.UpdateSolvers = true;
                 break;
-            case XRDeviceType.ThinkRealityA3:
+            case XRDeviceType.Handheld:
                 solverHandler.UpdateSolvers = false;
                 canvas.renderMode = RenderMode.ScreenSpaceOverlay;
                 break;

@@ -2,7 +2,9 @@
 // Released under the MIT license
 // http://opensource.org/licenses/mit-license.php
 
+using Qualcomm.Snapdragon.Spaces;
 using UnityEngine;
+using UnityEngine.XR.OpenXR;
 
 namespace Reseul.Snapdragon.Spaces.Devices
 {
@@ -10,8 +12,12 @@ namespace Reseul.Snapdragon.Spaces.Devices
     public enum XRDeviceType
     {
         Unknown,
-        ThinkRealityA3,
-        ThinkRealityVRX
+        Handheld,
+        ThinkRealityVRX,
+        Console,
+        Desktop,
+        
+
     }
 
     public class DeviceConfirmProvider
@@ -19,17 +25,18 @@ namespace Reseul.Snapdragon.Spaces.Devices
 
         public static XRDeviceType GetCurrentDeviceType()
         {
-
-            var modelName = SystemInfo.deviceModel.ToLower();
+            var baseRuntimeFeature = OpenXRSettings.Instance.GetFeature<BaseRuntimeFeature>();
+            baseRuntimeFeature.IsFusionSupported();
+                
+            var modelName = SystemInfo.graphicsDeviceName;
 
             if (modelName.Contains("vrx"))
             {
                 return XRDeviceType.ThinkRealityVRX;
             }
-            else if (modelName.Contains("motorola"))
+            else if (SystemInfo.deviceType == DeviceType.Handheld)
             {
-                //TODO: ThinkRealityA3のモデル名がわからないので、とりあえずMotorolaの文字列が入っていたらThinkRealityA3として扱う
-                return XRDeviceType.ThinkRealityA3;
+                return XRDeviceType.Handheld;
             }
             else
             {
