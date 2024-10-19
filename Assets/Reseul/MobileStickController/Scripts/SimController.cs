@@ -8,6 +8,12 @@ using UnityEngine.InputSystem;
 public class SimController : MonoBehaviour
 {
 
+    [SerializeField]
+    private Camera _arCamera;
+
+    [SerializeField]
+    private RectTransform _camCanvas;
+
     public InputActionReference LeftStick_y;
     public InputActionReference LeftStick_x;
     public InputActionReference RightStick_y;
@@ -17,6 +23,8 @@ public class SimController : MonoBehaviour
     public InputActionReference Button1;
 
     CanvasControllerInputDeviceState companionState;
+
+    private Vector2 _touchpadPos = new Vector2(1170, 540);
 
     // Start is called before the first frame update
     void Awake()
@@ -75,7 +83,15 @@ public class SimController : MonoBehaviour
         {
             TouchpadPosition.x = touchpad_x;
         }
-        companionState.touchpadPosition = TouchpadPosition;
+        _touchpadPos += TouchpadPosition;
+        companionState.touchScreenPosition = _touchpadPos;
+
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(_camCanvas, _touchpadPos, _arCamera,
+                out Vector3 result))
+        {
+            companionState.touchScreenPosition3D = result;
+        }
+        companionState.touchScreenPosition3D = Vector3.zero;
 
         companionState.buttons = 0;
         if (Button1.action.IsPressed())

@@ -1,7 +1,8 @@
+// Copyright (c) 2024 Takahiro Miyaura
+// Released under the MIT license
+// http://opensource.org/licenses/mit-license.php
+
 using Qualcomm.Snapdragon.Spaces;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,39 +10,63 @@ namespace Reseul.Snapdragon.Spaces
 {
     public class PlayerController : MonoBehaviour
     {
+        private Vector3 _initialPos;
+        private bool _isPressed;
+        private Vector2 _leftStickValue;
+        private Rigidbody _rigidBody;
+
+        public Camera ARCamera;
+        public InputActionReference Button1;
+        public GameObject Character;
+        public Animator CharacterAnimator;
+        public InputActionReference LeftStick;
+        public InputActionReference LeftStickDelta;
+
+        public float MoveSpeed;
+        public Camera PhoneCamera;
 
         public float RespawnRange = 10f;
 
-        public Camera ARCamera;
-        public Camera PhoneCamera;
-        public InputActionReference LeftStick;
-        public InputActionReference Button1;
-        private Rigidbody _rigidBody;
-        public Animator CharacterAnimator;
-        public GameObject Character;
+        public string DebugText => _leftStickValue.ToString();
 
         [SerializeField]
-        float stopThreshold = 0.005f;
+        private float stopThreshold = 0.005f;
 
-        public float MoveSpeed;
+        private bool useARCamera;
 
         private bool _isPlayable => _rigidBody != null && _rigidBody.useGravity;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             _initialPos = transform.position;
             _rigidBody = GetComponent<Rigidbody>();
+            LeftStick.action.started += ctx =>
+            {
+                _isPressed = true;
+                _leftStickValue = ctx.ReadValue<Vector2>();
+            };
+            LeftStickDelta.action.performed += ctx =>
+            {
+                _isPressed = true;
+                _leftStickValue += ctx.ReadValue<Vector2>();
+            };
+            LeftStick.action.canceled += ctx =>
+            {
+                _isPressed = false;
+                _leftStickValue = Vector2.zero;
+            };
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (transform.position.y < -RespawnRange)
             {
                 if (SpacesGlassStatus.Instance.GlassConnectionState == SpacesGlassStatus.ConnectionState.Connected)
                 {
-                    transform.position = ARCamera.transform.position + new Vector3(ARCamera.transform.forward.x, 2f, ARCamera.transform.forward.z);
+                    transform.position = ARCamera.transform.position +
+                                         new Vector3(ARCamera.transform.forward.x, 2f, ARCamera.transform.forward.z);
                     _rigidBody.velocity = Vector3.zero;
                 }
                 else
@@ -57,9 +82,6 @@ namespace Reseul.Snapdragon.Spaces
             _rigidBody.useGravity = true;
         }
 
-        private bool useARCamera;
-        private Vector3 _initialPos;
-
         public void SwitchMoveFromARCamera(bool value)
         {
             useARCamera = value;
@@ -67,18 +89,12 @@ namespace Reseul.Snapdragon.Spaces
 
         public void FixedUpdate()
         {
-
-            if (!_isPlayable)
-            {
-                return;
-            }
-
-            var leftStickValue = LeftStick.action.ReadValue<Vector2>();
+            if (!_isPlayable) return;
 
             CharacterAnimator.SetBool("walk", true);
-            if (LeftStick.action.IsPressed())
+            if (_isPressed)
             {
-                var forward = new Vector3(leftStickValue.x, 0, leftStickValue.y);
+                var forward = new Vector3(_leftStickValue.x, 0, _leftStickValue.y);
                 if (useARCamera)
                     forward = ARCamera.transform.rotation * forward;
                 else
@@ -92,11 +108,7 @@ namespace Reseul.Snapdragon.Spaces
             }
 
             if (Button1.action.IsPressed() && Mathf.Abs(_rigidBody.velocity.y) < 0.01f)
-            {
-                _rigidBody.AddForce(new Vector3(0, 4, 0),ForceMode.Impulse);
-            }
+                _rigidBody.AddForce(new Vector3(0, 4, 0), ForceMode.Impulse);
         }
-
-
     }
 }

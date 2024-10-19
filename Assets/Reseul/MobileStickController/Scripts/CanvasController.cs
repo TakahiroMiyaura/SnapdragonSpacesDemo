@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Takahiro Miyaura
+// Copyright (c) 2024 Takahiro Miyaura
 // Released under the MIT license
 // http://opensource.org/licenses/mit-license.php
 
@@ -7,130 +7,194 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace Reseul.Snapdragon.Spaces.Controllers
 {
     public class CanvasController : MonoBehaviour
     {
+        private static CanvasController _instanceObj;
+        private CanvasControllerInputDevice _inputDevice;
+        private CanvasControllerInputDeviceState _companionState;
+        public UnityEvent OnLeftStickEnd;
+        public UnityEvent OnRightStickEnd;
+        public UnityEvent OnTouchScreenEnd;
 
-        private static CanvasController instanceObj;
-        public TextMeshProUGUI text;
+        public string DebugText { get; private set; }
 
         public static CanvasController Instance
         {
             get
             {
-                if (instanceObj == null)
-                {
-                    instanceObj = FindObjectOfType<CanvasController>();
-                }
-                return instanceObj;
+                if (_instanceObj == null) _instanceObj = FindObjectOfType<CanvasController>();
+                return _instanceObj;
             }
         }
-        
-        CanvasControllerInputDeviceState companionState;
 
-        void Awake()
+        private void Awake()
         {
-            companionState = new CanvasControllerInputDeviceState();
-            companionState.trackingState = 1;
+            _companionState = new CanvasControllerInputDeviceState
+            {
+                trackingState = 1
+            };
         }
 
-        void Start()
+        private void OnEnable()
         {
+            _inputDevice ??= InputSystem.GetDevice<CanvasControllerInputDevice>();
         }
 
-        public void ReloadApp()
+
+        public void SendButton1PressEvent(int phase)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+            var bit = 1 << 0;
+            if (phase != 0)
+                _companionState.buttons |= (ushort)bit;
+            else
+                _companionState.buttons &= (ushort)~bit;
+            DebugText = $"{_companionState.buttons:B4}";
+            InputSystem.QueueStateEvent(_inputDevice, _companionState);
         }
 
-        public void SendButton1Event(int phase)
+        public void SendTouchScreenPositionEvent(int phase, Vector2 position)
         {
-            var bit = 1 << (int)0;
+            var bit = 1 << 1;
             if (phase != 0)
             {
-                companionState.buttons |= (ushort)bit;
+                _companionState.buttons |= (ushort)bit;
             }
             else
             {
-                companionState.buttons &= (ushort)~bit;
+                _companionState.buttons &= (ushort)~bit;
+                OnTouchScreenEnd?.Invoke();
             }
-            text.text = Convert.ToString(companionState.buttons, 2);
-            InputSystem.QueueStateEvent(InputSystem.GetDevice<CanvasControllerInputDevice>(), companionState);
+
+            DebugText = $"{_companionState.buttons:B4}";
+
+            _companionState.touchScreenPosition.x = position.x;
+            _companionState.touchScreenPosition.y = position.y;
+
+            InputSystem.QueueStateEvent(_inputDevice, _companionState);
         }
 
-        public void SendTouchpadEvent(int phase, Vector2 position)
+        public void SendTouchScreenDeltaEvent(int phase, Vector2 delta)
         {
-            var bit = 1 << (int)1;
+            InputSystem.QueueDeltaStateEvent(_inputDevice.touchScreenDelta, delta, Time.realtimeSinceStartup);
+        }
+
+        public void SendTouchScreenPosition3DEvent(int phase, Vector3 normalizedPosition)
+        {
+            var bit = 1 << 1;
             if (phase != 0)
             {
-                companionState.buttons |= (ushort)bit;
+                _companionState.buttons |= (ushort)bit;
             }
             else
             {
-                companionState.buttons &= (ushort)~bit;
-                OnTouchpadEnd?.Invoke();
+                _companionState.buttons &= (ushort)~bit;
+                OnTouchScreenEnd?.Invoke();
             }
-            text.text = Convert.ToString(companionState.buttons, 2);
 
-            companionState.touchpadPosition.x = position.x;
-            companionState.touchpadPosition.y = position.y;
+            DebugText = $"{_companionState.buttons:B4}";
 
-            InputSystem.QueueStateEvent(InputSystem.GetDevice<CanvasControllerInputDevice>(), companionState);
+            _companionState.touchScreenPosition3D = normalizedPosition;
+
+            InputSystem.QueueStateEvent(_inputDevice, _companionState);
         }
 
-        public void SendLeftStickEvent(int phase, Vector2 position)
+        public void SendTouchRadiusEvent(int phase, Vector2 position)
         {
-            var bit = 1 << (int)2;
+            var bit = 1 << 1;
             if (phase != 0)
             {
-                companionState.buttons |= (ushort)bit;
+                _companionState.buttons |= (ushort)bit;
             }
             else
             {
-                companionState.buttons &= (ushort)~bit;
+                _companionState.buttons &= (ushort)~bit;
+                OnTouchScreenEnd?.Invoke();
+            }
+
+            DebugText = $"{_companionState.buttons:B4}";
+
+            _companionState.touchRadius.x = position.x;
+            _companionState.touchRadius.y = position.y;
+
+            InputSystem.QueueStateEvent(_inputDevice, _companionState);
+        }
+
+        public void SendTouchRadiusDeltaEvent(int phase, Vector2 delta)
+        {
+            InputSystem.QueueDeltaStateEvent(_inputDevice.touchRadiusDelta, delta, Time.realtimeSinceStartup);
+        }
+
+        public void SendLeftStickPositionEvent(int phase, Vector2 position)
+        {
+            var bit = 1 << 2;
+            if (phase != 0)
+            {
+                _companionState.buttons |= (ushort)bit;
+            }
+            else
+            {
+                _companionState.buttons &= (ushort)~bit;
                 OnLeftStickEnd?.Invoke();
             }
-            text.text = Convert.ToString(companionState.buttons, 2);
 
-            companionState.leftStickPosition.x = position.x;
-            companionState.leftStickPosition.y = position.y;
+            DebugText = $"{_companionState.buttons:B4}";
 
-            InputSystem.QueueStateEvent(InputSystem.GetDevice<CanvasControllerInputDevice>(), companionState);
+            _companionState.leftStickPosition.x = position.x;
+            _companionState.leftStickPosition.y = position.y;
+
+            InputSystem.QueueStateEvent(_inputDevice, _companionState);
         }
 
-        public void SendRightStickEvent(int phase, Vector2 position)
+        public void SendLeftStickDeltaEvent(int phase, Vector2 delta)
         {
-            var bit = 1 << (int)3;
+            InputSystem.QueueDeltaStateEvent(_inputDevice.leftStickDelta, delta, Time.realtimeSinceStartup);
+        }
+
+        public void SendRightStickPositionEvent(int phase, Vector2 position)
+        {
+            var bit = 1 << 3;
             if (phase != 0)
             {
-                companionState.buttons |= (ushort)bit;
+                _companionState.buttons |= (ushort)bit;
             }
             else
             {
-                companionState.buttons &= (ushort)~bit;
+                _companionState.buttons &= (ushort)~bit;
                 OnRightStickEnd?.Invoke();
             }
-            text.text = Convert.ToString(companionState.buttons, 2);
 
-            companionState.rightStickPosition.x = position.x;
-            companionState.rightStickPosition.y = position.y;
+            DebugText = $"{_companionState.buttons:B4}";
 
-            InputSystem.QueueStateEvent(InputSystem.GetDevice<CanvasControllerInputDevice>(), companionState);
+            _companionState.rightStickPosition.x = position.x;
+            _companionState.rightStickPosition.y = position.y;
+
+            InputSystem.QueueStateEvent(_inputDevice, _companionState);
         }
 
-        public UnityEvent OnTouchpadEnd;
-        public UnityEvent OnLeftStickEnd;
-        public UnityEvent OnRightStickEnd;
-
-        public void Quit()
+        public void SendRightStickDeltaEvent(int phase, Vector2 delta)
         {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+            InputSystem.QueueDeltaStateEvent(_inputDevice.rightStickDelta, delta, Time.realtimeSinceStartup);
+        }
+
+        public void SendTouchScreenPressEvent(int i, TouchPhase contact)
+        {
+            var bit = (byte)contact << 1;
+            if ((byte)contact < 3)
+            {
+                _companionState.buttons |= (ushort)bit;
+            }
+            else
+            {
+                _companionState.buttons &= (ushort)~bit;
+                OnTouchScreenEnd?.Invoke();
+            }
+
+            InputSystem.QueueStateEvent(_inputDevice, _companionState);
+
         }
     }
 }

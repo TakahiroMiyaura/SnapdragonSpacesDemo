@@ -20,13 +20,13 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         public override void OnPointerDown(PointerEventData eventData)
         {
             base.OnPointerDown(eventData);
-            inputDevice.SendButton1Event(1);
+            inputDevice.SendButton1PressEvent(1);
         }
 
         public override void OnPointerUp(PointerEventData eventData)
         {
             base.OnPointerUp(eventData);
-            inputDevice.SendButton1Event(0);
+            inputDevice.SendButton1PressEvent(0);
         }
         
     }

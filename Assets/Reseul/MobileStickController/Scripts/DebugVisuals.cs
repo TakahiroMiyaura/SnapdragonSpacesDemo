@@ -1,40 +1,48 @@
+// Copyright (c) 2024 Takahiro Miyaura
+// Released under the MIT license
+// http://opensource.org/licenses/mit-license.php
 
+using Reseul.Snapdragon.Spaces;
+using Reseul.Snapdragon.Spaces.Controllers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class DebugVisuals : MonoBehaviour
 {
+    [SerializeField]
+    private CameraControl _cameraControl;
 
-    public InputActionReference toutchpad;
-    public InputActionReference rightStick;
-    public InputActionReference leftStick;
-    public InputActionReference button1;
+    [SerializeField]
+    private PlayerController _playerController;
+
+    [SerializeField]
+    private CanvasController _canvasController;
+
+    private Vector2 _touchScreenData;
+    public TextMeshProUGUI button1Text;
+    public TextMeshProUGUI leftStickText;
+    public TextMeshProUGUI rightStickText;
+
+    public InputActionReference touchScreen;
+    public InputActionReference touchScreenDelta;
 
     public TextMeshProUGUI touchText;
-    public TextMeshProUGUI rightStickText;
-    public TextMeshProUGUI leftStickText;
-    public TextMeshProUGUI button1Text;
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        touchScreen.action.started += ctx => _touchScreenData = ctx.ReadValue<Vector2>();
+        touchScreenDelta.action.performed += ctx => _touchScreenData += ctx.ReadValue<Vector2>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        var toutchpadData = toutchpad.action.ReadValue<Vector2>();
-        var rightStickData = rightStick.action.ReadValue<Vector2>();
-        var leftStickData = leftStick.action.ReadValue<Vector2>();
-        var button1Data = button1.action.IsPressed();
-
-        touchText.text = $"({toutchpadData.x:F1},{toutchpadData.y:F1})";
-        rightStickText.text = $"({rightStickData.x:F1},{rightStickData.y:F1})";
-        leftStickText.text = $"({leftStickData.x:F1},{leftStickData.y:F1})";
-        button1Text.text = $"({button1.action.name}-{button1Data})";
-
+        touchText.text = $"({_touchScreenData.x:F1},{_touchScreenData.y:F1})";
+        rightStickText.text = _playerController?.DebugText;
+        leftStickText.text = _cameraControl?.DebugText;
+        button1Text.text = _canvasController.DebugText;
     }
 }
