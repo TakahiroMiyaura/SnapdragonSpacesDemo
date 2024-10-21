@@ -21,6 +21,8 @@ public class SimController : MonoBehaviour
     public InputActionReference Touchpad_y;
     public InputActionReference Touchpad_x;
     public InputActionReference Button1;
+    public InputActionReference LeftStick;
+    public InputActionReference RightStick;
 
     CanvasControllerInputDeviceState companionState;
 
@@ -35,71 +37,125 @@ public class SimController : MonoBehaviour
 #endif
     }
 
+    void Start()
+    {
+        //Button1.action.started += ctx =>
+        //{
+        //   CanvasController.Instance.SendButton1PressEvent(1);
+        //};
+        //Button1.action.canceled += ctx =>
+        //{
+        //    CanvasController.Instance.SendButton1PressEvent(0);
+        //};
+        //LeftStick.action.started += ctx =>
+        //{
+        //    CanvasController.Instance.SendLeftStickPositionEvent(1,ctx.ReadValue<Vector2>());
+        //};
+        //LeftStick.action.performed += ctx =>
+        //{
+        //    CanvasController.Instance.SendLeftStickPositionEvent(1, ctx.ReadValue<Vector2>());
+        //};
+        //LeftStick.action.canceled += ctx =>
+        //{
+        //    CanvasController.Instance.SendLeftStickPositionEvent(0, ctx.ReadValue<Vector2>());
+        //};
+        //RightStick.action.started += ctx =>
+        //{
+        //    CanvasController.Instance.SendRightStickPositionEvent(1, ctx.ReadValue<Vector2>());
+        //};
+        //RightStick.action.performed += ctx =>
+        //{
+        //    CanvasController.Instance.SendRightStickPositionEvent(1, ctx.ReadValue<Vector2>());
+        //};
+        //RightStick.action.canceled += ctx =>
+        //{
+        //    CanvasController.Instance.SendRightStickPositionEvent(0, ctx.ReadValue<Vector2>());
+        //};
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
 #if UNITY_EDITOR
-        var leftStickValue_y = LeftStick_y.action.ReadValue<float>();
-        var leftStickValue_x = LeftStick_x.action.ReadValue<float>();
-        var rightStickValue_y = RightStick_y.action.ReadValue<float>();
-        var rightStickValue_x = RightStick_x.action.ReadValue<float>();
-        var touchpad_y = Touchpad_y.action.ReadValue<float>();
-        var touchpad_x = Touchpad_x.action.ReadValue<float>();
-        var button1Value = Button1.action.ReadValue<float>();
-
-        var leftStickPosition = Vector2.zero;
-        if (LeftStick_y.action.IsPressed())
-        {
-            leftStickPosition.y = leftStickValue_y;
-        }
-
-        if (LeftStick_x.action.IsPressed())
-        {
-            leftStickPosition.x = leftStickValue_x;
-        }
-        companionState.leftStickPosition = leftStickPosition;
+        bool isChanged = false;
+        //var leftStickPosition = Vector2.zero;
+        //if (LeftStick_y.action.IsPressed() || LeftStick_x.action.IsPressed())
+        //{
+        //    isChanged = true;
+        //    leftStickPosition.y = LeftStick_y.action.ReadValue<float>();
+        //    companionState.NewButtons |= (ushort)1<<2;
             
 
-        var RightStickPosition = Vector2.zero;
-        if (RightStick_y.action.IsPressed())
+        //    leftStickPosition.x = LeftStick_x.action.ReadValue<float>();
+        //    companionState.NewButtons |= (ushort)1 << 2;
+
+        //    companionState.newleftStick = leftStickPosition;
+        //}
+
+        if (LeftStick.action.IsPressed())
         {
-            RightStickPosition.y = rightStickValue_y;
+            companionState.NewButtons |= (ushort)1 << 2;
+            companionState.newleftStick = LeftStick.action.ReadValue<Vector2>();
+        }
+        else
+        {
+            companionState.NewButtons &= (ushort)1 << 2;
         }
 
-        if (RightStick_x.action.IsPressed())
-        {
-            RightStickPosition.x = rightStickValue_x;
-        }
-        
-        companionState.rightStickPosition = RightStickPosition;
 
-        var TouchpadPosition = Vector2.zero;
-        if (Touchpad_y.action.IsPressed())
+        //var rightStickPosition = Vector2.zero;
+        //if (RightStick_y.action.IsPressed() || RightStick_x.action.IsPressed())
+        //{ ;
+        //    isChanged = true;
+        //    rightStickPosition.y = RightStick_y.action.ReadValue<float>();
+        //    companionState.NewButtons |= (ushort)1 << 3;
+
+        //    rightStickPosition.x = RightStick_x.action.ReadValue<float>();
+        //    companionState.NewButtons |= (ushort)1 << 3;
+
+        //    companionState.newrightStick = rightStickPosition;
+        //}
+
+        if (RightStick.action.IsPressed())
         {
-            TouchpadPosition.y = touchpad_y;
+            companionState.NewButtons |= (ushort)1 << 3;
+            companionState.newrightStick = RightStick.action.ReadValue<Vector2>();
+        }
+        else
+        {
+            companionState.NewButtons &= (ushort)1 << 3;
         }
 
-        if (Touchpad_x.action.IsPressed())
+        var touchpadPosition = Vector2.zero;
+        if (Touchpad_y.action.IsPressed() || Touchpad_x.action.IsPressed())
         {
-            TouchpadPosition.x = touchpad_x;
-        }
-        _touchpadPos += TouchpadPosition;
-        companionState.touchScreenPosition = _touchpadPos;
+            touchpadPosition.y = Touchpad_y.action.ReadValue<float>();
+            companionState.NewButtons |= (ushort)1 << 1;
 
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(_camCanvas, _touchpadPos, _arCamera,
-                out Vector3 result))
-        {
-            companionState.touchScreenPosition3D = result;
-        }
-        companionState.touchScreenPosition3D = Vector3.zero;
+            touchpadPosition.x = Touchpad_x.action.ReadValue<float>();
+            companionState.NewButtons |= (ushort)1 << 1;
 
-        companionState.buttons = 0;
+            _touchpadPos += touchpadPosition;
+            companionState.touchScreenPosition = _touchpadPos;
+        }
+
+        //if (RectTransformUtility.ScreenPointToWorldPointInRectangle(_camCanvas, _touchpadPos, _arCamera,
+        //        out Vector3 result))
+        //{
+        //    companionState.touchScreenPosition3D = result;
+        //}
+        //companionState.touchScreenPosition3D = Vector3.zero;
+
         if (Button1.action.IsPressed())
         {
-            companionState.buttons = 1;
+            companionState.NewButtons |= (ushort)1 << 0;
         }
-
-        InputSystem.QueueStateEvent(InputSystem.GetDevice<CanvasControllerInputDevice>(), companionState);
+        else
+        {
+            companionState.NewButtons &= (ushort)1 << 0;
+        }
+        
+            InputSystem.QueueStateEvent(InputSystem.GetDevice<CanvasControllerInputDevice>(), companionState);
 #endif
     }
 }

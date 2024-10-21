@@ -370,6 +370,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "SinglePress",
+                    "type": "Button",
+                    "id": "19c9b9ca-c713-438a-b75c-fd8839d90679",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -427,6 +436,609 @@
                     "action": "PrimaryRadius",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90db01a9-624f-48dc-9862-334050b387b9",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "SinglePress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Canvas Controller1",
+            "id": "743e882f-7092-42a1-b424-e31af40be263",
+            "actions": [
+                {
+                    "name": "LeftStick",
+                    "type": "Value",
+                    "id": "bee02fb4-5d59-4f37-8c08-740a78bfb7d3",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchRadius",
+                    "type": "Value",
+                    "id": "c5074c87-eb1a-49a5-a34c-5d05231c1108",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchScreenPosition(3D)",
+                    "type": "Value",
+                    "id": "c58c1e8e-0bdf-48a9-a5cf-d3416f1dd124",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchScreenDelta",
+                    "type": "Value",
+                    "id": "2c5ada71-af60-40be-8e0b-4c906a9f7438",
+                    "expectedControlType": "Delta",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchScreenPosition",
+                    "type": "Value",
+                    "id": "ad5e06d8-ea16-4517-abac-1b9e35035ac5",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightStick",
+                    "type": "Value",
+                    "id": "a98e8c8f-f1f5-43ac-ae4a-a8601af73eed",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Button1Press",
+                    "type": "Button",
+                    "id": "2e95166b-7ebb-4bb8-b656-9061e46e30e3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftStickPress",
+                    "type": "Button",
+                    "id": "33ed9ecc-a99b-46fe-89c5-7d394b9952d3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightStickPress",
+                    "type": "Button",
+                    "id": "e3e7323c-2391-4cd9-a212-b1af9cdf0147",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TouchScreenPress",
+                    "type": "Button",
+                    "id": "201f4f91-de28-4d73-9f91-ea7f734a2d41",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "35497e1c-1c43-4917-89d1-8d9fee895893",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftStick",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "83e85396-1b0d-4d11-86a6-97259dce8a06",
+                    "path": "<CanvasControllerInputDevice>/newleftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "LeftStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "e2b5caee-5652-4389-9e59-cc4aab181446",
+                    "path": "<CanvasControllerInputDevice>/newleftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "LeftStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "15445fd1-6c18-46ad-8ec7-628ef297353b",
+                    "path": "<CanvasControllerInputDevice>/newleftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "LeftStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "ca005391-20e6-4ee1-81dc-f1b31e2677b3",
+                    "path": "<CanvasControllerInputDevice>/newleftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "LeftStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "99159112-2c45-4be6-bf50-7600a84f20f8",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightStick",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "56c0db91-b669-47b6-9ecd-255e60c3de9f",
+                    "path": "<CanvasControllerInputDevice>/newrightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "RightStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "10419a28-1183-4699-8ff5-41d8ef50e58c",
+                    "path": "<CanvasControllerInputDevice>/newrightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "RightStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "6326c1a6-be37-4420-a57e-891a5772f67e",
+                    "path": "<CanvasControllerInputDevice>/newrightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "RightStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "4cd16ba3-c775-41af-b9d3-1b1078df9d2d",
+                    "path": "<CanvasControllerInputDevice>/newrightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "RightStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "6d6664d9-763a-41f1-84dd-5d15b6dc84b4",
+                    "path": "<CanvasControllerInputDevice>/newButton1Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "Button1Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a25bd4f-e07f-4279-b075-29943a6e8c44",
+                    "path": "<CanvasControllerInputDevice>/newtouchScreenPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "TouchScreenPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d211dbc8-caa1-4fbe-9b13-9daab7d1eb04",
+                    "path": "<CanvasControllerInputDevice>/touchScreenPosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "TouchScreenPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d94322bd-7d58-451f-b807-a78efdf6fb8b",
+                    "path": "<CanvasControllerInputDevice>/touchScreenDelta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "TouchScreenDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a110916-5ced-4ca4-822c-1524b788bb98",
+                    "path": "<CanvasControllerInputDevice>/touchScreenPosition3D",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "TouchScreenPosition(3D)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4eb94a2b-039a-4250-98f7-14defbc2b2c8",
+                    "path": "<CanvasControllerInputDevice>/touchRadius",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "TouchRadius",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "022f1ac9-1b0f-4bad-b1d3-bfc81c675105",
+                    "path": "<CanvasControllerInputDevice>/newleftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "LeftStickPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07d20503-2ac5-40d2-a5ac-e6940884230d",
+                    "path": "<CanvasControllerInputDevice>/newrightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "RightStickPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Canvas Controller2",
+            "id": "8c1b81c6-92b6-4b60-9200-ff5f3ee1a172",
+            "actions": [
+                {
+                    "name": "LeftStick",
+                    "type": "Value",
+                    "id": "88a17c16-0c5e-4970-9bbc-bedbe43c1a8e",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchRadius",
+                    "type": "Value",
+                    "id": "133c43a2-dd76-44cf-8b17-5f4218783777",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchScreenPosition(3D)",
+                    "type": "Value",
+                    "id": "d8ec4c7a-67d5-4ecd-a28b-5e6a0b95216c",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchScreenDelta",
+                    "type": "Value",
+                    "id": "fcc37fe6-4d35-4902-9299-f7225fe9772a",
+                    "expectedControlType": "Delta",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TouchScreenPosition",
+                    "type": "Value",
+                    "id": "c946d203-68a3-4bfb-b1d1-9ff952829fbc",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightStick",
+                    "type": "Value",
+                    "id": "e3673513-2ecf-4006-bad0-4b477039945e",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Button1Press",
+                    "type": "Button",
+                    "id": "1acc0199-e21d-40ed-8123-079d7d0ef8fb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftStickPress",
+                    "type": "Button",
+                    "id": "f7628e8e-322e-4902-811c-4bada28717fa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightStickPress",
+                    "type": "Button",
+                    "id": "3a81f02f-c6d6-4c4b-8a94-0ec525c38a84",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TouchScreenPress",
+                    "type": "Button",
+                    "id": "813100b6-2007-4e9f-a2f9-880bb7975122",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "284d2329-dce1-40e0-9696-7f6f78cf4f65",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftStick",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "acad33ba-b6da-49a8-8818-bc41328bbd0a",
+                    "path": "<MyCustomDevice>/LeftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "LeftStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "6789c26c-6a19-4a1c-9b47-a19d9a64cfdc",
+                    "path": "<MyCustomDevice>/LeftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "LeftStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "2da8d372-e6a0-4c79-a9a8-4228424bea45",
+                    "path": "<MyCustomDevice>/LeftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "LeftStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "4662ce63-8365-4ddf-be3a-89143606266a",
+                    "path": "<MyCustomDevice>/LeftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "LeftStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "4aedf6e8-b626-4e55-a2a2-7e46ca4af390",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightStick",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "6900ef86-f289-4972-a538-9297c0da4596",
+                    "path": "<MyCustomDevice>/RightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "RightStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "bb3ac48d-3882-4357-b574-403f4349afb6",
+                    "path": "<MyCustomDevice>/RightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "RightStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "fc509ced-16b4-45c5-8c0c-2b0f8f036326",
+                    "path": "<MyCustomDevice>/RightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "RightStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "086b6135-547e-47e0-b961-4cdb061cf29e",
+                    "path": "<MyCustomDevice>/RightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "RightStick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "abd9533e-3f20-4d25-b87a-73a1e07dc09d",
+                    "path": "<MyCustomDevice>/Button1Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "Button1Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15398219-25fc-4928-8c22-69fa50b65e6d",
+                    "path": "<MyCustomDevice>/TouchScreenPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "TouchScreenPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1843b933-76df-4ea0-b4d1-36424ddc4571",
+                    "path": "<MyCustomDevice>/TouchScreenPosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "TouchScreenPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "276144e1-5301-4436-aba5-d77fd450fdb1",
+                    "path": "<MyCustomDevice>/TouchScreenDelta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "TouchScreenDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0948aac6-ca72-422a-9271-988b61bb4c37",
+                    "path": "<MyCustomDevice>/TouchScreen3D",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "TouchScreenPosition(3D)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f87ddeb0-7a50-404c-b2d7-0caef4836280",
+                    "path": "<MyCustomDevice>/radius",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "TouchRadius",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d511fcf-ca4e-4efd-8643-843690ef6e4f",
+                    "path": "<MyCustomDevice>/LeftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "LeftStickPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c5eb77b-1d40-4eeb-9fd9-b51ec8bcc35f",
+                    "path": "<MyCustomDevice>/RightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "StickController",
+                    "action": "RightStickPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -443,6 +1055,11 @@
                 },
                 {
                     "devicePath": "<Touchscreen>",
+                    "isOptional": true,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<MyCustomDevice>",
                     "isOptional": true,
                     "isOR": false
                 }

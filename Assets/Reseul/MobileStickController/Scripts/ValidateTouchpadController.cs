@@ -41,7 +41,6 @@ namespace Assets.Reseul.MobileStickController.Scripts
             _touchpadDelta.action.performed += OnTouchpad;
             _touchpad.action.started += OnSarted;
          //   _touchpadDelta.action.canceled += OnTouchpadCancel;
-            _touchpadDelta.action.Enable();
         }
 
         private void OnSarted(InputAction.CallbackContext obj)
@@ -119,7 +118,7 @@ namespace Assets.Reseul.MobileStickController.Scripts
         void OnDisable()
         {
             _touchpadDelta.action.performed -= OnTouchpad;
-            _touchpadDelta.action.Disable();
+            _touchpad.action.started -= OnSarted;
         }
     }
 }

@@ -29,7 +29,8 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         public void OnDrag(PointerEventData eventData)
         {
-            inputDevice.SendTouchScreenPositionEvent(2, NormalizedPosition(eventData.position));
+            //inputDevice.SendTouchScreenPositionEvent(2, NormalizedPosition(eventData.position));
+            inputDevice.SendTouchScreenDeltaEvent(2, NormalizedPosition(eventData.delta));
         }
 
         public void OnEndDrag(PointerEventData eventData)

@@ -3,10 +3,13 @@
 // http://opensource.org/licenses/mit-license.php
 
 using System;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using Debug = UnityEngine.Debug;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace Reseul.Snapdragon.Spaces.Controllers
@@ -19,6 +22,15 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         public UnityEvent OnLeftStickEnd;
         public UnityEvent OnRightStickEnd;
         public UnityEvent OnTouchScreenEnd;
+
+        public UnityEvent OnLeftStickStart;
+        public UnityEvent OnRightStickStart;
+        public UnityEvent OnTouchScreenStart;
+
+        private bool _isLeftStickActive;
+        private bool _isRightStickActive;
+        private bool _isTouchScreenActive;
+
 
         public string DebugText { get; private set; }
 
@@ -44,35 +56,47 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             _inputDevice ??= InputSystem.GetDevice<CanvasControllerInputDevice>();
         }
 
-
         public void SendButton1PressEvent(int phase)
         {
-            var bit = 1 << 0;
+            var bit = phase << 0;
             if (phase != 0)
-                _companionState.buttons |= (ushort)bit;
+                _companionState.NewButtons |= (ushort)bit;
             else
-                _companionState.buttons &= (ushort)~bit;
-            DebugText = $"{_companionState.buttons:B4}";
+                _companionState.NewButtons &= (ushort)~bit;
+            DebugText = Convert.ToString(_companionState.NewButtons, 2);
+            Debug.Log(DebugText);
             InputSystem.QueueStateEvent(_inputDevice, _companionState);
         }
 
         public void SendTouchScreenPositionEvent(int phase, Vector2 position)
         {
-            var bit = 1 << 1;
+            var bit = phase << 1;
             if (phase != 0)
             {
-                _companionState.buttons |= (ushort)bit;
+                _companionState.NewButtons |= (ushort)bit;
+                if (!_isTouchScreenActive)
+                {
+                    OnTouchScreenStart?.Invoke();
+                    _isTouchScreenActive = true;
+                }
+
             }
             else
             {
-                _companionState.buttons &= (ushort)~bit;
+                _companionState.NewButtons &= (ushort)~bit;
                 OnTouchScreenEnd?.Invoke();
+                _isTouchScreenActive = false;
+                _companionState.touchRadius = Vector2.zero;
+                _companionState.touchRadiusDelta = Vector2.zero;
+                _companionState.touchScreenDelta = Vector2.zero;
+                _companionState.touchScreenPosition = Vector2.zero;
+                _companionState.touchScreenPosition3D = Vector3.zero;
             }
 
-            DebugText = $"{_companionState.buttons:B4}";
+            DebugText = Convert.ToString(_companionState.NewButtons, 2);
+            Debug.Log(DebugText);
 
-            _companionState.touchScreenPosition.x = position.x;
-            _companionState.touchScreenPosition.y = position.y;
+            _companionState.touchScreenPosition = position;
 
             InputSystem.QueueStateEvent(_inputDevice, _companionState);
         }
@@ -84,18 +108,30 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         public void SendTouchScreenPosition3DEvent(int phase, Vector3 normalizedPosition)
         {
-            var bit = 1 << 1;
+            var bit = phase << 1;
             if (phase != 0)
             {
-                _companionState.buttons |= (ushort)bit;
+                _companionState.NewButtons |= (ushort)bit;
+                if (!_isTouchScreenActive)
+                {
+                    OnTouchScreenStart?.Invoke();
+                    _isTouchScreenActive = true;
+                }
             }
             else
             {
-                _companionState.buttons &= (ushort)~bit;
+                _companionState.NewButtons &= (ushort)~bit;
                 OnTouchScreenEnd?.Invoke();
+                _isTouchScreenActive = false;
+                _companionState.touchRadius = Vector2.zero;
+                _companionState.touchRadiusDelta = Vector2.zero;
+                _companionState.touchScreenDelta = Vector2.zero;
+                _companionState.touchScreenPosition = Vector2.zero;
+                _companionState.touchScreenPosition3D = Vector3.zero;
             }
 
-            DebugText = $"{_companionState.buttons:B4}";
+            DebugText = Convert.ToString(_companionState.NewButtons, 2);
+            Debug.Log(DebugText);
 
             _companionState.touchScreenPosition3D = normalizedPosition;
 
@@ -104,21 +140,32 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         public void SendTouchRadiusEvent(int phase, Vector2 position)
         {
-            var bit = 1 << 1;
+            var bit = phase << 1;
             if (phase != 0)
             {
-                _companionState.buttons |= (ushort)bit;
+                _companionState.NewButtons |= (ushort)bit;
+                if (!_isTouchScreenActive)
+                {
+                    OnTouchScreenStart?.Invoke();
+                    _isTouchScreenActive = true;
+                }
             }
             else
             {
-                _companionState.buttons &= (ushort)~bit;
+                _companionState.NewButtons &= (ushort)~bit;
                 OnTouchScreenEnd?.Invoke();
+                _isTouchScreenActive = false;
+                _companionState.touchRadius = Vector2.zero;
+                _companionState.touchRadiusDelta = Vector2.zero;
+                _companionState.touchScreenDelta = Vector2.zero;
+                _companionState.touchScreenPosition = Vector2.zero;
+                _companionState.touchScreenPosition3D = Vector3.zero;
             }
 
-            DebugText = $"{_companionState.buttons:B4}";
+            DebugText = Convert.ToString(_companionState.NewButtons, 2);
+            Debug.Log(DebugText);
 
-            _companionState.touchRadius.x = position.x;
-            _companionState.touchRadius.y = position.y;
+            _companionState.touchRadius = position;
 
             InputSystem.QueueStateEvent(_inputDevice, _companionState);
         }
@@ -130,22 +177,28 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         public void SendLeftStickPositionEvent(int phase, Vector2 position)
         {
-            var bit = 1 << 2;
+            var bit = phase << 2;
             if (phase != 0)
             {
-                _companionState.buttons |= (ushort)bit;
+                _companionState.NewButtons |= (ushort)bit;
+                if (!_isLeftStickActive)
+                {
+                    OnLeftStickStart?.Invoke();
+                    _isLeftStickActive = true;
+                }
             }
             else
             {
-                _companionState.buttons &= (ushort)~bit;
+                _companionState.NewButtons &= (ushort)~bit;
                 OnLeftStickEnd?.Invoke();
+                _isLeftStickActive = false;
             }
 
-            DebugText = $"{_companionState.buttons:B4}";
+            DebugText = Convert.ToString(_companionState.NewButtons, 2);
+            Debug.Log(DebugText);
 
             _companionState.leftStickPosition.x = position.x;
             _companionState.leftStickPosition.y = position.y;
-
             InputSystem.QueueStateEvent(_inputDevice, _companionState);
         }
 
@@ -156,18 +209,25 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         public void SendRightStickPositionEvent(int phase, Vector2 position)
         {
-            var bit = 1 << 3;
+            var bit = phase << 3;
             if (phase != 0)
             {
-                _companionState.buttons |= (ushort)bit;
+                _companionState.NewButtons |= (ushort)bit;
+                if (!_isRightStickActive)
+                {
+                    OnRightStickStart?.Invoke();
+                    _isRightStickActive = true;
+                }
             }
             else
             {
-                _companionState.buttons &= (ushort)~bit;
+                _companionState.NewButtons &= (ushort)~bit;
                 OnRightStickEnd?.Invoke();
+                _isRightStickActive = false;
             }
 
-            DebugText = $"{_companionState.buttons:B4}";
+            DebugText = Convert.ToString(_companionState.NewButtons, 2);
+            Debug.Log(DebugText);
 
             _companionState.rightStickPosition.x = position.x;
             _companionState.rightStickPosition.y = position.y;
@@ -180,21 +240,38 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             InputSystem.QueueDeltaStateEvent(_inputDevice.rightStickDelta, delta, Time.realtimeSinceStartup);
         }
 
-        public void SendTouchScreenPressEvent(int i, TouchPhase contact)
+        public void SendTouchScreenPressEvent(int phase)
         {
-            var bit = (byte)contact << 1;
-            if ((byte)contact < 3)
+            var bit = (byte)phase << 1;
+            if (phase != 0)
             {
-                _companionState.buttons |= (ushort)bit;
+                _companionState.NewButtons |= (ushort)bit;
+                if (!_isTouchScreenActive)
+                {
+                    OnTouchScreenStart?.Invoke();
+                    _isTouchScreenActive = true;
+                }
             }
             else
             {
-                _companionState.buttons &= (ushort)~bit;
+                _companionState.NewButtons &= (ushort)~bit;
                 OnTouchScreenEnd?.Invoke();
+                _isTouchScreenActive = false;
+                _companionState.touchRadius = Vector2.zero;
+                _companionState.touchRadiusDelta = Vector2.zero;
+                _companionState.touchScreenDelta = Vector2.zero;
+                _companionState.touchScreenPosition = Vector2.zero;
+                _companionState.touchScreenPosition3D = Vector3.zero;
             }
 
             InputSystem.QueueStateEvent(_inputDevice, _companionState);
 
+        }
+
+        public void SendTouchState(TouchState state)
+        {
+            _companionState.NewTouchState = state;
+            InputSystem.QueueStateEvent(_inputDevice, _companionState);
         }
     }
 }

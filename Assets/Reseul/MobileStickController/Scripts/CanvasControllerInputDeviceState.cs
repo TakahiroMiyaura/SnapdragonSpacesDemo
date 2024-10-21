@@ -48,5 +48,21 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         [InputControl(displayName = "Tracking State", name = "trackingState", layout ="Integer")]
         public int trackingState;
+
+        [InputControl(displayName = "New Right Stick", name = "newrightStick", layout = "stick")]
+        public Vector2 newrightStick;
+
+        [InputControl(displayName = "New Left Stick", name = "newleftStick", layout = "stick")]
+        public Vector2 newleftStick;
+
+        [InputControl(displayName = "New Button1 Press", name = "newButton1Press", layout = "Button", bit = 0)]
+        [InputControl(displayName = "New Touch Screen Press", name = "newtouchScreenPress", layout = "Button", bit = 1)]
+        [InputControl(displayName = "New Left Stick Press", name = "newleftStickPress", layout = "Button", bit = 2)]
+        [InputControl(displayName = "New Right Stick Press", name = "newrightStickPress", layout = "Button", bit = 3)]
+        public int NewButtons;
+
+        [InputControl(displayName = "New Touch State", name = "newtouchState", layout = "touch")]
+        public TouchState NewTouchState;
+
     }
 }

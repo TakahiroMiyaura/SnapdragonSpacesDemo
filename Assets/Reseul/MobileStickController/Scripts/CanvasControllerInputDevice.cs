@@ -40,13 +40,25 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         public IntegerControl trackingState { get; private set; }
 
+
+        public ButtonControl newButton1Press { get; private set; }
+        public ButtonControl newtouchScreenPress { get; private set; }
+        public ButtonControl newrightStickPress { get; private set; }
+        public ButtonControl newleftStickPress { get; private set; }
+
+        public Vector2Control newleftStick { get; private set; }
+        public Vector2Control newrightStick { get; private set; }
+
+        public TouchControl newtouchState { get; private set; }
+
         static CanvasControllerInputDevice()
         {
             InputSystem.RegisterLayout<CanvasControllerInputDevice>();
             foreach (var inputDevice in InputSystem.devices)
                 if (inputDevice is CanvasControllerInputDevice)
                     return;
-            InputSystem.AddDevice<CanvasControllerInputDevice>();
+            var canvasControllerInputDevice = InputSystem.AddDevice<CanvasControllerInputDevice>();
+            InputSystem.EnableDevice(canvasControllerInputDevice);
         }
 
         protected override void FinishSetup()
@@ -66,6 +78,14 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             rightStickPosition = GetChildControl<Vector2Control>("rightStickPosition");
             rightStickDelta = GetChildControl<Vector2Control>("rightStickDelta");
             trackingState = GetChildControl<IntegerControl>("trackingState");
+            newButton1Press = GetChildControl<ButtonControl>("newButton1Press");
+            newrightStickPress = GetChildControl<ButtonControl>("newrightStickPress");
+            newleftStickPress = GetChildControl<ButtonControl>("newleftStickPress");
+            newleftStick = GetChildControl<Vector2Control>("newleftStick");
+            newrightStick = GetChildControl<Vector2Control>("newrightStick");
+            newtouchState = GetChildControl<TouchControl>("newtouchState");
+            newtouchScreenPress = GetChildControl<ButtonControl>("newtouchScreenPress");
+
         }
 
 
