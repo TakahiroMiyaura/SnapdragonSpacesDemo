@@ -39,13 +39,15 @@ namespace Assets.Reseul.MobileStickController.Scripts
         void OnEnable()
         {
             _touchpadDelta.action.performed += OnTouchpad;
+            _touchpadDelta.action.Enable();
             _touchpad.action.started += OnSarted;
-         //   _touchpadDelta.action.canceled += OnTouchpadCancel;
+            _touchpad.action.Enable();
+            //   _touchpadDelta.action.canceled += OnTouchpadCancel;
         }
 
         private void OnSarted(InputAction.CallbackContext obj)
         {
-            currentPos = obj.ReadValue<Vector2>();
+            currentPos = _touchpad.action.ReadValue<Vector2>();
         }
 
         private void OnTouchpadCancel(InputAction.CallbackContext obj)
@@ -68,7 +70,7 @@ namespace Assets.Reseul.MobileStickController.Scripts
                 return;
             }
 
-            currentPos += obj.ReadValue<Vector2>();
+            currentPos += obj.action.ReadValue<Vector2>();
 
             CameraBasePosition(currentPos);
             _isTouch = true;
@@ -118,7 +120,9 @@ namespace Assets.Reseul.MobileStickController.Scripts
         void OnDisable()
         {
             _touchpadDelta.action.performed -= OnTouchpad;
+            _touchpadDelta.action.Disable();
             _touchpad.action.started -= OnSarted;
+            _touchpad.action.Disable();
         }
     }
 }
