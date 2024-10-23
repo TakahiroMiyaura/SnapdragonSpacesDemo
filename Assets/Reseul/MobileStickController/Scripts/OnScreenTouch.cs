@@ -1,18 +1,14 @@
-﻿using Qualcomm.Snapdragon.Spaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright (c) 2024 Takahiro Miyaura
+// Released under the MIT license
+// http://opensource.org/licenses/mit-license.php
+
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Layouts;
-using UnityEngine.InputSystem.OnScreen;
 
 namespace Assets.Reseul.MobileStickController.Scripts
 {
-    public class OnScreenTouch : OnScreenTouchBase, IPointerDownHandler, IPointerUpHandler,IDragHandler
+    public class OnScreenTouch : OnScreenTouchBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
         private bool _canEventFire;
 
@@ -20,10 +16,21 @@ namespace Assets.Reseul.MobileStickController.Scripts
         [SerializeField]
         private string _controlPath;
 
+        [SerializeField]
+        private RectTransform _cursor;
+
         protected override string controlPathInternal
         {
             get => _controlPath;
             set => _controlPath = value;
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            if (!_canEventFire) return;
+            SendValueToControl(eventData.position);
+            _cursor.gameObject.SetActive(true);
+            _cursor.position = eventData.position;
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -31,18 +38,16 @@ namespace Assets.Reseul.MobileStickController.Scripts
             _canEventFire = CanEventFire(eventData);
             if (!_canEventFire) return;
             SendValueToControl(eventData.position);
+            _cursor.gameObject.SetActive(true);
+            _cursor.position = eventData.position;
         }
-        
+
         public void OnPointerUp(PointerEventData eventData)
         {
             if (!_canEventFire) return;
             SendValueToControl(eventData.position);
-        }
-
-        public void OnDrag(PointerEventData eventData)
-        {
-            if (!_canEventFire) return;
-            SendValueToControl(eventData.position);
+            _cursor.gameObject.SetActive(false);
+            _cursor.position = eventData.position;
         }
     }
 }
