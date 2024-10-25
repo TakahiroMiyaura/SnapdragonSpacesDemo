@@ -1,5 +1,5 @@
 {
-    "name": "ControllerInputActions",
+    "name": "Canvas Controller Input Actions",
     "maps": [
         {
             "name": "Canvas Controller",
@@ -51,6 +51,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "LeftStickDelta",
+                    "type": "Value",
+                    "id": "594431e6-9397-42ae-8554-6f5114d12ea7",
+                    "expectedControlType": "Delta",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "LeftStickPress",
                     "type": "Button",
                     "id": "f7628e8e-322e-4902-811c-4bada28717fa",
@@ -64,6 +73,15 @@
                     "type": "Value",
                     "id": "e3673513-2ecf-4006-bad0-4b477039945e",
                     "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightStickDelta",
+                    "type": "Value",
+                    "id": "a4a81077-64ab-439b-96c4-08d290225736",
+                    "expectedControlType": "Delta",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -272,6 +290,28 @@
                     "processors": "",
                     "groups": "ReseulControlScheme",
                     "action": "RightStickPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2639826f-3b99-4e60-a9aa-e078991a22fd",
+                    "path": "<MyCustomDevice>/LeftStickDelta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftStickDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "edb3fa77-63ae-4f23-a31e-ec0491bb25b7",
+                    "path": "<MyCustomDevice>/RightStickDelta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightStickDelta",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

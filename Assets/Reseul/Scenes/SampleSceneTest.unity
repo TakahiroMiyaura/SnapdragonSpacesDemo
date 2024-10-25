@@ -213,8 +213,8 @@ MonoBehaviour:
   lowAngleDistanceRatio: 0.5
   maxCameraAngle: 75
   minCameraAngle: -45
-  RightStick: {fileID: 7125273840682334686, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  RightStickDelta: {fileID: -3176600475302964961, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  RightStick: {fileID: 5753408709843963491, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  RightStickDelta: {fileID: 0}
   rotationSpeed: {x: -180, y: 180}
   StickSensitivity:
     serializedVersion: 2
@@ -2049,7 +2049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133107985162954211, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 465
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133107985162954211, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2121,7 +2121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986039871466, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986039871466, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2145,7 +2145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986106356019, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986106356019, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2185,7 +2185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986146006268, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986146006268, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2225,7 +2225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986180863826, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986180863826, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2249,7 +2249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986431131239, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 165
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986431131239, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2325,7 +2325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986575048005, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986575048005, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2349,7 +2349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986794404880, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133107986794404880, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2405,7 +2405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133107987010048847, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 615
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133107987010048847, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2429,7 +2429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133107987018193224, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 315
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1133107987018193224, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2661,6 +2661,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
+--- !u!1 &1133107986774056330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1133107985545534678, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
+  m_PrefabInstance: {fileID: 1133107986774056329}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1133107986774056331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1133107986028550690, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
+  m_PrefabInstance: {fileID: 1133107986774056329}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1133107986774056332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133107986774056330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf169720cf6bbcb49ade890c25e921d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controlPath: <MyCustomDevice>/LeftStickDelta
+--- !u!114 &1133107986774056333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133107986774056331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf169720cf6bbcb49ade890c25e921d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controlPath: <MyCustomDevice>/RightStickDelta
 --- !u!224 &8045998185044424526 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6922238294475532999, guid: e3b8495f4a312ff4782203e335ebedf2, type: 3}
