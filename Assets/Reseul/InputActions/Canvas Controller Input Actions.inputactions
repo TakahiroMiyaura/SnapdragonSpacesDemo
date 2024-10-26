@@ -2,7 +2,7 @@
     "name": "Canvas Controller Input Actions",
     "maps": [
         {
-            "name": "Canvas Controller",
+            "name": "Mobile Stick Controller",
             "id": "8c1b81c6-92b6-4b60-9200-ff5f3ee1a172",
             "actions": [
                 {
@@ -299,7 +299,7 @@
                     "path": "<MyCustomDevice>/LeftStickDelta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "ReseulControlScheme",
                     "action": "LeftStickDelta",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -310,7 +310,7 @@
                     "path": "<MyCustomDevice>/RightStickDelta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "ReseulControlScheme",
                     "action": "RightStickDelta",
                     "isComposite": false,
                     "isPartOfComposite": false

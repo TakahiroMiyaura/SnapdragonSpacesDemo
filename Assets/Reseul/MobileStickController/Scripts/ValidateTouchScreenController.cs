@@ -2,6 +2,7 @@
 // Released under the MIT license
 // http://opensource.org/licenses/mit-license.php
 
+using Qualcomm.Snapdragon.Spaces;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,6 +31,7 @@ namespace Assets.Reseul.MobileStickController.Scripts
 
         private void OnEnable()
         {
+            _arCamera = FindAnyObjectByType<SpacesHostView>()?.phoneCamera;
             _debugText = _TestObj.GetComponentInChildren<TextMeshPro>();
             _touchScreenDelta.action.performed += OnMove;
             _touchScreenDelta.action.Enable();

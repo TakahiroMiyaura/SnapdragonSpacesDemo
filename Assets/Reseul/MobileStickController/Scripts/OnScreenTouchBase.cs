@@ -15,7 +15,7 @@ namespace Assets.Reseul.MobileStickController.Scripts
         void Awake()
         {
             var spacesHostView = FindObjectOfType<SpacesHostView>(true);
-            if (spacesHostView != null && _phoneCamera != null) _phoneCamera = spacesHostView.phoneCamera;
+            if (spacesHostView != null && _phoneCamera == null) _phoneCamera = spacesHostView.phoneCamera;
         }
         [SerializeField]
         protected RectTransform[] _controls;

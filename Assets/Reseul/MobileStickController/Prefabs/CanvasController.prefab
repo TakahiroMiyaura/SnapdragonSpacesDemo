@@ -2090,14 +2090,14 @@ MonoBehaviour:
   _touchScreen3D: {fileID: 6422271797409167676, guid: 9505d2cc885e1e748bff895864481576, type: 3}
   _touchScreenDelta: {fileID: 5295458349306598474, guid: 9505d2cc885e1e748bff895864481576, type: 3}
   _touchScreenPress: {fileID: 2516005305327102569, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  button1PressText: {fileID: 0}
-  leftStickPressText: {fileID: 0}
+  button1PressText: {fileID: 6042034431507159131}
+  leftStickPressText: {fileID: 6986708409100958309}
   leftStickText: {fileID: 4520752788779109862}
-  rightStickPressText: {fileID: 0}
+  rightStickPressText: {fileID: 805497697668948515}
   rightStickText: {fileID: 4520752790353355366}
   touch3DText: {fileID: 1133107986431848997}
   touchDeltaText: {fileID: 1133107986106959862}
-  touchScreenPressText: {fileID: 0}
+  touchScreenPressText: {fileID: 2809496321120629285}
   touchText: {fileID: 4520752789796515797}
 --- !u!1 &1133107986575048002
 GameObject:
@@ -4604,7 +4604,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c319fdd8c86ee644b9cdee12487475ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controls: []
+  _controls:
+  - {fileID: 1133107985909158572}
+  - {fileID: 1133107986028550693}
+  - {fileID: 1133107985545534697}
   _phoneCamera: {fileID: 0}
   _controlPath: <MyCustomDevice>/TouchScreen3D
   _camCanvas: {fileID: 6922238294475532999}
