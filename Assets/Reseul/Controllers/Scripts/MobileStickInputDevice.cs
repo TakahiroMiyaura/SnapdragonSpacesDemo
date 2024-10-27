@@ -9,14 +9,12 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.Layouts;
 using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.InputSystem.OnScreen;
 using UnityEngine.InputSystem.Utilities;
-using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace Reseul.Snapdragon.Spaces.Controllers
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct  MyCustomDeviceState : IInputStateTypeInfo
+    public struct  MobileStickInputDeviceState : IInputStateTypeInfo
     {
         public FourCC format => new('M', 'Y', 'D', 'V');
 
@@ -62,12 +60,12 @@ namespace Reseul.Snapdragon.Spaces.Controllers
     }
 
 
-    [InputControlLayout(stateType = typeof(MyCustomDeviceState))]
+    [InputControlLayout(stateType = typeof(MobileStickInputDeviceState))]
 #if UNITY_EDITOR
     // Unityエディタで初期化処理を呼び出すのに必要
     [InitializeOnLoad]
 #endif
-    public class MyCustomDevice : InputDevice 
+    public class MobileStickInputDevice : InputDevice 
     {
         public ButtonControl Button1Press { get; private set; }
         public ButtonControl TouchScreenPress { get; private set; }
@@ -84,14 +82,14 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         public TouchControl TouchState { get; private set; }
 
         
-        static MyCustomDevice()
+        static MobileStickInputDevice()
         {
-            InputSystem.RegisterLayout<MyCustomDevice>();
+            InputSystem.RegisterLayout<MobileStickInputDevice>();
             foreach (var inputDevice in InputSystem.devices)
-                if (inputDevice is MyCustomDevice)
+                if (inputDevice is MobileStickInputDevice)
                     return;
-            var canvasControllerInputDevice = InputSystem.AddDevice<MyCustomDevice>();
-            InputSystem.EnableDevice(canvasControllerInputDevice);
+            var mobileStickInputDevice = InputSystem.AddDevice<MobileStickInputDevice>();
+            InputSystem.EnableDevice(mobileStickInputDevice);
         }
 
         protected override void FinishSetup()

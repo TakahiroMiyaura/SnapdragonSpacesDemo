@@ -6,48 +6,48 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Layouts;
 
-namespace Assets.Reseul.MobileStickController.Scripts
+namespace Reseul.Snapdragon.Spaces.Controllers
 {
     public class OnScreenTouch : OnScreenTouchBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
-        private bool _canEventFire;
+        private bool canEventFire;
 
         [InputControl(layout = "Vector2")]
         [SerializeField]
-        private string _controlPath;
+        private string touchScreenControlPath;
 
         [SerializeField]
-        private RectTransform _cursor;
+        private RectTransform cursor;
 
         protected override string controlPathInternal
         {
-            get => _controlPath;
-            set => _controlPath = value;
+            get => touchScreenControlPath;
+            set => touchScreenControlPath = value;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (!_canEventFire) return;
+            if (!canEventFire) return;
             SendValueToControl(eventData.position);
-            _cursor.gameObject.SetActive(true);
-            _cursor.position = eventData.position;
+            cursor.gameObject.SetActive(true);
+            cursor.position = eventData.position;
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            _canEventFire = CanEventFire(eventData);
-            if (!_canEventFire) return;
+            canEventFire = CanEventFire(eventData);
+            if (!canEventFire) return;
             SendValueToControl(eventData.position);
-            _cursor.gameObject.SetActive(true);
-            _cursor.position = eventData.position;
+            cursor.gameObject.SetActive(true);
+            cursor.position = eventData.position;
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            if (!_canEventFire) return;
+            if (!canEventFire) return;
             SendValueToControl(eventData.position);
-            _cursor.gameObject.SetActive(false);
-            _cursor.position = eventData.position;
+            cursor.gameObject.SetActive(false);
+            cursor.position = eventData.position;
         }
     }
 }

@@ -14,7 +14,7 @@ using UnityEngine.InputSystem.OnScreen;
 using UnityEditor.AnimatedValues;
 #endif
 
-namespace Assets.Reseul.MobileStickController.Scripts
+namespace Reseul.Snapdragon.Spaces.Controllers
 {
 
     public class OnScreenStickDelta : OnScreenStick, IPointerDownHandler, IPointerUpHandler,IDragHandler
@@ -88,8 +88,8 @@ namespace Assets.Reseul.MobileStickController.Scripts
         public override void OnInspectorGUI()
         {
             EditorGUILayout.PropertyField(movementRange);
-            EditorGUILayout.PropertyField(controlPathInternal);
-            EditorGUILayout.PropertyField(controlPathDelta);
+            EditorGUILayout.PropertyField(controlPathInternal,new GUIContent("Touch Screen Control Path"));
+            EditorGUILayout.PropertyField(controlPathDelta, new GUIContent("Touch Screen Delta Control Path"));
             EditorGUILayout.PropertyField(behaviour);
 
             showDynamicOriginOptions.target = ((OnScreenStick)target).behaviour ==

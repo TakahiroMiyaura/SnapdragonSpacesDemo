@@ -649,7 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPath: <MyCustomDevice>/LeftStickPress
+  m_ControlPath: <MobileStickInputDevice>/LeftStickPress
 --- !u!114 &40919620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,7 +664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MovementRange: 200
   m_DynamicOriginRange: 100
-  m_ControlPath: <MyCustomDevice>/LeftStick
+  m_ControlPath: <MobileStickInputDevice>/LeftStick
   m_Behaviour: 0
   m_UseIsolatedInputActions: 0
   m_PointerDownAction:
@@ -685,7 +685,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  controlPathDelta: <MyCustomDevice>/LeftStickDelta
+  controlPathDelta: <MobileStickInputDevice>/LeftStickDelta
 --- !u!114 &5139627881813919896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPath: <MyCustomDevice>/Button1Press
+  m_ControlPath: <MobileStickInputDevice>/Button1Press
 --- !u!114 &1828601345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPath: <MyCustomDevice>/RightStickPress
+  m_ControlPath: <MobileStickInputDevice>/RightStickPress
 --- !u!114 &1114040586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,7 +895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MovementRange: 200
   m_DynamicOriginRange: 100
-  m_ControlPath: <MyCustomDevice>/RightStick
+  m_ControlPath: <MobileStickInputDevice>/RightStick
   m_Behaviour: 0
   m_UseIsolatedInputActions: 0
   m_PointerDownAction:
@@ -916,7 +916,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  controlPathDelta: <MyCustomDevice>/RightStickDelta
+  controlPathDelta: <MobileStickInputDevice>/RightStickDelta
 --- !u!114 &3686069910790027474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2081,15 +2081,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ffdfce9fd9bd7459f605e6f2705ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button1Press: {fileID: -1376769180698956569, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  _leftStick: {fileID: 525154708032955030, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  _leftStickPress: {fileID: -1521039559800585282, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  _rightStick: {fileID: 5753408709843963491, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  _rightStickPress: {fileID: -5570508621981910764, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  _touchScreen: {fileID: 9076939962891151095, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  _touchScreen3D: {fileID: 6422271797409167676, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  _touchScreenDelta: {fileID: 5295458349306598474, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  _touchScreenPress: {fileID: 2516005305327102569, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  button1Press: {fileID: -1376769180698956569, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  leftStick: {fileID: 525154708032955030, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  leftStickPress: {fileID: -1521039559800585282, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  rightStick: {fileID: 5753408709843963491, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  rightStickPress: {fileID: -5570508621981910764, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  touchScreen: {fileID: 9076939962891151095, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  touchScreen3D: {fileID: 6422271797409167676, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  touchScreenDelta: {fileID: 5295458349306598474, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  touchScreenPress: {fileID: 2516005305327102569, guid: 9505d2cc885e1e748bff895864481576, type: 3}
   button1PressText: {fileID: 6042034431507159131}
   leftStickPressText: {fileID: 6986708409100958309}
   leftStickText: {fileID: 4520752788779109862}
@@ -2777,7 +2777,7 @@ GameObject:
   - component: {fileID: 4754517136185613726}
   - component: {fileID: 4754517136185613721}
   m_Layer: 0
-  m_Name: CanvasController
+  m_Name: MobileStickController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4604,13 +4604,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c319fdd8c86ee644b9cdee12487475ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controls:
-  - {fileID: 1133107985909158572}
-  - {fileID: 1133107986028550693}
-  - {fileID: 1133107985545534697}
-  _phoneCamera: {fileID: 0}
-  _controlPath: <MyCustomDevice>/TouchScreen3D
-  _camCanvas: {fileID: 6922238294475532999}
+  Controls: []
+  PhoneCamera: {fileID: 0}
+  touchScreenControlPath: <MobileStickInputDevice>/TouchScreen3D
+  targetRectTransform: {fileID: 6922238294475532999}
 --- !u!114 &8501890216582290232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4623,13 +4620,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 688d0cefbe77eaf4ab6e96ef7381fc8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controls:
-  - {fileID: 1133107985909158572}
-  - {fileID: 1133107986028550693}
-  - {fileID: 1133107985545534697}
-  _phoneCamera: {fileID: 0}
-  _controlPath: <MyCustomDevice>/TouchScreenPosition
-  _cursor: {fileID: 1133107985470714765}
+  Controls: []
+  PhoneCamera: {fileID: 0}
+  touchScreenControlPath: <MobileStickInputDevice>/TouchScreenPosition
+  cursor: {fileID: 1133107985470714765}
 --- !u!114 &8501890216582290235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4642,12 +4636,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c7841975bda4b48a7448c41c60ad41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controls:
-  - {fileID: 1133107985909158572}
-  - {fileID: 1133107986028550693}
-  - {fileID: 1133107985545534697}
-  _phoneCamera: {fileID: 0}
-  _controlPath: <MyCustomDevice>/TouchScreenDelta
+  Controls: []
+  PhoneCamera: {fileID: 0}
+  touchScreenControlPath: <MobileStickInputDevice>/TouchScreenDelta
 --- !u!114 &8501890216582290234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4660,12 +4651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8f46687b6869647915e3c14780812a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controls:
-  - {fileID: 1133107985909158572}
-  - {fileID: 1133107986028550693}
-  - {fileID: 1133107985545534697}
-  _phoneCamera: {fileID: 0}
-  _controlPath: <MyCustomDevice>/TouchScreenPress
+  Controls: []
+  PhoneCamera: {fileID: 0}
+  touchScreenControlPath: <MobileStickInputDevice>/TouchScreenPress
 --- !u!1 &8602134225861958805
 GameObject:
   m_ObjectHideFlags: 0

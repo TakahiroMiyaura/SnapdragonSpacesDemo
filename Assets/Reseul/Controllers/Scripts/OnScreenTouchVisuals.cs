@@ -7,9 +7,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Assets.Reseul.MobileStickController.Scripts
+namespace Reseul.Snapdragon.Spaces.Controllers
 {
-    public class ValidateTouchScreenController : MonoBehaviour
+    public class OnScreenTouchVisuals : MonoBehaviour
     {
         [SerializeField]
         private Camera _arCamera;

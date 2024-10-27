@@ -120,7 +120,7 @@
                 {
                     "name": "up",
                     "id": "acad33ba-b6da-49a8-8818-bc41328bbd0a",
-                    "path": "<MyCustomDevice>/LeftStick/up",
+                    "path": "<MobileStickInputDevice>/LeftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -131,7 +131,7 @@
                 {
                     "name": "down",
                     "id": "6789c26c-6a19-4a1c-9b47-a19d9a64cfdc",
-                    "path": "<MyCustomDevice>/LeftStick/down",
+                    "path": "<MobileStickInputDevice>/LeftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -142,7 +142,7 @@
                 {
                     "name": "left",
                     "id": "2da8d372-e6a0-4c79-a9a8-4228424bea45",
-                    "path": "<MyCustomDevice>/LeftStick/left",
+                    "path": "<MobileStickInputDevice>/LeftStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -153,7 +153,7 @@
                 {
                     "name": "right",
                     "id": "4662ce63-8365-4ddf-be3a-89143606266a",
-                    "path": "<MyCustomDevice>/LeftStick/right",
+                    "path": "<MobileStickInputDevice>/LeftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -175,7 +175,7 @@
                 {
                     "name": "up",
                     "id": "6900ef86-f289-4972-a538-9297c0da4596",
-                    "path": "<MyCustomDevice>/RightStick/up",
+                    "path": "<MobileStickInputDevice>/RightStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -186,7 +186,7 @@
                 {
                     "name": "down",
                     "id": "bb3ac48d-3882-4357-b574-403f4349afb6",
-                    "path": "<MyCustomDevice>/RightStick/down",
+                    "path": "<MobileStickInputDevice>/RightStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -197,7 +197,7 @@
                 {
                     "name": "left",
                     "id": "fc509ced-16b4-45c5-8c0c-2b0f8f036326",
-                    "path": "<MyCustomDevice>/RightStick/left",
+                    "path": "<MobileStickInputDevice>/RightStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -208,7 +208,7 @@
                 {
                     "name": "right",
                     "id": "086b6135-547e-47e0-b961-4cdb061cf29e",
-                    "path": "<MyCustomDevice>/RightStick/right",
+                    "path": "<MobileStickInputDevice>/RightStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -219,7 +219,7 @@
                 {
                     "name": "",
                     "id": "abd9533e-3f20-4d25-b87a-73a1e07dc09d",
-                    "path": "<MyCustomDevice>/Button1Press",
+                    "path": "<MobileStickInputDevice>/Button1Press",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -230,7 +230,7 @@
                 {
                     "name": "",
                     "id": "1843b933-76df-4ea0-b4d1-36424ddc4571",
-                    "path": "<MyCustomDevice>/TouchScreenPosition",
+                    "path": "<MobileStickInputDevice>/TouchScreenPosition",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -241,7 +241,7 @@
                 {
                     "name": "",
                     "id": "0948aac6-ca72-422a-9271-988b61bb4c37",
-                    "path": "<MyCustomDevice>/TouchScreen3D",
+                    "path": "<MobileStickInputDevice>/TouchScreen3D",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -252,7 +252,7 @@
                 {
                     "name": "",
                     "id": "276144e1-5301-4436-aba5-d77fd450fdb1",
-                    "path": "<MyCustomDevice>/TouchScreenDelta",
+                    "path": "<MobileStickInputDevice>/TouchScreenDelta",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -263,7 +263,7 @@
                 {
                     "name": "",
                     "id": "15398219-25fc-4928-8c22-69fa50b65e6d",
-                    "path": "<MyCustomDevice>/TouchScreenPress",
+                    "path": "<MobileStickInputDevice>/TouchScreenPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -274,7 +274,7 @@
                 {
                     "name": "",
                     "id": "6d511fcf-ca4e-4efd-8643-843690ef6e4f",
-                    "path": "<MyCustomDevice>/LeftStickPress",
+                    "path": "<MobileStickInputDevice>/LeftStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -285,7 +285,7 @@
                 {
                     "name": "",
                     "id": "9c5eb77b-1d40-4eeb-9fd9-b51ec8bcc35f",
-                    "path": "<MyCustomDevice>/RightStickPress",
+                    "path": "<MobileStickInputDevice>/RightStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -296,7 +296,7 @@
                 {
                     "name": "",
                     "id": "2639826f-3b99-4e60-a9aa-e078991a22fd",
-                    "path": "<MyCustomDevice>/LeftStickDelta",
+                    "path": "<MobileStickInputDevice>/LeftStickDelta",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",
@@ -307,7 +307,7 @@
                 {
                     "name": "",
                     "id": "edb3fa77-63ae-4f23-a31e-ec0491bb25b7",
-                    "path": "<MyCustomDevice>/RightStickDelta",
+                    "path": "<MobileStickInputDevice>/RightStickDelta",
                     "interactions": "",
                     "processors": "",
                     "groups": "ReseulControlScheme",

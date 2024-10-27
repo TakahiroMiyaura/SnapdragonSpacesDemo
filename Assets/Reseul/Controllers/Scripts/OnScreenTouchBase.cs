@@ -5,29 +5,29 @@
 using Qualcomm.Snapdragon.Spaces;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.Layouts;
 using UnityEngine.InputSystem.OnScreen;
 
-namespace Assets.Reseul.MobileStickController.Scripts
+namespace Reseul.Snapdragon.Spaces.Controllers
 {
     public abstract class OnScreenTouchBase : OnScreenControl
     {
         void Awake()
         {
             var spacesHostView = FindObjectOfType<SpacesHostView>(true);
-            if (spacesHostView != null && _phoneCamera == null) _phoneCamera = spacesHostView.phoneCamera;
+            if (spacesHostView != null && PhoneCamera == null) PhoneCamera = spacesHostView.phoneCamera;
         }
-        [SerializeField]
-        protected RectTransform[] _controls;
 
         [SerializeField]
-        protected Camera _phoneCamera;
+        protected RectTransform[] Controls;
+
+        [SerializeField]
+        protected Camera PhoneCamera;
 
         protected bool CanEventFire(PointerEventData eventData)
         {
-            foreach (var rect in _controls)
+            foreach (var rect in Controls)
             {
-                if (RectTransformUtility.RectangleContainsScreenPoint(rect, eventData.position,_phoneCamera))
+                if (RectTransformUtility.RectangleContainsScreenPoint(rect, eventData.position,PhoneCamera))
                 {
                     return false;
                 }

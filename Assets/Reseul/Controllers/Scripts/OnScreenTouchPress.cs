@@ -6,32 +6,32 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Layouts;
 
-namespace Assets.Reseul.MobileStickController.Scripts
+namespace Reseul.Snapdragon.Spaces.Controllers
 {
     public class OnScreenTouchPress : OnScreenTouchBase, IPointerDownHandler, IPointerUpHandler
     {
 
         [InputControl(layout = "Button")]
         [SerializeField]
-        private string _controlPath;
+        private string touchScreenControlPath;
 
         protected override string controlPathInternal { 
-            get => _controlPath;
-            set => _controlPath = value;
+            get => touchScreenControlPath;
+            set => touchScreenControlPath = value;
         }
 
-        private bool _canEventFire = true;
+        private bool canEventFire = true;
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            _canEventFire = CanEventFire(eventData);
-            if (!_canEventFire) return;
+            canEventFire = CanEventFire(eventData);
+            if (!canEventFire) return;
             SendValueToControl(1.0f);
         }
         
         public void OnPointerUp(PointerEventData eventData)
         {
-            if (!_canEventFire) return;
+            if (!canEventFire) return;
             SendValueToControl(0.0f);
         }
 

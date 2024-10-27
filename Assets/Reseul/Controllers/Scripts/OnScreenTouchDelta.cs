@@ -6,38 +6,38 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Layouts;
 
-namespace Assets.Reseul.MobileStickController.Scripts
+namespace Reseul.Snapdragon.Spaces.Controllers
 {
     public class OnScreenTouchDelta : OnScreenTouchBase, IPointerDownHandler, IPointerUpHandler,IDragHandler
     {
-        private bool _canEventFire;
+        private bool canEventFire;
 
         [InputControl(layout = "Vector2")]
         [SerializeField]
-        private string _controlPath;
+        private string touchScreenControlPath;
 
         protected override string controlPathInternal
         {
-            get => _controlPath;
-            set => _controlPath = value;
+            get => touchScreenControlPath;
+            set => touchScreenControlPath = value;
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            _canEventFire = CanEventFire(eventData);
-            if (!_canEventFire) return;
+            canEventFire = CanEventFire(eventData);
+            if (!canEventFire) return;
             SendValueToControl(eventData.delta);
         }
         
         public void OnPointerUp(PointerEventData eventData)
         {
-            if (!_canEventFire) return;
+            if (!canEventFire) return;
             SendValueToControl(eventData.delta);
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (!_canEventFire) return;
+            if (!canEventFire) return;
             SendValueToControl(eventData.delta);
         }
     }

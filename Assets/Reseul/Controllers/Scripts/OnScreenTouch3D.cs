@@ -6,49 +6,49 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Layouts;
 
-namespace Assets.Reseul.MobileStickController.Scripts
+namespace Reseul.Snapdragon.Spaces.Controllers
 {
     public class OnScreenTouch3D : OnScreenTouchBase, IPointerDownHandler, IPointerUpHandler,IDragHandler
     {
-        private bool _canEventFire;
+        private bool canEventFire;
 
         [InputControl(layout = "Vector3")]
         [SerializeField]
-        private string _controlPath;
+        private string touchScreenControlPath;
 
         [SerializeField]
-        private RectTransform _camCanvas;
+        private RectTransform targetRectTransform;
 
         protected override string controlPathInternal
         {
-            get => _controlPath;
-            set => _controlPath = value;
+            get => touchScreenControlPath;
+            set => touchScreenControlPath = value;
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            _canEventFire = CanEventFire(eventData);
-            if (!_canEventFire) return;
+            canEventFire = CanEventFire(eventData);
+            if (!canEventFire) return;
             SendValueToControl(eventData);
         }
 
         private void SendValueToControl(PointerEventData eventData)
         {
-            var pos = RectTransformUtility.WorldToScreenPoint(_phoneCamera, eventData.position);
+            var pos = RectTransformUtility.WorldToScreenPoint(PhoneCamera, eventData.position);
 
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(_camCanvas, pos, _phoneCamera, out Vector3 result);
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(targetRectTransform, pos, PhoneCamera, out Vector3 result);
             SendValueToControl(result);
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            if (!_canEventFire) return;
+            if (!canEventFire) return;
             SendValueToControl(eventData);
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (!_canEventFire) return;
+            if (!canEventFire) return;
             SendValueToControl(eventData);
         }
     }
