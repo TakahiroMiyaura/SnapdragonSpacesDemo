@@ -16,6 +16,8 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         [SerializeField]
         private RectTransform mobileStickControllerCanvas;
+        [SerializeField]
+        private RectTransform mobileStickControllerCanvas2;
 
         [SerializeField]
         private Transform CubeOnViewPort;
@@ -69,8 +71,9 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             debugCursor.position = currentPos;
 
             //TouchScreen上のタップ座標をワールド座標(カメラの画角内)に変換してオブジェクトを表示
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(mobileStickControllerCanvas, currentPos, arCamera, out var result);
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(mobileStickControllerCanvas2, currentPos, arCamera, out var result);
             CubeOnViewPort.position = result;
+            CubeOnViewPort.transform.rotation = arCamera.transform.rotation;
 
             //TouchScreen上のタップ座標をワールド座標（OverlayしているCanvas上）に変換してオブジェクトを表示
             RectTransformUtility.ScreenPointToWorldPointInRectangle(mobileStickControllerCanvas, currentPos, null, out result);
