@@ -4,46 +4,49 @@
 
 using UnityEngine;
 
-public class SystemSettings : MonoBehaviour
+namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
 {
-    private static SystemSettings instance;
-
-    public static SystemSettings Instance
+    public class SystemSettings : MonoBehaviour
     {
-        get
-        {
-            if (instance == null) instance = FindObjectOfType<SystemSettings>();
-            return instance;
-        }
-    }
+        private static SystemSettings instance;
 
-    public bool AutoStartOnDisplayConnected
-    {
-        get
+        public static SystemSettings Instance
         {
-            if (PlayerPrefs.HasKey("AutoStartOnDisplayConnected"))
+            get
             {
-                return PlayerPrefs.GetInt("AutoStartOnDisplayConnected") == 1;
+                if (instance == null) instance = FindObjectOfType<SystemSettings>();
+                return instance;
             }
-
-            PlayerPrefs.SetInt("AutoStartOnDisplayConnected", 0);
-            return false;
         }
-        set => PlayerPrefs.SetInt("AutoStartOnDisplayConnected", value ? 1 : 0);
-    }
 
-    public bool AutoManageXRCamera
-    {
-        get
+        public bool AutoStartOnDisplayConnected
         {
-            if (PlayerPrefs.HasKey("AutoManageXRCamera"))
+            get
             {
-                return PlayerPrefs.GetInt("AutoManageXRCamera") == 1;
-            }
+                if (PlayerPrefs.HasKey("AutoStartOnDisplayConnected"))
+                {
+                    return PlayerPrefs.GetInt("AutoStartOnDisplayConnected") == 1;
+                }
 
-            PlayerPrefs.SetInt("AutoManageXRCamera", 1);
-            return true;
+                PlayerPrefs.SetInt("AutoStartOnDisplayConnected", 0);
+                return false;
+            }
+            set => PlayerPrefs.SetInt("AutoStartOnDisplayConnected", value ? 1 : 0);
         }
-        set => PlayerPrefs.SetInt("AutoManageXRCamera", value ? 1 : 0);
+
+        public bool AutoManageXRCamera
+        {
+            get
+            {
+                if (PlayerPrefs.HasKey("AutoManageXRCamera"))
+                {
+                    return PlayerPrefs.GetInt("AutoManageXRCamera") == 1;
+                }
+
+                PlayerPrefs.SetInt("AutoManageXRCamera", 1);
+                return true;
+            }
+            set => PlayerPrefs.SetInt("AutoManageXRCamera", value ? 1 : 0);
+        }
     }
 }

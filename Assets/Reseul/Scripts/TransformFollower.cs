@@ -1,22 +1,17 @@
-// Copyright (c) 2023 Takahiro Miyaura
+// Copyright (c) 2024 Takahiro Miyaura
 // Released under the MIT license
 // http://opensource.org/licenses/mit-license.php
 
-using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
+namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
 {
-
-
     public class TransformFollower : MonoBehaviour
     {
-
         public Transform transformToFollow;
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (transformToFollow != null)
             {

@@ -1,63 +1,67 @@
-using System.Collections;
-using System.Collections.Generic;
+// Copyright (c) 2024 Takahiro Miyaura
+// Released under the MIT license
+// http://opensource.org/licenses/mit-license.php
+
 using MixedReality.Toolkit.UX;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 
-[RequireComponent(typeof(PressableButton))]
-public class PressableButtonVisualizeState : MonoBehaviour
+namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
 {
-    private PressableButton _pressableBrFutton;
-
-    [SerializeField]
-    private TextMeshProUGUI[] _texts;
-
-    [SerializeField]
-    private Color _inactiveColor;
-
-    private Color[] _defaultColors;
-    void Awake()
+    [RequireComponent(typeof(PressableButton))]
+    public class PressableButtonVisualizeState : MonoBehaviour
     {
-        _pressableBrFutton = GetComponent<PressableButton>();
-        _defaultColors = new Color[_texts.Length];
-        for (int i = 0; i < _texts.Length; i++)
+        private Color[] defaultColors;
+
+        [SerializeField]
+        private Color inactiveColor;
+
+        private PressableButton pressableBrFutton;
+
+        [SerializeField]
+        private TextMeshProUGUI[] texts;
+
+        private void Awake()
         {
-            _defaultColors[i] = _texts[i].color;
-        }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    public void SetVisualStateActive()
-    {
-        SwitchVisualState(true);
-    }
-
-    public void SetVisualStateInactive()
-    {
-        SwitchVisualState(false);
-    }
-
-    private void SwitchVisualState(bool active)
-    {
-        _pressableBrFutton.enabled = active;
-        if (active)
-        {
-            for (int i = 0; i < _texts.Length; i++)
+            pressableBrFutton = GetComponent<PressableButton>();
+            defaultColors = new Color[texts.Length];
+            for (var i = 0; i < texts.Length; i++)
             {
-                _texts[i].color = _defaultColors[i];
+                defaultColors[i] = texts[i].color;
             }
         }
-        else
+
+        // Start is called before the first frame update
+        private void Start()
         {
-            foreach (var text in _texts)
+        }
+
+        public void SetVisualStateActive()
+        {
+            SwitchVisualState(true);
+        }
+
+        public void SetVisualStateInactive()
+        {
+            SwitchVisualState(false);
+        }
+
+        private void SwitchVisualState(bool active)
+        {
+            pressableBrFutton.enabled = active;
+            if (active)
             {
-                text.color = _inactiveColor;
+                for (var i = 0; i < texts.Length; i++)
+                {
+                    texts[i].color = defaultColors[i];
+                }
+            }
+            else
+            {
+                foreach (var text in texts)
+                {
+                    text.color = inactiveColor;
+                }
             }
         }
     }

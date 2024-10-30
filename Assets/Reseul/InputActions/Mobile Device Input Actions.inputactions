@@ -1,0 +1,66 @@
+{
+    "name": "Mobile Device Input Actions",
+    "maps": [
+        {
+            "name": "SpacesHostView",
+            "id": "2aed8102-5d1b-4baa-9685-f5049c1f3303",
+            "actions": [
+                {
+                    "name": "Mobile Display Position",
+                    "type": "Value",
+                    "id": "c07409f6-a32c-4d55-9ce5-0baf64753ac2",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Mobile Display Rotation",
+                    "type": "Value",
+                    "id": "7bd8f657-0fbf-44f7-932a-5f67ef4e01fe",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ad18fada-1e71-4e02-9061-41ce4f563f1d",
+                    "path": "<SpacesHostViewDevice>/MobileDisplayPosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "SpacesHostView",
+                    "action": "Mobile Display Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b5b8b320-1854-48e8-b612-1807a665eea6",
+                    "path": "<SpacesHostViewDevice>/MobileDisplayRotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "SpacesHostView",
+                    "action": "Mobile Display Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "SpacesHostView",
+            "bindingGroup": "SpacesHostView",
+            "devices": [
+                {
+                    "devicePath": "<SpacesHostViewDevice>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

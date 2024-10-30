@@ -6,55 +6,54 @@ using Qualcomm.Snapdragon.Spaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Reseul.Snapdragon.Spaces
+namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
 {
     public class PlayerController : MonoBehaviour
     {
-        private Vector3 _initialPos;
-        private bool _isPressed;
-        private Vector2 _leftStickValue;
-        private Rigidbody _rigidBody;
-
         public Camera ARCamera;
         public InputActionReference Button1;
         public GameObject Character;
         public Animator CharacterAnimator;
+        private Vector3 initialPos;
+        private bool isPressed;
         public InputActionReference LeftStick;
         public InputActionReference LeftStickDelta;
+        private Vector2 leftStickValue;
 
         public float MoveSpeed;
         public Camera PhoneCamera;
 
         public float RespawnRange = 10f;
-
-        public string DebugText => _leftStickValue.ToString();
+        private Rigidbody rigidBody;
 
         [SerializeField]
-        private float stopThreshold = 0.005f;
+        private readonly float stopThreshold = 0.005f;
 
         private bool useARCamera;
 
-        private bool _isPlayable => _rigidBody != null && _rigidBody.useGravity;
+        public string DebugText => leftStickValue.ToString();
+
+        private bool IsPlayable => rigidBody != null && rigidBody.useGravity;
 
         // Start is called before the first frame update
         private void Start()
         {
-            _initialPos = transform.position;
-            _rigidBody = GetComponent<Rigidbody>();
+            initialPos = transform.position;
+            rigidBody = GetComponent<Rigidbody>();
             LeftStick.action.started += ctx =>
             {
-                _isPressed = true;
-                _leftStickValue = ctx.ReadValue<Vector2>();
+                isPressed = true;
+                leftStickValue = ctx.ReadValue<Vector2>();
             };
             LeftStickDelta.action.performed += ctx =>
             {
-                _isPressed = true;
-                _leftStickValue += ctx.ReadValue<Vector2>();
+                isPressed = true;
+                leftStickValue += ctx.ReadValue<Vector2>();
             };
             LeftStick.action.canceled += ctx =>
             {
-                _isPressed = false;
-                _leftStickValue = Vector2.zero;
+                isPressed = false;
+                leftStickValue = Vector2.zero;
             };
         }
 
@@ -67,19 +66,19 @@ namespace Reseul.Snapdragon.Spaces
                 {
                     transform.position = ARCamera.transform.position +
                                          new Vector3(ARCamera.transform.forward.x, 2f, ARCamera.transform.forward.z);
-                    _rigidBody.velocity = Vector3.zero;
+                    rigidBody.velocity = Vector3.zero;
                 }
                 else
                 {
-                    transform.position = _initialPos;
-                    _rigidBody.velocity = Vector3.zero;
+                    transform.position = initialPos;
+                    rigidBody.velocity = Vector3.zero;
                 }
             }
         }
 
         public void Playable()
         {
-            _rigidBody.useGravity = true;
+            rigidBody.useGravity = true;
         }
 
         public void SwitchMoveFromARCamera(bool value)
@@ -89,12 +88,12 @@ namespace Reseul.Snapdragon.Spaces
 
         public void FixedUpdate()
         {
-            if (!_isPlayable) return;
+            if (!IsPlayable) return;
 
             CharacterAnimator.SetBool("walk", true);
-            if (_isPressed)
+            if (isPressed)
             {
-                var forward = new Vector3(_leftStickValue.x, 0, _leftStickValue.y);
+                var forward = new Vector3(leftStickValue.x, 0, leftStickValue.y);
                 if (useARCamera)
                     forward = ARCamera.transform.rotation * forward;
                 else
@@ -107,8 +106,8 @@ namespace Reseul.Snapdragon.Spaces
                 Character.transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
             }
 
-            if (Button1.action.IsPressed() && Mathf.Abs(_rigidBody.velocity.y) < 0.01f)
-                _rigidBody.AddForce(new Vector3(0, 4, 0), ForceMode.Impulse);
+            if (Button1.action.IsPressed() && Mathf.Abs(rigidBody.velocity.y) < 0.01f)
+                rigidBody.AddForce(new Vector3(0, 4, 0), ForceMode.Impulse);
         }
     }
 }

@@ -1,29 +1,25 @@
-// Copyright (c) 2023 Takahiro Miyaura
+// Copyright (c) 2024 Takahiro Miyaura
 // Released under the MIT license
 // http://opensource.org/licenses/mit-license.php
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Qualcomm.Snapdragon.Spaces;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
 namespace Reseul.Snapdragon.Spaces.SpatialMappings
 {
     public class SpatialMeshingController : MonoBehaviour
     {
-        private ARMeshManager _meshManager;
-        private SpacesARMeshManagerConfig _meshManagerConfig;
+        private ARMeshManager meshManager;
+        private SpacesARMeshManagerConfig meshManagerConfig;
         public Material SpatialMeshMaterial;
 
         public void Awake()
         {
-            _meshManager = FindObjectOfType<ARMeshManager>(true);
-            _meshManagerConfig = FindObjectOfType<SpacesARMeshManagerConfig>(true);
+            meshManager = FindObjectOfType<ARMeshManager>(true);
+            meshManagerConfig = FindObjectOfType<SpacesARMeshManagerConfig>(true);
 
-            if (_meshManager == null)
+            if (meshManager == null)
             {
                 Debug.LogError("Could not find mesh manager. Sample will not work correctly.");
             }
@@ -35,24 +31,24 @@ namespace Reseul.Snapdragon.Spaces.SpatialMappings
 
         public void OnEnable()
         {
-            _meshManager.meshesChanged += OnMeshesChanged;
+            meshManager.meshesChanged += OnMeshesChanged;
         }
 
         public void OnDisable()
         {
-            _meshManager.meshesChanged -= OnMeshesChanged;
+            meshManager.meshesChanged -= OnMeshesChanged;
         }
 
         private void OnMeshesChanged(ARMeshesChangedEventArgs args)
         {
-            _meshManagerConfig?.UpdateMeshTransforms(args);
+            meshManagerConfig?.UpdateMeshTransforms(args);
         }
 
         public void EnabledARMesh()
         {
-            if (_meshManager != null)
+            if (meshManager != null)
             {
-                _meshManager.enabled = true;
+                meshManager.enabled = true;
             }
         }
 
@@ -70,9 +66,9 @@ namespace Reseul.Snapdragon.Spaces.SpatialMappings
 
         public void ReleaseARMesh()
         {
-            _meshManager.meshesChanged -= OnMeshesChanged;
-            _meshManager.DestroyAllMeshes();
-            _meshManager.enabled = false;
+            meshManager.meshesChanged -= OnMeshesChanged;
+            meshManager.DestroyAllMeshes();
+            meshManager.enabled = false;
         }
     }
 }

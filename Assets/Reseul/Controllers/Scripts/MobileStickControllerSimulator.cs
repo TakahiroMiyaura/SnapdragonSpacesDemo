@@ -10,13 +10,19 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 {
     public class MobileStickControllerSimulator : MonoBehaviour
     {
-        private Vector2 touchScreenPos = new(1170, 540);
+        private Vector2 touchScreenPos = Vector2.zero;
         private MobileStickInputDeviceState state;
+
+        void Awake()
+        {
+            touchScreenPos = new(Screen.currentResolution.width / 2f, Screen.currentResolution.height / 2f);
+        }
 
 #if UNITY_EDITOR
         // Update is called once per frame
         private void FixedUpdate()
         {
+            
             var leftStickPosition = Vector2.zero;
             state.Buttons &= ~(1 << 2);
             if (Input.GetKey(KeyCode.W))

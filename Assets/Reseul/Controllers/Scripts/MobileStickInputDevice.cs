@@ -18,42 +18,42 @@ namespace Reseul.Snapdragon.Spaces.Controllers
     {
         public FourCC format => new('M', 'Y', 'D', 'V');
 
-        [FieldOffset(0)] //4
+        [FieldOffset(0)]
         [InputControl(displayName = "Button1 Press", name = "Button1Press", layout = "Button", bit = 0)]
         [InputControl(displayName = "Touch Screen Press", name = "TouchScreenPress", layout = "Button", bit = 1)]
         [InputControl(displayName = "Left Stick Press", name = "LeftStickPress", layout = "Button", bit = 2)]
         [InputControl(displayName = "Right Stick Press", name = "RightStickPress", layout = "Button", bit = 3)]
         public int Buttons;
 
-        [FieldOffset(4)] //8
+        [FieldOffset(4)]
         [InputControl(displayName = "Left Stick", name = "LeftStick", layout = "stick")]
         public Vector2 LeftStick;
         
-        [FieldOffset(12)] //12
+        [FieldOffset(12)]
         [InputControl(displayName = "Left Stick Delta", name = "LeftStickDelta", layout = "delta")]
         public Vector2 LeftStickDelta;
         
-        [FieldOffset(24)] //8
+        [FieldOffset(24)]
         [InputControl(displayName = "Right Stick", name = "RightStick", layout = "stick")]
         public Vector2 RightStick;
         
-        [FieldOffset(32)] //12 
+        [FieldOffset(32)]
         [InputControl(displayName = "Right Stick Delta", name = "RightStickDelta", layout = "delta")]
         public Vector2 RightStickDelta;
 
-        [FieldOffset(44)] //8
+        [FieldOffset(44)]
         [InputControl(displayName = "Touch Screen", name = "TouchScreenPosition", layout = "vector2")]
         public Vector2 TouchScreenPosition;
 
-        [FieldOffset(52)] //8
+        [FieldOffset(52)]
         [InputControl(displayName = "Touch Screen(3D)", name = "TouchScreen3D", layout = "vector3")]
-        public Vector2 TouchScreen3D;
+        public Vector3 TouchScreen3D;
 
-        [FieldOffset(60)] //12
+        [FieldOffset(64)]
         [InputControl(displayName = "Touch Screen Delta", name = "TouchScreenDelta", layout = "delta")]
         public Vector2 TouchScreenDelta;
 
-        [FieldOffset(72)]
+        [FieldOffset(76)]
         [InputControl(displayName = "Touch State", name = "TouchState", layout = "Touch")]
         public TouchState TouchState;
 

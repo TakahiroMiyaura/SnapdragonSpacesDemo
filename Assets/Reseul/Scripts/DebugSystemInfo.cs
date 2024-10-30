@@ -5,14 +5,17 @@
 using TMPro;
 using UnityEngine;
 
-public class DebugSystemInfo : MonoBehaviour
+namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
 {
-    [SerializeField]
-    private TextMeshProUGUI DisplaySize;
-
-    // Start is called before the first frame update
-    private void Start()
+    public class DebugSystemInfo : MonoBehaviour
     {
-        DisplaySize.text = $"{Screen.currentResolution.width},{Screen.currentResolution.height}";
+        [SerializeField]
+        private TextMeshProUGUI DisplaySize;
+
+        // Start is called before the first frame update
+        private void Start()
+        {
+            DisplaySize.text = $"{Screen.currentResolution.width},{Screen.currentResolution.height}";
+        }
     }
 }
