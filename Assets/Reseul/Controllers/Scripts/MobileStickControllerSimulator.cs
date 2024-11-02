@@ -2,7 +2,6 @@
 // Released under the MIT license
 // http://opensource.org/licenses/mit-license.php
 
-using Reseul.Snapdragon.Spaces.Controllers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,19 +9,22 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 {
     public class MobileStickControllerSimulator : MonoBehaviour
     {
-        private Vector2 touchScreenPos = Vector2.zero;
+        private OnScreenTouch3D onScreenTouch3D;
+        private OnScreenTouch3DOnCanvas onScreenTouch3DOnCanvas;
         private MobileStickInputDeviceState state;
+        private Vector2 touchScreenPos = Vector2.zero;
 
-        void Awake()
+        private void Awake()
         {
-            touchScreenPos = new(Screen.currentResolution.width / 2f, Screen.currentResolution.height / 2f);
+            touchScreenPos = new Vector2(Screen.currentResolution.width / 2f, Screen.currentResolution.height / 2f);
+            onScreenTouch3D = FindObjectOfType<OnScreenTouch3D>();
+            onScreenTouch3DOnCanvas = FindObjectOfType<OnScreenTouch3DOnCanvas>();
         }
 
 #if UNITY_EDITOR
         // Update is called once per frame
         private void FixedUpdate()
         {
-            
             var leftStickPosition = Vector2.zero;
             state.Buttons &= ~(1 << 2);
             if (Input.GetKey(KeyCode.W))
@@ -85,40 +87,43 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             state.Buttons &= ~(1 << 1);
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                touchScreen.y = 1;
+                touchScreen.y = 10;
                 state.Buttons |= 1 << 1;
                 isPressed = true;
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
-                touchScreen.y = -1;
+                touchScreen.y = -10;
                 state.Buttons |= 1 << 1;
                 isPressed = true;
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                touchScreen.x = -1;
+                touchScreen.x = -10;
                 state.Buttons |= 1 << 1;
                 isPressed = true;
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
-                touchScreen.x = 1;
+                touchScreen.x = 10;
                 state.Buttons |= 1 << 1;
                 isPressed = true;
             }
 
-            touchScreenPos += touchScreen * 10;
+            touchScreenPos += touchScreen;
             state.TouchScreenPosition = touchScreenPos;
             if (isPressed)
+            {
                 InputSystem.QueueDeltaStateEvent(InputSystem.GetDevice<MobileStickInputDevice>().TouchScreenDelta,
-                    touchScreen * 10,
+                    touchScreen,
                     Time.realtimeSinceStartup);
+                state.TouchScreen3D = onScreenTouch3D.Calculate3DPositionFrom2D(touchScreenPos);
+                state.TouchScreen3DOnCanvas = onScreenTouch3DOnCanvas.Calculate3DPositionOnCanvasFrom2D(touchScreenPos);
+            }
 
             InputSystem.QueueStateEvent(InputSystem.GetDevice<MobileStickInputDevice>(), state);
         }
 #endif
-
     }
 }

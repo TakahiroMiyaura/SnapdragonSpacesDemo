@@ -10,12 +10,12 @@ namespace Reseul.Snapdragon.Spaces.Controllers
     public class SpacesHostViewInputAction : MonoBehaviour
     {
         private SpacesHostViewDevice spacesHostViewDevice;
-        private SpacesHostViewDeviceState spacesHostViewDeviceState1;
+        private SpacesHostViewDeviceState deviceState;
 
         private void OnEnable()
         {
             spacesHostViewDevice = InputSystem.GetDevice<SpacesHostViewDevice>();
-            spacesHostViewDeviceState1 = new SpacesHostViewDeviceState();
+            deviceState = new SpacesHostViewDeviceState();
         }
 
         private void Update()
@@ -23,9 +23,9 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 #if UNITY_EDITOR
             if (!Application.isPlaying) return;
 #endif
-            spacesHostViewDeviceState1.MobileDisplayPosition = transform.position;
-            spacesHostViewDeviceState1.MobileDisplayRotation = transform.rotation;
-            InputSystem.QueueStateEvent(spacesHostViewDevice, spacesHostViewDeviceState1, Time.realtimeSinceStartup);
+            deviceState.MobileDisplayPosition = transform.position;
+            deviceState.MobileDisplayRotation = transform.rotation;
+            InputSystem.QueueStateEvent(spacesHostViewDevice, deviceState, Time.realtimeSinceStartup);
         }
     }
 }

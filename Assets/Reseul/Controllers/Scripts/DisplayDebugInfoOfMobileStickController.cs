@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 namespace Reseul.Snapdragon.Spaces.Controllers
 {
-    public class DebugInfoVisuals : MonoBehaviour
+    public class DisplayDebugInfoOfMobileStickController : MonoBehaviour
     {
         [SerializeField]
         private InputActionReference button1Press = null;
@@ -30,6 +30,9 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         [SerializeField]
         private InputActionReference touchScreen3D = null;
+
+        [SerializeField]
+        private InputActionReference touchScreen3DOnCanvas = null;
 
         [SerializeField]
         private InputActionReference touchScreenDelta = null;
@@ -54,6 +57,9 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         [SerializeField]
         private TextMeshProUGUI touch3DText = null;
+
+        [SerializeField]
+        private TextMeshProUGUI touch3DOnCanvasText = null;
 
         [SerializeField]
         private TextMeshProUGUI touchDeltaText = null;
@@ -87,6 +93,9 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             touchScreen3D.action.performed += ctx =>
                 touch3DText.text =
                     $"({ctx.ReadValue<Vector3>().x:F2},{ctx.ReadValue<Vector3>().y:F2},{ctx.ReadValue<Vector3>().z:F2})";
+            touchScreen3DOnCanvas.action.performed += ctx =>
+                touch3DOnCanvasText.text =
+                    $"({ctx.ReadValue<Vector3>().x:F2},{ctx.ReadValue<Vector3>().y:F2},{ctx.ReadValue<Vector3>().z:F2})";
             touchScreen3D.action.canceled += _ => touch3DText.text = "(0.00,0.00,0.00)";
             touchScreenDelta.action.performed += ctx =>
                 touchDeltaText.text = $"({ctx.ReadValue<Vector2>().x:F2},{ctx.ReadValue<Vector2>().y:F2})";
@@ -104,6 +113,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             button1Press.action.Enable();
             touchScreenPress.action.Enable();
             touchScreen3D.action.Enable();
+            touchScreen3DOnCanvas.action.Enable();
             touchScreenDelta.action.Enable();
         }
 
@@ -118,6 +128,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             button1Press.action.Disable();
             touchScreenPress.action.Disable();
             touchScreen3D.action.Disable();
+            touchScreen3DOnCanvas.action.Disable();
             touchScreenDelta.action.Disable();
         }
     }

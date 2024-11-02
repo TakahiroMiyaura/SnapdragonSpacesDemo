@@ -24,6 +24,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "TouchScreen(3D - OnCanvas)",
+                    "type": "Value",
+                    "id": "126573e6-88b2-46ce-b9b8-26ed78b38771",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "TouchScreenDelta",
                     "type": "Value",
                     "id": "fcc37fe6-4d35-4902-9299-f7225fe9772a",
@@ -312,6 +321,17 @@
                     "processors": "",
                     "groups": "ReseulControlScheme",
                     "action": "RightStickDelta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a8c61b8-2e7c-49f1-bf7e-8126f9d7c637",
+                    "path": "<MobileStickInputDevice>/TouchScreen3DOnCanvas",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TouchScreen(3D - OnCanvas)",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

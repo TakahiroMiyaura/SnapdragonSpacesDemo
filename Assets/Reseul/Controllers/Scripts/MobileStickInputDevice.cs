@@ -50,10 +50,14 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         public Vector3 TouchScreen3D;
 
         [FieldOffset(64)]
+        [InputControl(displayName = "Touch Screen(3D - On Canvas)", name = "TouchScreen3DOnCanvas", layout = "vector3")]
+        public Vector3 TouchScreen3DOnCanvas;
+
+        [FieldOffset(76)]
         [InputControl(displayName = "Touch Screen Delta", name = "TouchScreenDelta", layout = "delta")]
         public Vector2 TouchScreenDelta;
 
-        [FieldOffset(76)]
+        [FieldOffset(88)]
         [InputControl(displayName = "Touch State", name = "TouchState", layout = "Touch")]
         public TouchState TouchState;
 
@@ -78,6 +82,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         public DeltaControl RightStickDelta { get; private set; }
         public Vector2Control TouchScreenPosition { get; private set; }
         public Vector3Control TouchScreen3D { get; private set; }
+        public Vector3Control TouchScreen3DOnCanvas { get; private set; }
         public DeltaControl TouchScreenDelta { get; private set; }
         public TouchControl TouchState { get; private set; }
 
@@ -107,6 +112,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             RightStickDelta = GetChildControl<DeltaControl>("RightStickDelta");
             TouchScreenPosition = GetChildControl<Vector2Control>("TouchScreenPosition");
             TouchScreen3D = GetChildControl<Vector3Control>("TouchScreen3D");
+            TouchScreen3DOnCanvas = GetChildControl<Vector3Control>("TouchScreen3DOnCanvas");
             TouchScreenDelta = GetChildControl<DeltaControl>("TouchScreenDelta");
             TouchState = GetChildControl<TouchControl>("TouchState");
         }

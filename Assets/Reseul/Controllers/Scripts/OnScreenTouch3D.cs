@@ -34,11 +34,16 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         private void SendValueToControl(PointerEventData eventData)
         {
-            var pos = RectTransformUtility.WorldToScreenPoint(PhoneCamera, eventData.position);
-
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(targetRectTransform, pos, PhoneCamera, out Vector3 result);
+            var result = Calculate3DPositionFrom2D(eventData.position);
             SendValueToControl(result);
         }
+
+        internal Vector3 Calculate3DPositionFrom2D(Vector2 eventDataPosition)
+        {
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(targetRectTransform, eventDataPosition, PhoneCamera, out var result);
+            return result;
+        }
+
 
         public void OnPointerUp(PointerEventData eventData)
         {
