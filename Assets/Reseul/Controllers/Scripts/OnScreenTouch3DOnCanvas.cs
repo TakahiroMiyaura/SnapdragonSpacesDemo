@@ -19,6 +19,9 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         [SerializeField]
         private RectTransform targetRectTransform;
 
+        [SerializeField]
+        private float distanceFromCanvas = 0f;
+
         protected override string controlPathInternal
         {
             get => touchScreenControlPath;
@@ -41,6 +44,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         internal Vector3 Calculate3DPositionOnCanvasFrom2D(Vector2 eventDataPosition)
         {
             RectTransformUtility.ScreenPointToWorldPointInRectangle(targetRectTransform, eventDataPosition, null, out var result);
+            result -= targetRectTransform.forward * distanceFromCanvas;
             return result;
         }
 

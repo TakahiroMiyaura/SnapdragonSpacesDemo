@@ -30,10 +30,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         [SerializeField]
         private InputActionReference touchScreen3D = null;
-
-        [SerializeField]
-        private InputActionReference touchScreen3DOnCanvas = null;
-
+        
         [SerializeField]
         private InputActionReference touchScreenDelta = null;
 
@@ -57,10 +54,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         [SerializeField]
         private TextMeshProUGUI touch3DText = null;
-
-        [SerializeField]
-        private TextMeshProUGUI touch3DOnCanvasText = null;
-
+        
         [SerializeField]
         private TextMeshProUGUI touchDeltaText = null;
 
@@ -70,66 +64,136 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         [SerializeField]
         private TextMeshProUGUI touchText = null;
 
-
-        void Start()
-        {
-            rightStick.action.performed += ctx =>
-                rightStickText.text = $"({ctx.ReadValue<Vector2>().x:F2},{ctx.ReadValue<Vector2>().y:F2})";
-            rightStick.action.canceled += _ => rightStickText.text = "(0.00,0.00)";
-            leftStick.action.performed += ctx =>
-                leftStickText.text = $"({ctx.ReadValue<Vector2>().x:F2},{ctx.ReadValue<Vector2>().y:F2})";
-            leftStick.action.canceled += _ => leftStickText.text = "(0.00,0.00)";
-            rightStickPress.action.performed += ctx => rightStickPressText.text = $"{ctx.ReadValue<float>():F2}";
-            rightStickPress.action.canceled += _ => rightStickPressText.text = "0.0";
-            leftStickPress.action.performed += ctx => leftStickPressText.text = $"{ctx.ReadValue<float>():F2}";
-            leftStickPress.action.canceled += _ => leftStickPressText.text = "0.0";
-            button1Press.action.performed += ctx => button1PressText.text = $"{ctx.ReadValue<float>():F2}";
-            button1Press.action.canceled += _ => button1PressText.text = "0.0";
-            touchScreen.action.performed += ctx =>
-                touchText.text = $"({ctx.ReadValue<Vector2>().x:F2},{ctx.ReadValue<Vector2>().y:F2})";
-            touchScreen.action.canceled += _ => touchText.text = "(0.00,0.00)";
-            touchScreenPress.action.performed += ctx => touchScreenPressText.text = $"{ctx.ReadValue<float>():F2}";
-            touchScreenPress.action.canceled += _ => touchScreenPressText.text = "0.0";
-            touchScreen3D.action.performed += ctx =>
-                touch3DText.text =
-                    $"({ctx.ReadValue<Vector3>().x:F2},{ctx.ReadValue<Vector3>().y:F2},{ctx.ReadValue<Vector3>().z:F2})";
-            touchScreen3DOnCanvas.action.performed += ctx =>
-                touch3DOnCanvasText.text =
-                    $"({ctx.ReadValue<Vector3>().x:F2},{ctx.ReadValue<Vector3>().y:F2},{ctx.ReadValue<Vector3>().z:F2})";
-            touchScreen3D.action.canceled += _ => touch3DText.text = "(0.00,0.00,0.00)";
-            touchScreenDelta.action.performed += ctx =>
-                touchDeltaText.text = $"({ctx.ReadValue<Vector2>().x:F2},{ctx.ReadValue<Vector2>().y:F2})";
-            touchScreenDelta.action.canceled += _ => touchDeltaText.text = "(0.00,0.00)";
-        }
-
         void OnEnable()
         {
-            rightStick.action.Enable();
-            leftStick.action.Enable();
-            rightStickPress.action.Enable();
-            leftStickPress.action.Enable();
-            touchScreen.action.Enable();
-            touchScreenPress.action.Enable();
-            button1Press.action.Enable();
-            touchScreenPress.action.Enable();
-            touchScreen3D.action.Enable();
-            touchScreen3DOnCanvas.action.Enable();
-            touchScreenDelta.action.Enable();
+            button1Press.action.performed += Button1PressPerformed;
+            button1Press.action.canceled += Button1PressCanceled;
+            leftStickPress.action.performed += LeftStickPressPerformed;
+            leftStickPress.action.canceled += LeftStickPressCanceled;
+            rightStickPress.action.performed += RightStickPressPerformed;
+            rightStickPress.action.canceled += RightStickPressCanceled;
+            touchScreenPress.action.performed += TouchScreenPressPerformed;
+            touchScreenPress.action.canceled += TouchScreenPressCanceled;
+            leftStick.action.performed += LeftStickPerformed;
+            leftStick.action.canceled += LeftStickCanceled;
+            rightStick.action.performed += RightStickPerformed;
+            rightStick.action.canceled += RightStickCanceled;
+            touchScreen.action.performed += TouchScreenPerformed;
+            touchScreen.action.canceled += TouchScreenCanceled;
+            touchScreen3D.action.performed += TouchScreen3DPerformed;
+            touchScreen3D.action.canceled += TouchScreen3DCanceled;
+            touchScreenDelta.action.performed += TouchScreenDeltaPerformed;
+            touchScreenDelta.action.canceled += TouchScreenDeltaCanceled;
         }
-
         void OnDisable()
         {
-            rightStick.action.Disable();
-            leftStick.action.Disable();
-            rightStickPress.action.Disable();
-            leftStickPress.action.Disable();
-            touchScreen.action.Disable();
-            touchScreenPress.action.Disable();
-            button1Press.action.Disable();
-            touchScreenPress.action.Disable();
-            touchScreen3D.action.Disable();
-            touchScreen3DOnCanvas.action.Disable();
-            touchScreenDelta.action.Disable();
+            button1Press.action.performed -= Button1PressPerformed;
+            button1Press.action.canceled -= Button1PressCanceled;
+            leftStickPress.action.performed -= LeftStickPressPerformed;
+            leftStickPress.action.canceled -= LeftStickPressCanceled;
+            rightStickPress.action.performed -= RightStickPressPerformed;
+            rightStickPress.action.canceled -= RightStickPressCanceled;
+            touchScreenPress.action.performed -= TouchScreenPressPerformed;
+            touchScreenPress.action.canceled -= TouchScreenPressCanceled;
+            leftStick.action.performed -= LeftStickPerformed;
+            leftStick.action.canceled -= LeftStickCanceled;
+            rightStick.action.performed -= RightStickPerformed;
+            rightStick.action.canceled -= RightStickCanceled;
+            touchScreen.action.performed -= TouchScreenPerformed;
+            touchScreen.action.canceled -= TouchScreenCanceled;
+            touchScreen3D.action.performed -= TouchScreen3DPerformed;
+            touchScreen3D.action.canceled -= TouchScreen3DCanceled;
+            touchScreenDelta.action.performed -= TouchScreenDeltaPerformed;
+            touchScreenDelta.action.canceled -= TouchScreenDeltaCanceled;
+        }
+
+        private void Button1PressPerformed(InputAction.CallbackContext ctx)
+        {
+            button1PressText.text = $"{ctx.ReadValue<float>():F2}";
+        }
+
+        private void Button1PressCanceled(InputAction.CallbackContext ctx)
+        {
+            button1PressText.text = "0.0";
+        }
+
+        private void LeftStickPressPerformed(InputAction.CallbackContext ctx)
+        {
+            leftStickPressText.text = $"{ctx.ReadValue<float>():F2}";
+        }
+
+        private void LeftStickPressCanceled(InputAction.CallbackContext ctx)
+        {
+            leftStickPressText.text = "0.0";
+        }
+
+        private void RightStickPressPerformed(InputAction.CallbackContext ctx)
+        {
+            rightStickPressText.text = $"{ctx.ReadValue<float>():F2}";
+        }
+
+        private void RightStickPressCanceled(InputAction.CallbackContext ctx)
+        {
+            rightStickPressText.text = "0.0";
+        }
+
+        private void TouchScreenPressPerformed(InputAction.CallbackContext ctx)
+        {
+            touchScreenPressText.text = $"{ctx.ReadValue<float>():F2}";
+        }
+
+        private void TouchScreenPressCanceled(InputAction.CallbackContext ctx)
+        {
+            touchScreenPressText.text = "0.0";
+        }
+
+        private void RightStickPerformed(InputAction.CallbackContext ctx)
+        {
+            rightStickText.text = $"({ctx.ReadValue<Vector2>().x:F2},{ctx.ReadValue<Vector2>().y:F2})";
+        }
+        private void RightStickCanceled(InputAction.CallbackContext ctx)
+        {
+            rightStickText.text = "(0.00,0.00)";
+        }
+
+        private void LeftStickPerformed(InputAction.CallbackContext ctx)
+        {
+            leftStickText.text = $"({ctx.ReadValue<Vector2>().x:F2},{ctx.ReadValue<Vector2>().y:F2})";
+        }
+        private void LeftStickCanceled(InputAction.CallbackContext ctx)
+        {
+            leftStickText.text = "(0.00,0.00)";
+        }
+
+        private void TouchScreenPerformed(InputAction.CallbackContext ctx)
+        {
+            touchText.text = $"({ctx.ReadValue<Vector2>().x:F2},{ctx.ReadValue<Vector2>().y:F2})";
+        }
+
+        private void TouchScreenCanceled(InputAction.CallbackContext ctx)
+        {
+            touchText.text = "(0.00,0.00)";
+        }
+
+        private void TouchScreen3DPerformed(InputAction.CallbackContext ctx)
+        {
+            touch3DText.text =
+                $"({ctx.ReadValue<Vector3>().x:F2},{ctx.ReadValue<Vector3>().y:F2},{ctx.ReadValue<Vector3>().z:F2})";
+        }
+
+        private void TouchScreen3DCanceled(InputAction.CallbackContext ctx)
+        {
+            touch3DText.text = "(0.00,0.00,0.00)";
+        }
+        
+        private void TouchScreenDeltaPerformed(InputAction.CallbackContext ctx)
+        {
+            touchDeltaText.text = $"({ctx.ReadValue<Vector2>().x:F2},{ctx.ReadValue<Vector2>().y:F2})";
+        }
+
+        private void TouchScreenDeltaCanceled(InputAction.CallbackContext ctx)
+        {
+            touchDeltaText.text = "(0.00,0.00)";
         }
     }
 }

@@ -119,7 +119,6 @@ namespace Reseul.Snapdragon.Spaces.Controllers
                     touchScreen,
                     Time.realtimeSinceStartup);
                 state.TouchScreen3D = onScreenTouch3D.Calculate3DPositionFrom2D(touchScreenPos);
-                state.TouchScreen3DOnCanvas = onScreenTouch3DOnCanvas.Calculate3DPositionOnCanvasFrom2D(touchScreenPos);
             }
 
             InputSystem.QueueStateEvent(InputSystem.GetDevice<MobileStickInputDevice>(), state);

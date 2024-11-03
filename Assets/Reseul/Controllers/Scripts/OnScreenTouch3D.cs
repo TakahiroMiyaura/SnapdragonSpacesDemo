@@ -18,7 +18,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
         [SerializeField]
         private RectTransform targetRectTransform;
-
+        
         protected override string controlPathInternal
         {
             get => touchScreenControlPath;
