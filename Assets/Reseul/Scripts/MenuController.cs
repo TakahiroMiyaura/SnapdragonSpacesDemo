@@ -40,27 +40,5 @@ namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
             Application.Quit();
 #endif
         }
-
-        public void SetAutoStartOnDisplayConnectedButton(PressableButton button)
-        {
-            button.ForceSetToggled(SystemSettings.Instance.AutoStartOnDisplayConnected);
-        }
-
-        public void SetAutoStartOnDisplayConnected(bool value)
-        {
-            loader.AutoStartXROnDisplayConnected = value;
-            SystemSettings.Instance.AutoStartOnDisplayConnected = value;
-        }
-
-        public void SetAutoManageXRCameraButton(PressableButton button)
-        {
-            button.ForceSetToggled(SystemSettings.Instance.AutoManageXRCamera);
-        }
-
-        public void SetAutoManageXRCamera(bool value)
-        {
-            loader.AutoManageXRCamera = value;
-            SystemSettings.Instance.AutoManageXRCamera = value;
-        }
     }
 }
