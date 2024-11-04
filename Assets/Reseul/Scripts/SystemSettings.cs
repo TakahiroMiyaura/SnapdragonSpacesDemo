@@ -5,11 +5,29 @@
 using MixedReality.Toolkit.UX;
 using UnityEngine;
 
-namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
+namespace Reseul.Snapdragon.Spaces.Utilities
 {
     public class SystemSettings : MonoBehaviour
     {
         private static SystemSettings instance;
+
+        [SerializeField]
+        private PressableButton AutoManageXRCameraButton;
+
+        [SerializeField]
+        private PressableButton AutoStartOnDisplayConnectedButton;
+
+        [SerializeField]
+        private PressableButton DisplayDebugControllerButton;
+
+        [SerializeField]
+        private PressableButton DisplayDebugHostViewButton;
+
+        [SerializeField]
+        private PressableButton DisplayDebugOpenXRRButton;
+
+        [SerializeField]
+        private PressableButton DisplayDebugTouchScreenButton;
 
         public static SystemSettings Instance
         {
@@ -20,28 +38,6 @@ namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
             }
         }
 
-        [SerializeField]
-        private PressableButton AutoStartOnDisplayConnectedButton;
-        [SerializeField]
-        private PressableButton AutoManageXRCameraButton;
-        [SerializeField]
-        private PressableButton DisplayDebugOpenXRRButton;
-        [SerializeField]
-        private PressableButton DisplayDebugHostViewButton;
-        [SerializeField]
-        private PressableButton DisplayDebugControllerButton;
-        [SerializeField]
-        private PressableButton DisplayDebugTouchScreenButton;
-
-        void Start()
-        {
-            AutoStartOnDisplayConnectedButton?.ForceSetToggled(AutoStartOnDisplayConnected);
-            AutoManageXRCameraButton?.ForceSetToggled(AutoManageXRCamera);
-            DisplayDebugOpenXRRButton?.ForceSetToggled(DisplayDebugOpenXR);
-            DisplayDebugHostViewButton?.ForceSetToggled(DisplayDebugHostView);
-            DisplayDebugControllerButton?.ForceSetToggled(DisplayDebugController);
-            DisplayDebugTouchScreenButton?.ForceSetToggled(DisplayDebugTouchScreen);
-        }
         public bool AutoStartOnDisplayConnected
         {
             get
@@ -130,6 +126,16 @@ namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
                 return true;
             }
             set => PlayerPrefs.SetInt("DisplayDebugTouchScreen", value ? 1 : 0);
+        }
+
+        private void Start()
+        {
+            AutoStartOnDisplayConnectedButton?.ForceSetToggled(AutoStartOnDisplayConnected);
+            AutoManageXRCameraButton?.ForceSetToggled(AutoManageXRCamera);
+            DisplayDebugOpenXRRButton?.ForceSetToggled(DisplayDebugOpenXR);
+            DisplayDebugHostViewButton?.ForceSetToggled(DisplayDebugHostView);
+            DisplayDebugControllerButton?.ForceSetToggled(DisplayDebugController);
+            DisplayDebugTouchScreenButton?.ForceSetToggled(DisplayDebugTouchScreen);
         }
     }
 }

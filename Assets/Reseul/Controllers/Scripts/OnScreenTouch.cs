@@ -2,7 +2,6 @@
 // Released under the MIT license
 // http://opensource.org/licenses/mit-license.php
 
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Layouts;
@@ -11,14 +10,14 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 {
     public class OnScreenTouch : OnScreenTouchBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
-        private bool canEventFire;
+        [SerializeField]
+        private RectTransform cursor;
 
         [InputControl(layout = "Vector2")]
         [SerializeField]
         private string touchScreenControlPath;
 
-        [SerializeField]
-        private RectTransform cursor;
+        private bool canEventFire;
 
         protected override string controlPathInternal
         {

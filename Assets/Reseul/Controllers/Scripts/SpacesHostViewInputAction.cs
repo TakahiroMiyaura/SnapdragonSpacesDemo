@@ -9,8 +9,8 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 {
     public class SpacesHostViewInputAction : MonoBehaviour
     {
-        private SpacesHostViewDevice spacesHostViewDevice;
         private SpacesHostViewDeviceState deviceState;
+        private SpacesHostViewDevice spacesHostViewDevice;
 
         private void OnEnable()
         {

@@ -7,11 +7,12 @@ using Qualcomm.Snapdragon.Spaces;
 using UnityEditor;
 using UnityEngine;
 
-namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
+namespace Reseul.Snapdragon.Spaces.Utilities
 {
     public class MenuController : MonoBehaviour
     {
-        public DialogPool DialogPool;
+        [SerializeField]
+        private DialogPool dialogPool;
 
         [SerializeField]
         private DynamicOpenXRLoader loader;
@@ -23,7 +24,7 @@ namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
 
         public void ApplicationQuit()
         {
-            var dialog = DialogPool.Get();
+            var dialog = dialogPool.Get();
             dialog.SetHeader("Quit");
             dialog.SetBody("Do you really want to exit this applications?");
             dialog.SetNegative("OK", args => Quit());

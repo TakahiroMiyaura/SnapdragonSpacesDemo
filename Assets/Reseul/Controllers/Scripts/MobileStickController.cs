@@ -1,6 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO.Enumeration;
+// Copyright (c) 2024 Takahiro Miyaura
+// Released under the MIT license
+// http://opensource.org/licenses/mit-license.php
+
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
                 {
                     instance = FindObjectOfType<MobileStickController>();
                 }
+
                 return instance;
             }
         }
@@ -33,11 +35,11 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         public RectTransform RayCastTarget => rayCastTarget;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             foreach (var canvas in gameObject.GetComponentsInChildren<Canvas>(true))
             {
-                if (canvas.isRootCanvas && canvas.renderMode == RenderMode.WorldSpace
+                if ((canvas.isRootCanvas && canvas.renderMode == RenderMode.WorldSpace)
                     || !canvas.isRootCanvas)
                 {
                     canvas.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
@@ -48,7 +50,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             debugObject?.SetActive(visualControllerInfo);
         }

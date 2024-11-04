@@ -2,7 +2,6 @@
 // Released under the MIT license
 // http://opensource.org/licenses/mit-license.php
 
-using System;
 using Qualcomm.Snapdragon.Spaces;
 using TMPro;
 using UnityEngine;
@@ -14,10 +13,10 @@ namespace Reseul.Snapdragon.Spaces.Controllers
     {
         [SerializeField]
         private Camera arCamera;
-        
+
         [SerializeField]
         private Transform CubeOnViewPort;
-        
+
         [SerializeField]
         private RectTransform debugCursor;
 
@@ -25,14 +24,16 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         private InputActionReference touchScreen;
 
         [SerializeField]
-        private InputActionReference touchScreenDelta;
+        private InputActionReference touchScreen3D;
 
         [SerializeField]
-        private InputActionReference touchScreen3D;
-        
+        private InputActionReference touchScreenDelta;
+
         private Vector2 currentPos = Vector2.zero;
+
         private TextMeshPro viewPortDebugText;
-        void OnEnable()
+
+        private void OnEnable()
         {
             arCamera = FindAnyObjectByType<SpacesHostView>()?.phoneCamera;
             viewPortDebugText = CubeOnViewPort.GetComponentInChildren<TextMeshPro>();
@@ -40,7 +41,8 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             touchScreen.action.performed += OnTouchScreenStarted;
             touchScreen3D.action.performed += OnTouchScreen3DPerformed;
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             touchScreenDelta.action.performed -= OnTouchScreenDeltaPerformed;
             touchScreen.action.performed -= OnTouchScreenStarted;
@@ -50,7 +52,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         private void OnTouchScreenStarted(InputAction.CallbackContext obj)
         {
             currentPos = obj.ReadValue<Vector2>();
-            if(viewPortDebugText != null) viewPortDebugText.text = $"({currentPos.x:F2},{currentPos.y:F2})";
+            if (viewPortDebugText != null) viewPortDebugText.text = $"({currentPos.x:F2},{currentPos.y:F2})";
         }
 
         private void OnTouchScreenDeltaPerformed(InputAction.CallbackContext obj)
@@ -68,6 +70,5 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             CubeOnViewPort.position = pos;
             CubeOnViewPort.transform.rotation = arCamera.transform.rotation;
         }
-
     }
 }

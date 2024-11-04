@@ -10,7 +10,6 @@ namespace Reseul.Snapdragon.Spaces.Controllers
     public class MobileStickControllerSimulator : MonoBehaviour
     {
         private OnScreenTouch3D onScreenTouch3D;
-        private OnScreenTouch3DOnCanvas onScreenTouch3DOnCanvas;
         private MobileStickInputDeviceState state;
         private Vector2 touchScreenPos = Vector2.zero;
 
@@ -18,7 +17,6 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         {
             touchScreenPos = new Vector2(Screen.currentResolution.width / 2f, Screen.currentResolution.height / 2f);
             onScreenTouch3D = FindObjectOfType<OnScreenTouch3D>();
-            onScreenTouch3DOnCanvas = FindObjectOfType<OnScreenTouch3DOnCanvas>();
         }
 
 #if UNITY_EDITOR

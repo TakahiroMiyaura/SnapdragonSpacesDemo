@@ -13,7 +13,6 @@ using UnityEngine.InputSystem.Utilities;
 
 namespace Reseul.Snapdragon.Spaces.Controllers
 {
-
     [StructLayout(LayoutKind.Explicit)]
     public struct SpacesHostViewDeviceState : IInputStateTypeInfo
     {

@@ -6,20 +6,20 @@ using MixedReality.Toolkit.UX;
 using TMPro;
 using UnityEngine;
 
-namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
+namespace Reseul.Snapdragon.Spaces.Utilities
 {
     [RequireComponent(typeof(PressableButton))]
     public class PressableButtonVisualizeState : MonoBehaviour
     {
-        private Color[] defaultColors;
-
         [SerializeField]
         private Color inactiveColor;
 
-        private PressableButton pressableBrFutton;
-
         [SerializeField]
         private TextMeshProUGUI[] texts;
+
+        private Color[] defaultColors;
+
+        private PressableButton pressableBrFutton;
 
         private void Awake()
         {

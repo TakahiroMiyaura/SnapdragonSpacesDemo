@@ -14,7 +14,7 @@ using UnityEngine.InputSystem.Utilities;
 namespace Reseul.Snapdragon.Spaces.Controllers
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct  MobileStickInputDeviceState : IInputStateTypeInfo
+    public struct MobileStickInputDeviceState : IInputStateTypeInfo
     {
         public FourCC format => new('M', 'Y', 'D', 'V');
 
@@ -28,19 +28,19 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         [FieldOffset(4)]
         [InputControl(displayName = "Left Stick", name = "LeftStick", layout = "stick")]
         public Vector2 LeftStick;
-        
+
         [FieldOffset(12)]
         [InputControl(displayName = "Left Stick Delta", name = "LeftStickDelta", layout = "delta")]
         public Vector2 LeftStickDelta;
-        
+
         [FieldOffset(20)]
         [InputControl(displayName = "Right Stick", name = "RightStick", layout = "stick")]
         public Vector2 RightStick;
-        
+
         [FieldOffset(28)]
         [InputControl(displayName = "Right Stick Delta", name = "RightStickDelta", layout = "delta")]
         public Vector2 RightStickDelta;
-        
+
         [FieldOffset(36)]
         [InputControl(displayName = "Touch Screen", name = "TouchScreenPosition", layout = "vector2")]
         public Vector2 TouchScreenPosition;
@@ -48,7 +48,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         [FieldOffset(44)]
         [InputControl(displayName = "Touch Screen(3D)", name = "TouchScreen3D", layout = "vector3")]
         public Vector3 TouchScreen3D;
-        
+
         [FieldOffset(56)]
         [InputControl(displayName = "Touch Screen Delta", name = "TouchScreenDelta", layout = "delta")]
         public Vector2 TouchScreenDelta;
@@ -56,7 +56,6 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         [FieldOffset(64)]
         [InputControl(displayName = "Touch State", name = "TouchState", layout = "Touch")]
         public TouchState TouchState;
-
     }
 
 
@@ -65,13 +64,12 @@ namespace Reseul.Snapdragon.Spaces.Controllers
     // Unityエディタで初期化処理を呼び出すのに必要
     [InitializeOnLoad]
 #endif
-    public class MobileStickInputDevice : InputDevice 
+    public class MobileStickInputDevice : InputDevice
     {
         public ButtonControl Button1Press { get; private set; }
         public ButtonControl TouchScreenPress { get; private set; }
         public ButtonControl LeftStickPress { get; private set; }
         public ButtonControl RightStickPress { get; private set; }
-
         public StickControl LeftStick { get; private set; }
         public DeltaControl LeftStickDelta { get; private set; }
         public StickControl RightStick { get; private set; }
@@ -81,7 +79,7 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         public DeltaControl TouchScreenDelta { get; private set; }
         public TouchControl TouchState { get; private set; }
 
-        
+
         static MobileStickInputDevice()
         {
             InputSystem.RegisterLayout<MobileStickInputDevice>();
@@ -100,7 +98,6 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             TouchScreenPress = GetChildControl<ButtonControl>("TouchScreenPress");
             LeftStickPress = GetChildControl<ButtonControl>("LeftStickPress");
             RightStickPress = GetChildControl<ButtonControl>("RightStickPress");
-
             LeftStick = GetChildControl<StickControl>("LeftStick");
             LeftStickDelta = GetChildControl<DeltaControl>("LeftStickDelta");
             RightStick = GetChildControl<StickControl>("RightStick");

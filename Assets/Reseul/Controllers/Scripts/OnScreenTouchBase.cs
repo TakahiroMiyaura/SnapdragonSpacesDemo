@@ -11,23 +11,23 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 {
     public abstract class OnScreenTouchBase : OnScreenControl
     {
-        void Awake()
-        {
-            var spacesHostView = FindObjectOfType<SpacesHostView>(true);
-            if (spacesHostView != null && PhoneCamera == null) PhoneCamera = spacesHostView.phoneCamera;
-        }
-
         [SerializeField]
         protected RectTransform[] Controls;
 
         [SerializeField]
         protected Camera PhoneCamera;
 
+        private void Awake()
+        {
+            var spacesHostView = FindObjectOfType<SpacesHostView>(true);
+            if (spacesHostView != null && PhoneCamera == null) PhoneCamera = spacesHostView.phoneCamera;
+        }
+
         protected bool CanEventFire(PointerEventData eventData)
         {
             foreach (var rect in Controls)
             {
-                if (RectTransformUtility.RectangleContainsScreenPoint(rect, eventData.position,PhoneCamera))
+                if (RectTransformUtility.RectangleContainsScreenPoint(rect, eventData.position, PhoneCamera))
                 {
                     return false;
                 }
@@ -35,6 +35,5 @@ namespace Reseul.Snapdragon.Spaces.Controllers
 
             return true;
         }
-
     }
 }

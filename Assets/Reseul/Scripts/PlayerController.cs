@@ -6,29 +6,46 @@ using Qualcomm.Snapdragon.Spaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
+namespace Reseul.Snapdragon.Spaces.Utilities
 {
     public class PlayerController : MonoBehaviour
     {
-        public Camera ARCamera;
-        public InputActionReference Button1;
-        public GameObject Character;
-        public Animator CharacterAnimator;
-        private Vector3 initialPos;
-        private bool isPressed;
-        public InputActionReference LeftStick;
-        public InputActionReference LeftStickDelta;
-        private Vector2 leftStickValue;
-
-        public float MoveSpeed;
-        public Camera PhoneCamera;
-
-        public float RespawnRange = 10f;
-        private Rigidbody rigidBody;
-
         [SerializeField]
         private readonly float stopThreshold = 0.005f;
 
+        [SerializeField]
+        private Camera ARCamera;
+
+        [SerializeField]
+        private InputActionReference Button1;
+
+        [SerializeField]
+        private GameObject Character;
+
+        [SerializeField]
+        private Animator CharacterAnimator;
+
+        [SerializeField]
+        private InputActionReference LeftStick;
+
+        [SerializeField]
+        private InputActionReference LeftStickDelta;
+
+        [SerializeField]
+        private float MoveSpeed;
+
+        [SerializeField]
+        private Camera PhoneCamera;
+
+        [SerializeField]
+        private float RespawnRange = 10f;
+
+        private Vector3 initialPos;
+        private bool isPressed;
+
+        private Vector2 leftStickValue;
+
+        private Rigidbody rigidBody;
         private bool useARCamera;
 
         public string DebugText => leftStickValue.ToString();

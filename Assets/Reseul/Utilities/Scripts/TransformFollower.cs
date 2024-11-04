@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-namespace Reseul.Snapdragon.Spaces.Samples.DualRenderFusionMRTK3
+namespace Reseul.Snapdragon.Spaces.Utilities
 {
     public class TransformFollower : MonoBehaviour
     {

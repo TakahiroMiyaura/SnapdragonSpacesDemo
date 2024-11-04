@@ -10,9 +10,11 @@ namespace Reseul.Snapdragon.Spaces.SpatialMappings
 {
     public class SpatialMeshingController : MonoBehaviour
     {
+        [SerializeField]
+        private Material spatialMeshMaterial;
+
         private ARMeshManager meshManager;
         private SpacesARMeshManagerConfig meshManagerConfig;
-        public Material SpatialMeshMaterial;
 
         public void Awake()
         {
@@ -54,14 +56,14 @@ namespace Reseul.Snapdragon.Spaces.SpatialMappings
 
         public void VisualizedMesh()
         {
-            var color = SpatialMeshMaterial.color;
-            SpatialMeshMaterial.color = new Color(color.r, color.g, color.b, 1f);
+            var color = spatialMeshMaterial.color;
+            spatialMeshMaterial.color = new Color(color.r, color.g, color.b, 1f);
         }
 
         public void HideMesh()
         {
-            var color = SpatialMeshMaterial.color;
-            SpatialMeshMaterial.color = new Color(color.r, color.g, color.b, 0f);
+            var color = spatialMeshMaterial.color;
+            spatialMeshMaterial.color = new Color(color.r, color.g, color.b, 0f);
         }
 
         public void ReleaseARMesh()

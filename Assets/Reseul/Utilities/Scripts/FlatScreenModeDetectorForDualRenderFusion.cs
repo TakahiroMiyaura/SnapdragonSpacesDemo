@@ -7,20 +7,20 @@ using MixedReality.Toolkit;
 using MixedReality.Toolkit.Input;
 using UnityEngine;
 
-namespace Assets.Reseul
+namespace Reseul.Snapdragon.Spaces.Utilities
 {
     internal class FlatScreenModeDetectorForDualRenderFusion : MonoBehaviour, IInteractionModeDetector
     {
-        protected ControllerLookup controllerLookup;
+        [SerializeField]
+        private List<GameObject> controllers;
 
         [SerializeField]
         private InteractionMode flatScreenInteractionMode;
 
         [SerializeField]
-        private List<GameObject> controllers;
-
-        [SerializeField]
         private bool forceModeDetected = false;
+
+        protected ControllerLookup controllerLookup;
 
 
         public InteractionMode ModeOnDetection => flatScreenInteractionMode;
@@ -33,7 +33,10 @@ namespace Assets.Reseul
 
         public bool IsModeDetected()
         {
-            return forceModeDetected || !controllerLookup.LeftHandController.currentControllerState.inputTrackingState.HasPositionAndRotation() && !controllerLookup.RightHandController.currentControllerState.inputTrackingState.HasPositionAndRotation();
+            return forceModeDetected ||
+                   (!controllerLookup.LeftHandController.currentControllerState.inputTrackingState
+                       .HasPositionAndRotation() && !controllerLookup.RightHandController.currentControllerState
+                       .inputTrackingState.HasPositionAndRotation());
         }
 
         protected void Awake()

@@ -6,10 +6,11 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
 {
     public class CameraFrameAccessController : MonoBehaviour
     {
+        [SerializeField]
+        private CameraFrameAccess cameraFrameAccessObject;
 
-        public CameraFrameAccess CameraFrameAccessObject;
-
-        public GameObject DisplayObject;
+        [SerializeField]
+        private GameObject displayObject;
 
         // Start is called before the first frame update
         void Start()
@@ -19,14 +20,14 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
 
         public void DisableCameraFrameAccess()
         {
-            CameraFrameAccessObject.enabled = false;
-            DisplayObject.SetActive(false);
+            cameraFrameAccessObject.enabled = false;
+            displayObject.SetActive(false);
         }
 
         public void EnableCameraFrameAccess()
         {
-            CameraFrameAccessObject.enabled = true;
-            DisplayObject.SetActive(true);
+            cameraFrameAccessObject.enabled = true;
+            displayObject.SetActive(true);
         }
     }
 }

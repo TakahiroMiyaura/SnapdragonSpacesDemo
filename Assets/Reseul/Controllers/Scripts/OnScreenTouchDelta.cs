@@ -8,18 +8,24 @@ using UnityEngine.InputSystem.Layouts;
 
 namespace Reseul.Snapdragon.Spaces.Controllers
 {
-    public class OnScreenTouchDelta : OnScreenTouchBase, IPointerDownHandler, IPointerUpHandler,IDragHandler
+    public class OnScreenTouchDelta : OnScreenTouchBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
-        private bool canEventFire;
-
         [InputControl(layout = "Vector2")]
         [SerializeField]
         private string touchScreenControlPath;
+
+        private bool canEventFire;
 
         protected override string controlPathInternal
         {
             get => touchScreenControlPath;
             set => touchScreenControlPath = value;
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            if (!canEventFire) return;
+            SendValueToControl(eventData.delta);
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -28,14 +34,8 @@ namespace Reseul.Snapdragon.Spaces.Controllers
             if (!canEventFire) return;
             SendValueToControl(eventData.delta);
         }
-        
-        public void OnPointerUp(PointerEventData eventData)
-        {
-            if (!canEventFire) return;
-            SendValueToControl(eventData.delta);
-        }
 
-        public void OnDrag(PointerEventData eventData)
+        public void OnPointerUp(PointerEventData eventData)
         {
             if (!canEventFire) return;
             SendValueToControl(eventData.delta);

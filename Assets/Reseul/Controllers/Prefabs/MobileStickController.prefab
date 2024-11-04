@@ -1250,7 +1250,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2739012828185474631
 CanvasRenderer:
@@ -1280,7 +1280,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  radius: 40
+  radius: 50
   thickness: 1
   wedges: 8
   calculateSmoothEdges: 1
@@ -1635,7 +1635,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2739012828915691659
 CanvasRenderer:
@@ -1665,7 +1665,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  radius: 40
+  radius: 50
   thickness: 1
   wedges: 8
   calculateSmoothEdges: 1
@@ -2033,8 +2033,8 @@ MonoBehaviour:
   CubeOnViewPort: {fileID: 3007126996089736774}
   debugCursor: {fileID: 3007126995949655790}
   touchScreen: {fileID: 9076939962891151095, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  touchScreenDelta: {fileID: 5295458349306598474, guid: 9505d2cc885e1e748bff895864481576, type: 3}
   touchScreen3D: {fileID: 6422271797409167676, guid: 9505d2cc885e1e748bff895864481576, type: 3}
+  touchScreenDelta: {fileID: 5295458349306598474, guid: 9505d2cc885e1e748bff895864481576, type: 3}
 --- !u!1 &3007126996120011305
 GameObject:
   m_ObjectHideFlags: 0
@@ -4289,7 +4289,6 @@ GameObject:
   - component: {fileID: 6649492321763307914}
   - component: {fileID: 2739012827608927767}
   - component: {fileID: 6649492321763307920}
-  - component: {fileID: 8573929271052022045}
   - component: {fileID: 6649492321763307925}
   - component: {fileID: 6649492321763307926}
   - component: {fileID: 6649492321763307927}
@@ -4370,28 +4369,8 @@ MonoBehaviour:
   - {fileID: 2739012828185474628}
   - {fileID: 2739012828834052097}
   PhoneCamera: {fileID: 0}
-  touchScreenControlPath: <MobileStickInputDevice>/TouchScreen3D
   targetRectTransform: {fileID: 3007126996466569738}
---- !u!114 &8573929271052022045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6649492321763307957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c28b4f4df4d27b439c6163dd708c605, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Controls:
-  - {fileID: 2739012828915691656}
-  - {fileID: 2739012828185474628}
-  - {fileID: 2739012828834052097}
-  PhoneCamera: {fileID: 0}
-  touchScreenControlPath: <MobileStickInputDevice>/TouchScreen3DOnCanvas
-  targetRectTransform: {fileID: 5308562122999054442}
-  distanceFromCanvas: 0
+  touchScreenControlPath: <MobileStickInputDevice>/TouchScreen3D
 --- !u!114 &6649492321763307925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4409,8 +4388,8 @@ MonoBehaviour:
   - {fileID: 2739012828185474628}
   - {fileID: 2739012828834052097}
   PhoneCamera: {fileID: 0}
-  touchScreenControlPath: <MobileStickInputDevice>/TouchScreenPosition
   cursor: {fileID: 2739012828391397664}
+  touchScreenControlPath: <MobileStickInputDevice>/TouchScreenPosition
 --- !u!114 &6649492321763307926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4817,7 +4796,6 @@ MonoBehaviour:
   rightStickPress: {fileID: -5570508621981910764, guid: 9505d2cc885e1e748bff895864481576, type: 3}
   touchScreen: {fileID: 9076939962891151095, guid: 9505d2cc885e1e748bff895864481576, type: 3}
   touchScreen3D: {fileID: 6422271797409167676, guid: 9505d2cc885e1e748bff895864481576, type: 3}
-  touchScreen3DOnCanvas: {fileID: -3212406422013564618, guid: 9505d2cc885e1e748bff895864481576, type: 3}
   touchScreenDelta: {fileID: 5295458349306598474, guid: 9505d2cc885e1e748bff895864481576, type: 3}
   touchScreenPress: {fileID: 2516005305327102569, guid: 9505d2cc885e1e748bff895864481576, type: 3}
   button1PressText: {fileID: 1461199871351959553}
@@ -4826,7 +4804,6 @@ MonoBehaviour:
   rightStickPressText: {fileID: 8440705760683994155}
   rightStickText: {fileID: 3002024144717521290}
   touch3DText: {fileID: 5832377882702860723}
-  touch3DOnCanvasText: {fileID: 0}
   touchDeltaText: {fileID: 6756660944662214758}
   touchScreenPressText: {fileID: 4177896394870569128}
   touchText: {fileID: 7394356549613794497}

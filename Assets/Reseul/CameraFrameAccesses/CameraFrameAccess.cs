@@ -1,13 +1,12 @@
-// Copyright (c) 2023 Takahiro Miyaura
+// Copyright (c) 2024 Takahiro Miyaura
 // Released under the MIT license
 // http://opensource.org/licenses/mit-license.php
 
 using System;
 using System.Runtime.InteropServices;
-using Reseul.Snapdragon.Spaces.Devices;
+using Reseul.Snapdragon.Spaces.Utilities;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.UI;
@@ -18,24 +17,32 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
 {
     public class CameraFrameAccess : MonoBehaviour
     {
+        [SerializeField]
+        private ARCameraManager cameraManager;
 
         [Header("Camera Feed")]
-        public RawImage CameraRawImage;
-
-        public bool RenderUsingYUVPlanes;
+        [SerializeField]
+        private RawImage cameraRawImage;
 
         [SerializeField]
-        private ARCameraManager _cameraManager;
-        private Texture2D _cameraTexture;
-        private bool _deviceSupported;
-        private bool _feedPaused;
-        private NativeArray<XRCameraConfiguration> _cameraConfigs;
+        private bool renderUsingYUVPlanes;
 
-        private XRCpuImage _lastCpuImage;
-        private Vector2 _maxTextureSize;
-        private float _defaultAspectRatio;
+        private NativeArray<XRCameraConfiguration> cameraConfigs;
+        private Texture2D cameraTexture;
+        private float defaultAspectRatio;
+        private bool deviceSupported;
+        private readonly bool feedPaused;
 
-        private byte[] _rgbBuffer;
+        private XRCpuImage lastCpuImage;
+        private Vector2 maxTextureSize;
+
+        private byte[] rgbBuffer;
+
+        public CameraFrameAccess(bool feedPaused, ARCameraManager cameraManager)
+        {
+            this.feedPaused = feedPaused;
+            this.cameraManager = cameraManager;
+        }
 
         public void Awake()
         {
@@ -45,10 +52,10 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
             }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
-            _deviceSupported = CheckDeviceSupported();
-            if (!_deviceSupported)
+            deviceSupported = CheckDeviceSupported();
+            if (!deviceSupported)
             {
                 OnDeviceNotSupported();
                 return;
@@ -59,65 +66,67 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
                 return;
             }
 
-            _deviceSupported = FindSupportedConfiguration();
-            if (!_deviceSupported)
+            deviceSupported = FindSupportedConfiguration();
+            if (!deviceSupported)
             {
                 OnDeviceNotSupported();
                 return;
             }
 
-            if (_cameraManager != null)
+            if (cameraManager != null)
             {
-                _cameraManager.frameReceived += OnFrameReceived;
+                cameraManager.frameReceived += OnFrameReceived;
             }
 
-            _maxTextureSize = CameraRawImage.rectTransform.sizeDelta;
-            _defaultAspectRatio = _maxTextureSize.x / _maxTextureSize.y;
+            maxTextureSize = cameraRawImage.rectTransform.sizeDelta;
+            defaultAspectRatio = maxTextureSize.x / maxTextureSize.y;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
-            if (_cameraManager != null)
+            if (cameraManager != null)
             {
-                _cameraManager.frameReceived -= OnFrameReceived;
+                cameraManager.frameReceived -= OnFrameReceived;
             }
-            _lastCpuImage.Dispose();
-            _cameraConfigs.Dispose();
+
+            lastCpuImage.Dispose();
+            cameraConfigs.Dispose();
         }
 
         // Start is called before the first frame update
         private void Start()
         {
-
         }
 
         private void OnFrameReceived(ARCameraFrameEventArgs args)
         {
-            if (_feedPaused)
+            if (feedPaused)
             {
                 return;
             }
 
-            if (!_cameraManager.TryAcquireLatestCpuImage(out _lastCpuImage))
+            if (!cameraManager.TryAcquireLatestCpuImage(out lastCpuImage))
             {
                 Debug.Log("Failed to acquire latest cpu image.");
                 return;
             }
 
-            UpdateCameraTexture(_lastCpuImage, RenderUsingYUVPlanes);
+            UpdateCameraTexture(lastCpuImage, renderUsingYUVPlanes);
         }
 
 
         private void ResizeCameraFeed(Vector2Int outputDimensions)
         {
             var outputAspectRatio = outputDimensions.x / (float)outputDimensions.y;
-            if (outputAspectRatio > _defaultAspectRatio)
+            if (outputAspectRatio > defaultAspectRatio)
             {
-                CameraRawImage.rectTransform.sizeDelta = new Vector2(_maxTextureSize.x, _maxTextureSize.x / outputAspectRatio);
+                cameraRawImage.rectTransform.sizeDelta =
+                    new Vector2(maxTextureSize.x, maxTextureSize.x / outputAspectRatio);
             }
             else
             {
-                CameraRawImage.rectTransform.sizeDelta = new Vector2(_maxTextureSize.y * outputAspectRatio, _maxTextureSize.y);
+                cameraRawImage.rectTransform.sizeDelta =
+                    new Vector2(maxTextureSize.y * outputAspectRatio, maxTextureSize.y);
             }
         }
 
@@ -128,13 +137,14 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
             var downsamplingFactor = Mathf.CeilToInt(image.width / 640);
             var outputDimensions = convertYuvManually ? image.dimensions : image.dimensions / downsamplingFactor;
 
-            if (_cameraTexture == null || _cameraTexture.width != outputDimensions.x || _cameraTexture.height != outputDimensions.y)
+            if (cameraTexture == null || cameraTexture.width != outputDimensions.x ||
+                cameraTexture.height != outputDimensions.y)
             {
-                _cameraTexture = new Texture2D(outputDimensions.x, outputDimensions.y, format, false);
+                cameraTexture = new Texture2D(outputDimensions.x, outputDimensions.y, format, false);
                 ResizeCameraFeed(outputDimensions);
             }
 
-            var rawTextureData = _cameraTexture.GetRawTextureData<byte>();
+            var rawTextureData = cameraTexture.GetRawTextureData<byte>();
             var rawTexturePtr = new IntPtr(rawTextureData.GetUnsafePtr());
 
             if (convertYuvManually)
@@ -166,131 +176,134 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
                 }
             }
 
-            _cameraTexture.Apply();
-            CameraRawImage.texture = _cameraTexture;
+            cameraTexture.Apply();
+            cameraRawImage.texture = cameraTexture;
         }
 
         private void ConvertYuvImageIntoBuffer(XRCpuImage image, IntPtr targetBuffer, TextureFormat format)
         {
             var bufferSize = image.height * image.width * (format == TextureFormat.RGB24 ? 3 : 4);
 
-            if (_rgbBuffer == null || _rgbBuffer.Length != bufferSize)
+            if (rgbBuffer == null || rgbBuffer.Length != bufferSize)
             {
-                _rgbBuffer = new byte[bufferSize];
+                rgbBuffer = new byte[bufferSize];
             }
 
             var yPlane = image.GetPlane(0);
             var uvPlane = image.GetPlane(1);
 
-            for (int row = 0; row < image.height; row++)
+            for (var row = 0; row < image.height; row++)
             {
-                for (int col = 0; col < image.width; col++)
+                for (var col = 0; col < image.width; col++)
                 {
                     var y = yPlane.data[row * yPlane.rowStride + col * yPlane.pixelStride];
 
-                    var offset = (row / 2) * uvPlane.rowStride + (col / 2) * uvPlane.pixelStride;
-                    sbyte u = (sbyte)(uvPlane.data[offset] - 128);
-                    sbyte v = (sbyte)(uvPlane.data[offset + 1] - 128);
+                    var offset = row / 2 * uvPlane.rowStride + col / 2 * uvPlane.pixelStride;
+                    var u = (sbyte)(uvPlane.data[offset] - 128);
+                    var v = (sbyte)(uvPlane.data[offset + 1] - 128);
 
                     // YUV NV12 to RGB conversion
                     // https://en.wikipedia.org/wiki/YUV#Y%E2%80%B2UV420sp_(NV21)_to_RGB_conversion_(Android)
-                    var r = y + (1.370705f * v);
-                    var g = y - (0.698001f * v) - (0.337633f * u);
-                    var b = y + (1.732446f * u);
+                    var r = y + 1.370705f * v;
+                    var g = y - 0.698001f * v - 0.337633f * u;
+                    var b = y + 1.732446f * u;
 
                     r = r > 255 ? 255 : r < 0 ? 0 : r;
                     g = g > 255 ? 255 : g < 0 ? 0 : g;
                     b = b > 255 ? 255 : b < 0 ? 0 : b;
 
-                    int pixelIndex = ((image.height - row - 1) * image.width) + col;
+                    var pixelIndex = (image.height - row - 1) * image.width + col;
 
                     switch (format)
                     {
                         case TextureFormat.RGB24:
-                            _rgbBuffer[3 * pixelIndex] = (byte)r;
-                            _rgbBuffer[(3 * pixelIndex) + 1] = (byte)g;
-                            _rgbBuffer[(3 * pixelIndex) + 2] = (byte)b;
+                            rgbBuffer[3 * pixelIndex] = (byte)r;
+                            rgbBuffer[3 * pixelIndex + 1] = (byte)g;
+                            rgbBuffer[3 * pixelIndex + 2] = (byte)b;
                             break;
                         case TextureFormat.RGBA32:
-                            _rgbBuffer[4 * pixelIndex] = (byte)r;
-                            _rgbBuffer[(4 * pixelIndex) + 1] = (byte)g;
-                            _rgbBuffer[(4 * pixelIndex) + 2] = (byte)b;
-                            _rgbBuffer[(4 * pixelIndex) + 3] = 255;
+                            rgbBuffer[4 * pixelIndex] = (byte)r;
+                            rgbBuffer[4 * pixelIndex + 1] = (byte)g;
+                            rgbBuffer[4 * pixelIndex + 2] = (byte)b;
+                            rgbBuffer[4 * pixelIndex + 3] = 255;
                             break;
                         case TextureFormat.BGRA32:
-                            _rgbBuffer[4 * pixelIndex] = (byte)b;
-                            _rgbBuffer[(4 * pixelIndex) + 1] = (byte)g;
-                            _rgbBuffer[(4 * pixelIndex) + 2] = (byte)r;
-                            _rgbBuffer[(4 * pixelIndex) + 3] = 255;
+                            rgbBuffer[4 * pixelIndex] = (byte)b;
+                            rgbBuffer[4 * pixelIndex + 1] = (byte)g;
+                            rgbBuffer[4 * pixelIndex + 2] = (byte)r;
+                            rgbBuffer[4 * pixelIndex + 3] = 255;
                             break;
                     }
                 }
             }
-            Marshal.Copy(_rgbBuffer, 0, targetBuffer, bufferSize);
+
+            Marshal.Copy(rgbBuffer, 0, targetBuffer, bufferSize);
         }
+
         private void ConvertYuyvImageIntoBuffer(XRCpuImage image, IntPtr targetBuffer, TextureFormat format)
         {
             var bufferSize = image.height * image.width * (format == TextureFormat.RGB24 ? 3 : 4);
 
-            if (_rgbBuffer == null || _rgbBuffer.Length != bufferSize)
+            if (rgbBuffer == null || rgbBuffer.Length != bufferSize)
             {
-                _rgbBuffer = new byte[bufferSize];
+                rgbBuffer = new byte[bufferSize];
             }
 
             var yuyvPlane = image.GetPlane(0);
 
-            for (int row = 0; row < image.height; row++)
+            for (var row = 0; row < image.height; row++)
             {
-                for (int col = 0; col < image.width; col++)
+                for (var col = 0; col < image.width; col++)
                 {
                     var y = yuyvPlane.data[row * yuyvPlane.rowStride + col * 2];
 
                     // Calculate offset of the YUYV byte group, select U (2nd byte) and V (4th byte)
-                    var offset = row * yuyvPlane.rowStride + (col / 2) * yuyvPlane.pixelStride;
-                    sbyte u = (sbyte)(yuyvPlane.data[offset + 1] - 128);
-                    sbyte v = (sbyte)(yuyvPlane.data[offset + 3] - 128);
+                    var offset = row * yuyvPlane.rowStride + col / 2 * yuyvPlane.pixelStride;
+                    var u = (sbyte)(yuyvPlane.data[offset + 1] - 128);
+                    var v = (sbyte)(yuyvPlane.data[offset + 3] - 128);
 
                     // YUV NV12 to RGB conversion
                     // https://en.wikipedia.org/wiki/YUV#Y%E2%80%B2UV420sp_(NV21)_to_RGB_conversion_(Android)
-                    var r = y + (1.370705f * v);
-                    var g = y - (0.698001f * v) - (0.337633f * u);
-                    var b = y + (1.732446f * u);
+                    var r = y + 1.370705f * v;
+                    var g = y - 0.698001f * v - 0.337633f * u;
+                    var b = y + 1.732446f * u;
 
                     r = r > 255 ? 255 : r < 0 ? 0 : r;
                     g = g > 255 ? 255 : g < 0 ? 0 : g;
                     b = b > 255 ? 255 : b < 0 ? 0 : b;
 
-                    int pixelIndex = ((image.height - row - 1) * image.width) + col;
+                    var pixelIndex = (image.height - row - 1) * image.width + col;
 
                     switch (format)
                     {
                         case TextureFormat.RGB24:
-                            _rgbBuffer[3 * pixelIndex] = (byte)r;
-                            _rgbBuffer[(3 * pixelIndex) + 1] = (byte)g;
-                            _rgbBuffer[(3 * pixelIndex) + 2] = (byte)b;
+                            rgbBuffer[3 * pixelIndex] = (byte)r;
+                            rgbBuffer[3 * pixelIndex + 1] = (byte)g;
+                            rgbBuffer[3 * pixelIndex + 2] = (byte)b;
                             break;
                         case TextureFormat.RGBA32:
-                            _rgbBuffer[4 * pixelIndex] = (byte)r;
-                            _rgbBuffer[(4 * pixelIndex) + 1] = (byte)g;
-                            _rgbBuffer[(4 * pixelIndex) + 2] = (byte)b;
-                            _rgbBuffer[(4 * pixelIndex) + 3] = 255;
+                            rgbBuffer[4 * pixelIndex] = (byte)r;
+                            rgbBuffer[4 * pixelIndex + 1] = (byte)g;
+                            rgbBuffer[4 * pixelIndex + 2] = (byte)b;
+                            rgbBuffer[4 * pixelIndex + 3] = 255;
                             break;
                         case TextureFormat.BGRA32:
-                            _rgbBuffer[4 * pixelIndex] = (byte)b;
-                            _rgbBuffer[(4 * pixelIndex) + 1] = (byte)g;
-                            _rgbBuffer[(4 * pixelIndex) + 2] = (byte)r;
-                            _rgbBuffer[(4 * pixelIndex) + 3] = 255;
+                            rgbBuffer[4 * pixelIndex] = (byte)b;
+                            rgbBuffer[4 * pixelIndex + 1] = (byte)g;
+                            rgbBuffer[4 * pixelIndex + 2] = (byte)r;
+                            rgbBuffer[4 * pixelIndex + 3] = 255;
                             break;
                     }
                 }
             }
-            Marshal.Copy(_rgbBuffer, 0, targetBuffer, bufferSize);
+
+            Marshal.Copy(rgbBuffer, 0, targetBuffer, bufferSize);
         }
 
         private bool FindSupportedConfiguration()
         {
-            _cameraConfigs = _cameraManager.GetConfigurations(Allocator.Persistent);
-            return _cameraConfigs.Length > 0;
+            cameraConfigs = cameraManager.GetConfigurations(Allocator.Persistent);
+            return cameraConfigs.Length > 0;
         }
 
         private bool CheckDeviceSupported()
@@ -307,7 +320,7 @@ namespace Reseul.Snapdragon.Spaces.CameraFrameAccesses
 
         private bool CheckSubsystem()
         {
-            return _cameraManager.subsystem?.running ?? false;
+            return cameraManager.subsystem?.running ?? false;
         }
 
         // Update is called once per frame

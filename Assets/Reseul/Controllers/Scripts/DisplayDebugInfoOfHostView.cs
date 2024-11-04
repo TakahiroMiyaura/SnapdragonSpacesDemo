@@ -2,7 +2,6 @@
 // Released under the MIT license
 // http://opensource.org/licenses/mit-license.php
 
-using Qualcomm.Snapdragon.Spaces;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,19 +14,21 @@ namespace Reseul.Snapdragon.Spaces.Controllers
         private InputActionReference hostViewPosition;
 
         [SerializeField]
-        private InputActionReference hostViewRotation;
-
-        [SerializeField]
         private TextMeshProUGUI hostViewPositionText = null;
 
         [SerializeField]
+        private InputActionReference hostViewRotation;
+
+        [SerializeField]
         private TextMeshProUGUI hostViewRotationText = null;
-        void OnEnable()
+
+        private void OnEnable()
         {
             hostViewPosition.action.performed += HostViewPositionPerformed;
             hostViewRotation.action.performed += HostViewRotationPerformed;
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             hostViewPosition.action.performed -= HostViewPositionPerformed;
             hostViewRotation.action.performed -= HostViewRotationPerformed;
