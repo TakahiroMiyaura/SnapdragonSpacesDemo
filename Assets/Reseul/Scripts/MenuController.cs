@@ -14,9 +14,6 @@ namespace Reseul.Snapdragon.Spaces.Utilities
         [SerializeField]
         private DialogPool dialogPool;
 
-        [SerializeField]
-        private DynamicOpenXRLoader loader;
-
         // Start is called before the first frame update
         private void Start()
         {
