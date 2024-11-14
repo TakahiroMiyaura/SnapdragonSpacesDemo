@@ -3,7 +3,6 @@
 // http://opensource.org/licenses/mit-license.php
 
 using MixedReality.Toolkit.UX;
-using Qualcomm.Snapdragon.Spaces;
 using UnityEditor;
 using UnityEngine;
 
