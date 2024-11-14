@@ -275,13 +275,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.vanbassum.wakatime": {
-      "version": "https://github.com/vanBassum/Wakatime.Unity.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "66217422184ea3caa5e31320a58b83e6a1e08898"
-    },
     "org.mixedrealitytoolkit.core": {
       "version": "file:MixedReality/org.mixedrealitytoolkit.core-3.2.1.tgz",
       "depth": 0,
