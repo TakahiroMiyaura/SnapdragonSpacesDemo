@@ -7,7 +7,7 @@
       "dependencies": {}
     },
     "com.qualcomm.snapdragon.spaces": {
-      "version": "file:SnapdragonSpaces/com.qualcomm.snapdragon.spaces-1.0.0.tgz",
+      "version": "file:SnapdragonSpaces/com.qualcomm.snapdragon.spaces-1.0.1.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {

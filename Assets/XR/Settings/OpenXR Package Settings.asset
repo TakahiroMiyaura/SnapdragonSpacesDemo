@@ -176,7 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 0
   nameUi: Passthrough Layer (Experimental)
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.passthroughlayer
   openxrExtensionStrings: XR_FB_passthrough XR_FB_composition_layer_alpha_blend
   company: Qualcomm
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 0
   nameUi: Image Tracking
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.imagetracking
   openxrExtensionStrings: XR_QCOM_image_tracking XR_QCOM_tracking_optimization_settings
   company: Qualcomm
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 1
   nameUi: Spatial Meshing
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.sceneunderstanding
   openxrExtensionStrings: XR_MSFT_scene_understanding
   company: Qualcomm
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 0
   nameUi: Image Tracking
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.imagetracking
   openxrExtensionStrings: XR_QCOM_image_tracking XR_QCOM_tracking_optimization_settings
   company: Qualcomm
@@ -544,7 +544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 0
   nameUi: QR Code Tracking
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.qrcodetracking
   openxrExtensionStrings: XR_QCOMX_marker_tracking
   company: Qualcomm
@@ -604,7 +604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 0
   nameUi: Base Runtime
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.base
   openxrExtensionStrings: XR_QCOM_component_versioning XR_FB_display_refresh_rate
     XR_KHR_android_thread_settings XR_EXT_performance_settings
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 0
   nameUi: Plane Detection
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.planedetection
   openxrExtensionStrings: XR_MSFT_scene_understanding
   company: Qualcomm
@@ -773,7 +773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 1
   nameUi: Camera Access
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.cameraaccess
   openxrExtensionStrings: XR_QCOMX_camera_frame_access XR_KHR_convert_timespec_time
   company: Qualcomm
@@ -837,7 +837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 1
   nameUi: Base Runtime
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.base
   openxrExtensionStrings: XR_QCOM_component_versioning XR_FB_display_refresh_rate
     XR_KHR_android_thread_settings XR_EXT_performance_settings
@@ -995,7 +995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 0
   nameUi: Composition Layers (Experimental)
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.compositionlayers
   openxrExtensionStrings: XR_KHR_composition_layer_cylinder XR_KHR_composition_layer_equirect2
     XR_FB_composition_layer_alpha_blend XR_KHR_android_surface_swapchain
@@ -1133,7 +1133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 0
   nameUi: Foveated Rendering
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.foveatedrendering
   openxrExtensionStrings: XR_FB_swapchain_update_state XR_FB_foveation XR_FB_foveation_configuration
     XR_FB_foveation_vulkan
@@ -1387,7 +1387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 1
   nameUi: Microsoft Mixed Reality Motion Controller Profile
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.unity.openxr.feature.input.microsoftmotioncontroller
   openxrExtensionStrings: 
   company: Qualcomm
@@ -1562,7 +1562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 1
   nameUi: Dual Render Fusion
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.fusion
   openxrExtensionStrings: XR_UNITY_android_present
   company: Qualcomm
@@ -1583,7 +1583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enabled: 0
   nameUi: Spatial Anchors
-  version: 1.0.0
+  version: 1.0.1
   featureIdInternal: com.qualcomm.snapdragon.spaces.spatialanchors
   openxrExtensionStrings: XR_MSFT_spatial_anchor XR_MSFT_spatial_anchor_persistence
     XR_QCOM_spatial_anchor_persistence_extent
