@@ -22,6 +22,7 @@ A stick controller displayed on a smartphone can be used to control a character 
     - Dynamic OpenXR Loader
 - Addtional Libraries
     - [Mixed Reality Toolkit 3(MRTK3)](https://github.com/MixedRealityToolkit/MixedRealityToolkit-Unity)
+    - [MRTK Graphics Tools](https://github.com/microsoft/MixedReality-GraphicsTools-Unity)
 
 ## Develop Environments
 
@@ -34,6 +35,7 @@ A stick controller displayed on a smartphone can be used to control a character 
    - org.mixedrealitytoolkit.standardassets: 3.2.0
    - org.mixedrealitytoolkit.uxcomponents: 3.3.0
    - org.mixedrealitytoolkit.uxcore: 3.2.0
+- MRTK Graphics Tools 0.5.12
 
 ## Support Devices
 
@@ -44,10 +46,21 @@ A stick controller displayed on a smartphone can be used to control a character 
 
 1. Download SnapDragon Spaces SDK from [Snapdragon Spaces Developer Portal](https://spaces.qualcomm.com/developer/)
 1. Copy com.qualcomm.snapdragon.spaces-1.0.1.tgz to \Unity\DualRenderFusionMRTK3\Packages\SnapdragonSpaces
+1. Set up MRTK3 to this Unity project using [Mixed Reality Feature Tool](https://learn.microsoft.com/ja-jp/windows/mixed-reality/develop/unity/welcome-to-mr-feature-tool?wt.mc_id=WDIT-MVP-5003104)[^1].
+    - Required Components:
+        - MRTK Graphics Tools
+        - MRTK Core Definitions
+        - MRTK Input
+        - MRTK Spatial Mnipulation
+        - MRTK Standard Assets
+        - MRTK UX Components
+        - MRTK UX Core Scripts
 1. Open Unity Project
 1. Set Project KeyStore
 1. Build and create APK
 1. Install APK in Snapdragon Spaces Devices
+
+[^1]: See also [MRTK3 Setup Guide](https://docs.spaces.qualcomm.com/unity/samples/preview/mrtk3-setup-guide) 
 
 ## How to use this app.
 
