@@ -55,8 +55,11 @@ A stick controller displayed on a smartphone can be used to control a character 
         - MRTK Standard Assets
         - MRTK UX Components
         - MRTK UX Core Scripts
-1. Open Unity Project
-1. Set Project KeyStore
+1. Open Unity Project and setting
+    1. Switch Platform to Android
+    1. Open Scene [Reseul\Scenes\SampleScene]
+    1. Import TextMeshPro Essential Resources
+    1. Open [Project Settings\Player Settings\Publishing Settings] and set Project KeyStore
 1. Build and create APK
 1. Install APK in Snapdragon Spaces Devices
 
