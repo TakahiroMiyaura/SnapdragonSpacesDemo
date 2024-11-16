@@ -12,17 +12,18 @@ A stick controller displayed on a smartphone can be used to control a character 
     - Virtual controller for character manipulation
     - Display of the image being viewed on the AR glasses side
     - Various debugging information
-
+- Supported Interactions
+    - Hand Tracking(of MRTK3 feature)
+    - Touch Screen interface
 - Snapdragon Spaces features used primarily
     - Dual Render Fusion
     - Spatial Meshing
     - Camera Frame Access
     - Dynamic OpenXR Loader
-
 - Addtional Libraries
     - [Mixed Reality Toolkit 3(MRTK3)](https://github.com/MixedRealityToolkit/MixedRealityToolkit-Unity)
 
-## Develop Environment
+## Develop Environments
 
 - Unity 2023.3.36f1
 - Snapdragon Spaces SDk V1.0.1
@@ -38,6 +39,13 @@ A stick controller displayed on a smartphone can be used to control a character 
 
 - Lenovo ThinkReality A3
 - QONOQ MiRZA
+
+## Biuld & Install
+
+1. Open Unity Project
+1. Set Project KeyStore
+1. Build and Create APK
+1. Install APK
 
 ## How to use this app.
 
