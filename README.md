@@ -60,7 +60,7 @@ A stick controller displayed on a smartphone can be used to control a character 
 1. Build and create APK
 1. Install APK in Snapdragon Spaces Devices
 
-[^1]: See also [MRTK3 Setup Guide](https://docs.spaces.qualcomm.com/unity/samples/preview/mrtk3-setup-guide) 
+[^1]: See also [MRTK3 Setup Guide(in Snapdragon Spaces Platform web sites)](https://docs.spaces.qualcomm.com/unity/samples/preview/mrtk3-setup-guide) 
 
 ## How to use this app.
 
