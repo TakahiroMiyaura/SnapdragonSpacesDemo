@@ -42,10 +42,12 @@ A stick controller displayed on a smartphone can be used to control a character 
 
 ## Biuld & Install
 
+1. Download SnapDragon Spaces SDK from [Snapdragon Spaces Developer Portal](https://spaces.qualcomm.com/developer/)
+1. Copy com.qualcomm.snapdragon.spaces-1.0.1.tgz to \Unity\DualRenderFusionMRTK3\Packages\SnapdragonSpaces
 1. Open Unity Project
 1. Set Project KeyStore
-1. Build and Create APK
-1. Install APK
+1. Build and create APK
+1. Install APK in Snapdragon Spaces Devices
 
 ## How to use this app.
 
