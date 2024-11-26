@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.microsoft.mrtk.graphicstools.unity": {
-      "version": "file:MixedReality/com.microsoft.mrtk.graphicstools.unity-0.5.12.tgz",
+      "version": "file:MixedReality/com.microsoft.mrtk.graphicstools.unity-0.7.1.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {}
@@ -276,7 +276,7 @@
       "url": "https://packages.unity.com"
     },
     "org.mixedrealitytoolkit.core": {
-      "version": "file:MixedReality/org.mixedrealitytoolkit.core-3.2.1.tgz",
+      "version": "file:MixedReality/org.mixedrealitytoolkit.core-3.2.2.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
@@ -286,7 +286,7 @@
       }
     },
     "org.mixedrealitytoolkit.input": {
-      "version": "file:MixedReality/org.mixedrealitytoolkit.input-3.2.1.tgz",
+      "version": "file:MixedReality/org.mixedrealitytoolkit.input-3.2.2.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
@@ -300,7 +300,7 @@
       }
     },
     "org.mixedrealitytoolkit.spatialmanipulation": {
-      "version": "file:MixedReality/org.mixedrealitytoolkit.spatialmanipulation-3.3.0.tgz",
+      "version": "file:MixedReality/org.mixedrealitytoolkit.spatialmanipulation-3.3.1.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
@@ -331,7 +331,7 @@
       }
     },
     "org.mixedrealitytoolkit.uxcore": {
-      "version": "file:MixedReality/org.mixedrealitytoolkit.uxcore-3.2.0.tgz",
+      "version": "file:MixedReality/org.mixedrealitytoolkit.uxcore-3.2.2.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
