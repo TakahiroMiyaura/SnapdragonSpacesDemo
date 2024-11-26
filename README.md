@@ -29,12 +29,13 @@ A stick controller displayed on a smartphone can be used to control a character 
 - Unity 2023.3.36f1
 - Snapdragon Spaces SDk V1.0.1
 - Mixed Reality Toolkit 3
-   - org.mixedrealitytoolkit.core: 3.2.1
-   - org.mixedrealitytoolkit.input: 3.2.1
-   - org.mixedrealitytoolkit.spatialmanipulation: 3.3.0
+   - org.mixedrealitytoolkit.core: 3.2.2
+   - org.mixedrealitytoolkit.input: 3.2.2
+   - org.mixedrealitytoolkit.spatialmanipulation: 3.3.1
    - org.mixedrealitytoolkit.standardassets: 3.2.0
    - org.mixedrealitytoolkit.uxcomponents: 3.3.0
-   - org.mixedrealitytoolkit.uxcore: 3.2.0
+   - org.mixedrealitytoolkit.uxcore: 3.2.2
+
 - MRTK Graphics Tools 0.5.12
 
 ## Support Devices
