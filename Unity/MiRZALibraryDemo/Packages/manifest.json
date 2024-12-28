@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.nttqonoq.devices.android.mirzalibrary": "file:MiRZA/mirza_library.tgz",
     "com.qualcomm.snapdragon.spaces": "file:SnapdragonSpaces/com.qualcomm.snapdragon.spaces-1.0.1.tgz",
     "com.unity.collab-proxy": "2.6.0",
     "com.unity.feature.development": "1.0.1",
