@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.microsoft.mrtk.graphicstools.unity": "0.8.0",
     "com.nttqonoq.devices.android.mirzalibrary": "file:MiRZA/mirza_library.tgz",
     "com.qualcomm.snapdragon.spaces": "file:SnapdragonSpaces/com.qualcomm.snapdragon.spaces-1.0.1.tgz",
     "com.unity.collab-proxy": "2.6.0",
@@ -9,6 +10,13 @@
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.9.4",
     "com.unity.xr.openxr": "1.10.0",
+    "org.mixedrealitytoolkit.core": "3.2.2",
+    "org.mixedrealitytoolkit.extendedassets": "3.0.3",
+    "org.mixedrealitytoolkit.input": "3.2.2",
+    "org.mixedrealitytoolkit.spatialmanipulation": "3.3.1",
+    "org.mixedrealitytoolkit.standardassets": "3.2.0",
+    "org.mixedrealitytoolkit.uxcomponents": "3.3.0",
+    "org.mixedrealitytoolkit.uxcore": "3.2.2",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
