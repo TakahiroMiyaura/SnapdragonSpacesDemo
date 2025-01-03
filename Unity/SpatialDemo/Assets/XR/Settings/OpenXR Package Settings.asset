@@ -844,11 +844,11 @@ MonoBehaviour:
   company: Qualcomm
   priority: 0
   required: 1
-  LaunchAppOnViewer: 1
+  LaunchAppOnViewer: 0
   PreventSleepMode: 1
   ShowSplashScreenOnHost: 0
   ShowLaunchMessageOnHost: 0
-  LaunchControllerOnHost: 1
+  LaunchControllerOnHost: 0
   UseCustomController: 0
   ExportHeadless: 0
   AlternateStartActivity: 
@@ -1568,7 +1568,7 @@ MonoBehaviour:
   company: Qualcomm
   priority: 0
   required: 1
-  ValidateOpenScene: 1
+  ValidateOpenScene: 0
 --- !u!114 &9154960528375550742
 MonoBehaviour:
   m_ObjectHideFlags: 0
