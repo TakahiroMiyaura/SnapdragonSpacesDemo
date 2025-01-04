@@ -1,5 +1,5 @@
 # How To Use
-[README.md](README.md)
+[README.md](/README.md)
 
 ## Basic Operations
 

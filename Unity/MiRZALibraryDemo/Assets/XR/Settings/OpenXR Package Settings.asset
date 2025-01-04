@@ -691,12 +691,12 @@ MonoBehaviour:
   m_Name: HandTracking Metro
   m_EditorClassIdentifier: 
   m_enabled: 0
-  nameUi: 
-  version: 
-  featureIdInternal: 
-  openxrExtensionStrings: 
-  company: 
-  priority: 0
+  nameUi: Hand Tracking Subsystem
+  version: 0.0.1
+  featureIdInternal: com.unity.openxr.feature.input.handtracking
+  openxrExtensionStrings: XR_EXT_hand_tracking
+  company: Unity
+  priority: -100
   required: 0
 --- !u!114 &-2433654975016646741
 MonoBehaviour:
@@ -736,6 +736,7 @@ MonoBehaviour:
   - {fileID: -5605640609986286881}
   - {fileID: -993886962246310952}
   - {fileID: 712552131719983469}
+  - {fileID: -2743225021437235273}
   - {fileID: -5494760805469845316}
   - {fileID: 2270667311521937018}
   - {fileID: 8667322478505357341}
