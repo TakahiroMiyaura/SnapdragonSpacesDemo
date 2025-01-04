@@ -37,7 +37,7 @@ A stick controller displayed on a smartphone can be used to control a character 
    - org.mixedrealitytoolkit.standardassets: 3.2.0
    - org.mixedrealitytoolkit.uxcomponents: 3.3.0
    - org.mixedrealitytoolkit.uxcore: 3.2.2
-- MRTK Graphics Tools 0.8.0
+- MRTK Graphics Tools 0.7.1
 
 ### Support Devices
 

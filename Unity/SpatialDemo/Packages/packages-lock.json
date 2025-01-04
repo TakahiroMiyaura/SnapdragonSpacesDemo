@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.microsoft.mrtk.graphicstools.unity": {
-      "version": "0.8.0",
+      "version": "0.7.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
