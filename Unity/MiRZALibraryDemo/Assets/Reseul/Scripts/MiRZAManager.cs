@@ -107,4 +107,17 @@ public class MiRZAManager : MonoBehaviour
     {
         throw new NotImplementedException();
     }
+
+    public async void GetMiRZAStatus()
+    {
+        mirzaPlugin.GetBatteryLevelAsync(x => PostMessage(batteryLevelObj, x.Data.ToString()));
+        mirzaPlugin.GetChargeStatusAsync(x => PostMessage(chargeStatusObj, x.Data.ToString()));
+        mirzaPlugin.GetGlassStatusAsync(x => PostMessage(glassStatusObj, x.Data.ToString()));
+        mirzaPlugin.GetSpacesModeStatusAsync(x => PostMessage(spacesModeStatusObj, x.Data.ToString()));
+    }
+
+    private void PostMessage(TextMeshProUGUI targetText, string text)
+    {
+        mainThreadContext.Post(_ => { targetText.text = text; }, null);
+    }
 }
