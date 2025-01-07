@@ -5,6 +5,7 @@
 using System;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using com.nttqonoq.devices.android.mirzalibrary;
 using MixedReality.Toolkit.UX;
 using TMPro;
@@ -51,6 +52,12 @@ public class MiRZAManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI spacesModeStatusObj;
+
+    [SerializeField]
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private ToggleCollection audioButtons;
 
     private bool enableOnBatteryLevelChanged = true;
     private bool enableOnDisplayStatusChanged = true;
@@ -130,7 +137,14 @@ public class MiRZAManager : MonoBehaviour
 #endif
         mirzaPlugin?.SetLogEnable(true);
         pluginVersionObj.text = mirzaPlugin?.GetVersion();
+
     }
+
+    public TextMeshProUGUI text;
+    private MicMode wearingMicMode;
+    private MicMode frontMicMode;
+    private MixMode mixMode;
+    private string deviceName;
 
     public void OnMonitoringStart()
     {
@@ -227,6 +241,7 @@ public class MiRZAManager : MonoBehaviour
 
     private void OnDisplayStatusChanged(DisplayStatus obj)
     {
+
         PostMessage(displayStatusChangedObj, $"{Enum.GetName(typeof(DisplayStatus), obj)}");
     }
 
@@ -248,5 +263,94 @@ public class MiRZAManager : MonoBehaviour
     private void PostMessage(TextMeshProUGUI targetText, string text)
     {
         mainThreadContext.Post(_ => { targetText.text = text; }, null);
+    }
+
+    public void OnMicMode1(int index)
+    {
+        wearingMicMode = (MicMode)index;
+    }
+
+    public void OnMicMode2(int index)
+    {
+        frontMicMode = (MicMode)index;
+    }
+
+    public void StartRec()
+    {
+        deviceName = Microphone.devices[0];
+        if (Microphone.IsRecording(deviceName)) return;
+        var clip = Microphone.Start(deviceName, false, 30, 44100);
+        mainThreadContext.Post(_ => { audioSource.clip = clip; }, null);
+        Task.Delay(new TimeSpan(0,0,0,31)).ContinueWith(_ =>
+        {
+            mainThreadContext.Post(__ =>
+            {
+                audioButtons.CurrentIndex = 1;
+            }, null);
+        });
+
+    }
+    public void StopRecOrPlay()
+    {
+        if(Microphone.IsRecording(deviceName))
+            Microphone.End(deviceName);
+        if(audioSource.isPlaying)
+            audioSource.Stop();
+    }
+
+    public void PlayOneShot()
+    {
+        StopRecOrPlay();
+        audioSource.PlayOneShot(audioSource.clip);
+        Task.Delay(new TimeSpan(0, 0, 0, 31)).ContinueWith(_ =>
+        {
+            mainThreadContext.Post(__ =>
+            {
+                audioButtons.CurrentIndex = 1;
+            }, null);
+        });
+
+    }
+
+    public void SelectChanged(int index)
+    {
+
+        switch (index)
+        {
+            case 0:
+                StartRec();
+                break;
+            case 1:
+                StopRecOrPlay();
+                break;
+            case 2:
+                PlayOneShot();
+                break;
+        }
+
+    }
+
+    public void SetMixMode(TextMeshProUGUI text)
+    {
+        mixMode = MixMode.On;
+        if (wearingMicMode == MicMode.Off || frontMicMode == MicMode.Off)
+        {
+            mixMode = MixMode.Off;
+        }
+
+        text.text = Enum.GetName(typeof(MixMode),mixMode);
+
+        mirzaPlugin?.SwitchMicrophoneAsync(wearingMicMode, frontMicMode, mixMode, x =>
+        {
+            mainThreadContext.Post(_ =>
+            {
+                var dialog = dialogPool.Get();
+                dialog.SetHeader("Information");
+                dialog.SetBody($"Switch Microphone Mode.\n WearMicMode:{x.Data.WearingMicMode}\n FrontMicMode:{x.Data.FrontMicMode}\n MixMode:{x.Data.MixMode}");
+                dialog.SetPositive("close");
+                dialog.ShowAsync();
+            }, null);
+
+        });
     }
 }
