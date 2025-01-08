@@ -10,10 +10,24 @@ using com.nttqonoq.devices.android.mirzalibrary;
 using MixedReality.Toolkit.UX;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using TouchType = com.nttqonoq.devices.android.mirzalibrary.TouchType;
+
+public class GlassTouchGestureStatusChangedEvent : UnityEvent<GlassTouchGestureStatus>
+{
+}
 
 public class MiRZAManager : MonoBehaviour
 {
+    private static object lockObject = new();
+    private static MiRZAManager selfInstance;
+
+    [SerializeField]
+    private ToggleCollection audioButtons;
+
+    [SerializeField]
+    private AudioSource audioSource;
+
     [SerializeField]
     private TextMeshProUGUI batteryLevelChangedObj;
 
@@ -53,11 +67,7 @@ public class MiRZAManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI spacesModeStatusObj;
 
-    [SerializeField]
-    private AudioSource audioSource;
-
-    [SerializeField]
-    private ToggleCollection audioButtons;
+    private string deviceName;
 
     private bool enableOnBatteryLevelChanged = true;
     private bool enableOnDisplayStatusChanged = true;
@@ -66,12 +76,36 @@ public class MiRZAManager : MonoBehaviour
     private bool enableOnPowerOffChanged = true;
     private bool enableOnServiceStateChanged = true;
     private bool enableOnSpacesModeStatusChanged = true;
+    private MicMode frontMicMode;
 
 
     private SynchronizationContext mainThreadContext;
     private MirzaPlugin mirzaPlugin;
+    private MixMode mixMode;
+
+    public GlassTouchGestureStatusChangedEvent OnGlassTouchGestureStatusChanged = new GlassTouchGestureStatusChangedEvent();
     private StringBuilder sb1 = new();
     private StringBuilder sb2 = new();
+
+    private MicMode wearingMicMode;
+
+    public static MiRZAManager Instance
+    {
+        get
+        {
+            lock (lockObject)
+            {
+                if (selfInstance == null)
+                {
+                    selfInstance = FindObjectOfType<MiRZAManager>();
+                }
+            }
+
+            return selfInstance;
+        }
+    }
+
+    public GlassTouchGestureStatus GestureStatus { get; private set; }
 
     public void SetOnBatteryLevelChanged(bool value)
     {
@@ -110,7 +144,7 @@ public class MiRZAManager : MonoBehaviour
 
         if (result != null && result == SpacesModeStatus.Off)
 #else
-        if(true)
+        if (true)
 #endif
         {
             var dialog = dialogPool.Get();
@@ -137,14 +171,7 @@ public class MiRZAManager : MonoBehaviour
 #endif
         mirzaPlugin?.SetLogEnable(true);
         pluginVersionObj.text = mirzaPlugin?.GetVersion();
-
     }
-
-    public TextMeshProUGUI text;
-    private MicMode wearingMicMode;
-    private MicMode frontMicMode;
-    private MixMode mixMode;
-    private string deviceName;
 
     public void OnMonitoringStart()
     {
@@ -154,19 +181,19 @@ public class MiRZAManager : MonoBehaviour
         }
 
         if (enableOnBatteryLevelChanged)
-            mirzaPlugin.OnBatteryLevelChanged += OnBatteryLevelChanged;
+            mirzaPlugin.OnBatteryLevelChanged += OnBatteryLevelChangedInternalAction;
         if (enableOnDisplayStatusChanged)
-            mirzaPlugin.OnDisplayStatusChanged += OnDisplayStatusChanged;
+            mirzaPlugin.OnDisplayStatusChanged += OnDisplayStatusChangedInternalAction;
         if (enableOnGlassStatusChanged)
-            mirzaPlugin.OnGlassStatusChanged += OnGlassStatusChanged;
+            mirzaPlugin.OnGlassStatusChanged += OnGlassStatusChangedInternalAction;
         if (enableOnGlassTouchGestureStatusChanged)
-            mirzaPlugin.OnGlassTouchGestureStatusChanged += OnGlassTouchGestureStatusChanged;
+            mirzaPlugin.OnGlassTouchGestureStatusChanged += OnGlassTouchGestureStatusChangedInternalAction;
         if (enableOnPowerOffChanged)
-            mirzaPlugin.OnPowerOffChanged += OnPowerOffChanged;
+            mirzaPlugin.OnPowerOffChanged += OnPowerOffChangedInternalAction;
         if (enableOnServiceStateChanged)
-            mirzaPlugin.OnServiceStateChanged += OnServiceStateChanged;
+            mirzaPlugin.OnServiceStateChanged += OnServiceStateChangedInternalAction;
         if (enableOnSpacesModeStatusChanged)
-            mirzaPlugin.OnSpacesModeStatusChanged += OnSpacesModeStatusChanged;
+            mirzaPlugin.OnSpacesModeStatusChanged += OnSpacesModeStatusChangedInternalAction;
 
         batteryLevelChangedObj.text = ".....";
         displayStatusChangedObj.text = ".....";
@@ -189,48 +216,56 @@ public class MiRZAManager : MonoBehaviour
         mirzaPlugin.StopMonitoring();
 
         if (enableOnBatteryLevelChanged)
-            mirzaPlugin.OnBatteryLevelChanged -= OnBatteryLevelChanged;
+            mirzaPlugin.OnBatteryLevelChanged -= OnBatteryLevelChangedInternalAction;
         if (enableOnDisplayStatusChanged)
-            mirzaPlugin.OnDisplayStatusChanged -= OnDisplayStatusChanged;
+            mirzaPlugin.OnDisplayStatusChanged -= OnDisplayStatusChangedInternalAction;
         if (enableOnGlassStatusChanged)
-            mirzaPlugin.OnGlassStatusChanged -= OnGlassStatusChanged;
+            mirzaPlugin.OnGlassStatusChanged -= OnGlassStatusChangedInternalAction;
         if (enableOnGlassTouchGestureStatusChanged)
-            mirzaPlugin.OnGlassTouchGestureStatusChanged -= OnGlassTouchGestureStatusChanged;
+            mirzaPlugin.OnGlassTouchGestureStatusChanged -= OnGlassTouchGestureStatusChangedInternalAction;
         if (enableOnPowerOffChanged)
-            mirzaPlugin.OnPowerOffChanged -= OnPowerOffChanged;
+            mirzaPlugin.OnPowerOffChanged -= OnPowerOffChangedInternalAction;
         if (enableOnServiceStateChanged)
-            mirzaPlugin.OnServiceStateChanged -= OnServiceStateChanged;
+            mirzaPlugin.OnServiceStateChanged -= OnServiceStateChangedInternalAction;
         if (enableOnSpacesModeStatusChanged)
-            mirzaPlugin.OnSpacesModeStatusChanged -= OnSpacesModeStatusChanged;
+            mirzaPlugin.OnSpacesModeStatusChanged -= OnSpacesModeStatusChangedInternalAction;
     }
 
-    private void OnSpacesModeStatusChanged(SpacesModeStatus obj)
+    private void OnSpacesModeStatusChangedInternalAction(SpacesModeStatus obj)
     {
         PostMessage(spacesModeStatusChangedObj, Enum.GetName(typeof(SpacesModeStatus), obj));
     }
 
-    private void OnServiceStateChanged(ServiceState obj)
+    private void OnServiceStateChangedInternalAction(ServiceState obj)
     {
         PostMessage(serviceStateChangedObj, Enum.GetName(typeof(ServiceState), obj));
     }
 
-    private void OnPowerOffChanged()
+    private void OnPowerOffChangedInternalAction()
     {
         PostMessage(powerOffChangedObj, "Off");
     }
 
-    private void OnGlassTouchGestureStatusChanged(GlassTouchGestureStatus obj)
+
+    private void OnGlassTouchGestureStatusChangedInternalAction(GlassTouchGestureStatus obj)
     {
+        OnGlassTouchGestureStatusChanged.Invoke(obj);
+        GestureStatus = obj;
+        var movement = obj.Movement;
+        var touchOperation = Enum.GetName(typeof(TouchOperation), obj.Operation);
+        var touchType = Enum.GetName(typeof(TouchType), obj.Type);
+        var xCoordinate = obj.XCoordinate;
+        var yCoordinate = obj.YCoordinate;
         sb1.Clear();
-        sb1.AppendLine($"Movement -> {obj.Movement}");
-        sb1.AppendLine($"Operation -> {Enum.GetName(typeof(TouchOperation), obj.Operation)}");
-        sb1.AppendLine($"Type -> {Enum.GetName(typeof(TouchType), obj.Type)}");
-        sb1.AppendLine($"XCoordinate -> {obj.XCoordinate}");
-        sb1.AppendLine($"YCoordinate -> {obj.YCoordinate}");
+        sb1.AppendLine($"Movement -> {movement}");
+        sb1.AppendLine($"Operation -> {touchOperation}");
+        sb1.AppendLine($"Type -> {touchType}");
+        sb1.AppendLine($"XCoordinate -> {xCoordinate}");
+        sb1.AppendLine($"YCoordinate -> {yCoordinate}");
         PostMessage(glassTouchGestureStatusChangedObj, sb1.ToString());
     }
 
-    private void OnGlassStatusChanged(GlassStatus obj)
+    private void OnGlassStatusChangedInternalAction(GlassStatus obj)
     {
         sb2.Clear();
         sb2.AppendLine($"BluetoothStatus -> {Enum.GetName(typeof(ConnectionStatus), obj.BluetoothStatus)}");
@@ -239,13 +274,12 @@ public class MiRZAManager : MonoBehaviour
         PostMessage(glassStatusChangedObj, sb2.ToString());
     }
 
-    private void OnDisplayStatusChanged(DisplayStatus obj)
+    private void OnDisplayStatusChangedInternalAction(DisplayStatus obj)
     {
-
         PostMessage(displayStatusChangedObj, $"{Enum.GetName(typeof(DisplayStatus), obj)}");
     }
 
-    private void OnBatteryLevelChanged(int obj)
+    private void OnBatteryLevelChangedInternalAction(int obj)
     {
         PostMessage(batteryLevelChangedObj, obj.ToString());
     }
@@ -281,20 +315,17 @@ public class MiRZAManager : MonoBehaviour
         if (Microphone.IsRecording(deviceName)) return;
         var clip = Microphone.Start(deviceName, false, 30, 44100);
         mainThreadContext.Post(_ => { audioSource.clip = clip; }, null);
-        Task.Delay(new TimeSpan(0,0,0,31)).ContinueWith(_ =>
+        Task.Delay(new TimeSpan(0, 0, 0, 31)).ContinueWith(_ =>
         {
-            mainThreadContext.Post(__ =>
-            {
-                audioButtons.CurrentIndex = 1;
-            }, null);
+            mainThreadContext.Post(__ => { audioButtons.CurrentIndex = 1; }, null);
         });
-
     }
+
     public void StopRecOrPlay()
     {
-        if(Microphone.IsRecording(deviceName))
+        if (Microphone.IsRecording(deviceName))
             Microphone.End(deviceName);
-        if(audioSource.isPlaying)
+        if (audioSource.isPlaying)
             audioSource.Stop();
     }
 
@@ -304,17 +335,12 @@ public class MiRZAManager : MonoBehaviour
         audioSource.PlayOneShot(audioSource.clip);
         Task.Delay(new TimeSpan(0, 0, 0, 31)).ContinueWith(_ =>
         {
-            mainThreadContext.Post(__ =>
-            {
-                audioButtons.CurrentIndex = 1;
-            }, null);
+            mainThreadContext.Post(__ => { audioButtons.CurrentIndex = 1; }, null);
         });
-
     }
 
     public void SelectChanged(int index)
     {
-
         switch (index)
         {
             case 0:
@@ -327,7 +353,6 @@ public class MiRZAManager : MonoBehaviour
                 PlayOneShot();
                 break;
         }
-
     }
 
     public void SetMixMode(TextMeshProUGUI text)
@@ -338,7 +363,7 @@ public class MiRZAManager : MonoBehaviour
             mixMode = MixMode.Off;
         }
 
-        text.text = Enum.GetName(typeof(MixMode),mixMode);
+        text.text = Enum.GetName(typeof(MixMode), mixMode);
 
         mirzaPlugin?.SwitchMicrophoneAsync(wearingMicMode, frontMicMode, mixMode, x =>
         {
@@ -346,11 +371,11 @@ public class MiRZAManager : MonoBehaviour
             {
                 var dialog = dialogPool.Get();
                 dialog.SetHeader("Information");
-                dialog.SetBody($"Switch Microphone Mode.\n WearMicMode:{x.Data.WearingMicMode}\n FrontMicMode:{x.Data.FrontMicMode}\n MixMode:{x.Data.MixMode}");
+                dialog.SetBody(
+                    $"Switch Microphone Mode.\n WearMicMode:{x.Data.WearingMicMode}\n FrontMicMode:{x.Data.FrontMicMode}\n MixMode:{x.Data.MixMode}");
                 dialog.SetPositive("close");
                 dialog.ShowAsync();
             }, null);
-
         });
     }
 }
