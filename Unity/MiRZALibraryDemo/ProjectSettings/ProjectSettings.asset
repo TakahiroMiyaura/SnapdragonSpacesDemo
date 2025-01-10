@@ -142,6 +142,10 @@ PlayerSettings:
   bundleVersion: 0.1
   preloadedAssets:
   - {fileID: 0}
+  - {fileID: 11400000, guid: c677e5c4eb85b7849a8da406775c299d, type: 2}
+  - {fileID: 4009939325191216373, guid: 84114a8bf83e7e94ea2e6d184830fdd4, type: 2}
+  - {fileID: 11400000, guid: 2b45eb67f15e07845a615420efd2fd62, type: 2}
+  - {fileID: 2325614315878967343, guid: b1e85c345d289a246ba475ba3b54587c, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -870,7 +874,7 @@ PlayerSettings:
     tvOS: 1
   incrementalIl2cppBuild: {}
   suppressCommonWarnings: 1
-  allowUnsafeCode: 0
+  allowUnsafeCode: 1
   useDeterministicCompilation: 1
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
