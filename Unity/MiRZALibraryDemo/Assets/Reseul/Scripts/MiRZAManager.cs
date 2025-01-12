@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using com.nttqonoq.devices.android.mirzalibrary;
 using MixedReality.Toolkit.UX;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using TouchType = com.nttqonoq.devices.android.mirzalibrary.TouchType;
@@ -246,6 +247,43 @@ public class MiRZAManager : MonoBehaviour
         PostMessage(powerOffChangedObj, "Off");
     }
 
+    public void SpacesModeOn()
+    {
+        mirzaPlugin?.SpacesModeOnAsync(x =>
+        {
+            mainThreadContext.Post(_ =>
+            {
+                var dialog = dialogPool.Get();
+                dialog.SetHeader("Spaces Mode");
+                dialog.SetBody(
+                    $"Switch Spaces Mode - ON.\nExit Code{x.Data}");
+                dialog.SetPositive("close");
+                dialog.ShowAsync();
+            }, null);
+        });
+    }
+
+    public void SpacesModeOff()
+    {
+        mirzaPlugin?.SpacesModeOffAsync(x =>
+        {
+            mainThreadContext.Post(_ =>
+            {
+                var dialog = dialogPool.Get();
+                dialog.SetHeader("Spaces Mode");
+                dialog.SetBody(
+                    $"Switch Spaces Mode - OFF.\nExit Code{x.Data}");
+                dialog.SetPositive("close");
+                dialog.ShowAsync();
+            }, null);
+        });
+    }
+
+    public void SetSpacesModeStatus(TextMeshProUGUI text)
+    {
+        mirzaPlugin?.GetSpacesModeStatusAsync(x =>
+            mainThreadContext.Post(_ => { text.text = Enum.GetName(typeof(SpacesModeStatus), x.Data); }, null));
+    }
 
     private void OnGlassTouchGestureStatusChangedInternalAction(GlassTouchGestureStatus obj)
     {
@@ -357,11 +395,8 @@ public class MiRZAManager : MonoBehaviour
 
     public void SetMixMode(TextMeshProUGUI text)
     {
-        mixMode = MixMode.On;
-        if (wearingMicMode == MicMode.Off || frontMicMode == MicMode.Off)
-        {
-            mixMode = MixMode.Off;
-        }
+        //èÌÇ…OffÇ™åªç›ÇÃédól
+        mixMode = MixMode.Off;
 
         text.text = Enum.GetName(typeof(MixMode), mixMode);
 
