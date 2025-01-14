@@ -340,6 +340,7 @@ public class MiRZAManager : MonoBehaviour
     public void OnMicMode1(int index)
     {
         wearingMicMode = (MicMode)index;
+        OnMicMode2(index);
     }
 
     public void OnMicMode2(int index)
@@ -347,17 +348,6 @@ public class MiRZAManager : MonoBehaviour
         frontMicMode = (MicMode)index;
     }
 
-    public void StartRec()
-    {
-        deviceName = Microphone.devices[0];
-        if (Microphone.IsRecording(deviceName)) return;
-        var clip = Microphone.Start(deviceName, false, 30, 44100);
-        mainThreadContext.Post(_ => { audioSource.clip = clip; }, null);
-        Task.Delay(new TimeSpan(0, 0, 0, 31)).ContinueWith(_ =>
-        {
-            mainThreadContext.Post(__ => { audioButtons.CurrentIndex = 1; }, null);
-        });
-    }
 
     public void StopRecOrPlay()
     {
@@ -377,26 +367,10 @@ public class MiRZAManager : MonoBehaviour
         });
     }
 
-    public void SelectChanged(int index)
-    {
-        switch (index)
-        {
-            case 0:
-                StartRec();
-                break;
-            case 1:
-                StopRecOrPlay();
-                break;
-            case 2:
-                PlayOneShot();
-                break;
-        }
-    }
-
     public void SetMixMode(TextMeshProUGUI text)
     {
         //èÌÇ…OffÇ™åªç›ÇÃédól
-        mixMode = MixMode.Off;
+        mixMode = wearingMicMode == frontMicMode ? MixMode.Off: MixMode.On ;
 
         text.text = Enum.GetName(typeof(MixMode), mixMode);
 
