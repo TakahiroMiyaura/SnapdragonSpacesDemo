@@ -25,7 +25,7 @@ When you perform the following operations using the touch sensor, the ring made 
     * When you perform a "move" gesture on the MiRZA touch sensor, the ring will rotate.
 
 
-![](/images/TouchScreen.png)
+![](/images/MiRZALibrary.png)
 
 1. Monitoring On/Off (Toggle) ※ you must set "on" first!
 2. Launch MiRZA App Button
